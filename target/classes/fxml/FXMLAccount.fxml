@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLAccountController">
+   <children>
+      <AnchorPane layoutX="76.0" layoutY="116.0" prefHeight="190.0" prefWidth="420.0" style="-fx-background-radius: 5; -fx-background-color: white;">
+         <children>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="31.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
+            <Circle fill="WHITE" layoutX="81.0" layoutY="96.0" radius="37.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.5" style="-fx-background-color: white;" />
+            <Text fill="#828282" layoutX="67.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Text>
+            <Text fill="#369e53" layoutX="33.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update photo">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Text fill="#369e53" layoutX="376.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Label layoutX="147.0" layoutY="66.0" prefHeight="26.0" prefWidth="222.0" text="Chompoonud Khumpitak" textFill="#828282">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <Label layoutX="147.0" layoutY="91.0" prefHeight="18.0" prefWidth="117.0" text="joined in 2018" textFill="#828282">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="76.0" layoutY="339.0" prefHeight="165.0" prefWidth="420.0" style="-fx-background-radius: 5; -fx-background-color: white;">
+         <children>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="29.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account options">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
+            <Text fill="#369e53" layoutX="26.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close your account">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Text fill="#369e53" layoutX="374.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="26.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="National ID">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Label layoutX="130.0" layoutY="64.0" prefHeight="26.0" prefWidth="222.0" text="157xxxxxxxxxx" textFill="#828282">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="527.0" layoutY="116.0" prefHeight="216.0" prefWidth="420.0" style="-fx-background-radius: 5; -fx-background-color: white;">
+         <children>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="30.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
+            <Text fill="#369e53" layoutX="30.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage all addresses">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Text fill="#828282" layoutX="389.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+" wrappingWidth="20.109376311302185">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Text>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="31.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Primary Address">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Label layoutX="30.0" layoutY="50.0" text="You have 2 addresses." textFill="#828282">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <Label layoutX="31.0" layoutY="105.0" prefHeight="18.0" prefWidth="234.0" text="456 bla bla blah" textFill="#828282">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <Label layoutX="30.0" layoutY="81.0" prefHeight="18.0" prefWidth="245.0" text="123 bla bla blah" textFill="#828282">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="526.0" layoutY="366.0" prefHeight="173.0" prefWidth="420.0" style="-fx-background-radius: 5; -fx-background-color: white;">
+         <children>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="31.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email address">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
+            <Text fill="#828282" layoutX="29.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To update an email addreses. you must have at least two email addresses on file." wrappingWidth="383.18975830078125">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Text fill="#828282" layoutX="388.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+" wrappingWidth="20.109376311302185">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Text>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="32.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Primary ">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Label layoutX="31.0" layoutY="48.0" prefHeight="18.0" prefWidth="280.0" text="Chompoonud.k@123456.com" textFill="#828282">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="526.0" layoutY="564.0" prefHeight="118.0" prefWidth="420.0" style="-fx-background-radius: 5; -fx-background-color: white;">
+         <children>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="31.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
+            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="31.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile Primary ">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <Text fill="#828282" layoutX="389.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+" wrappingWidth="20.109376311302185">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Text>
+            <Label layoutX="31.0" layoutY="49.0" prefHeight="18.0" prefWidth="246.0" text="08X XXX XX11" textFill="#828282">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <ToolBar prefHeight="62.0" prefWidth="808.0" style="-fx-background-color: #369E53;">
+         <items>
+            <Button mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Wallet" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Transaction" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Activity" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </items>
+      </ToolBar>
+      <ToolBar layoutX="807.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="62.0" prefWidth="217.0" style="-fx-background-color: #369E53;">
+         <items>
+            <Button mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Sign Out" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="0.0" style="-fx-background-color: #369E53;" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/option2.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+         </items>
+      </ToolBar>
+   </children>
+</AnchorPane>
