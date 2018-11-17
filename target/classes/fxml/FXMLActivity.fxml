@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
@@ -14,30 +13,26 @@
 
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLActivityController">
    <children>
+      <TextField layoutX="61.0" layoutY="80.0" prefHeight="40.0" prefWidth="260.0" promptText="Date">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
       <TextField layoutX="388.0" layoutY="79.0" prefHeight="40.0" prefWidth="260.0" promptText="Search Activities">
          <font>
             <Font size="16.0" />
          </font></TextField>
       <Line endX="-100.0" endY="22.399993896484375" layoutX="696.0" layoutY="91.0" startX="-100.0" />
-      <TextField layoutX="61.0" layoutY="80.0" prefHeight="40.0" prefWidth="260.0" promptText="Date">
-         <font>
-            <Font size="16.0" />
-         </font></TextField>
       <AnchorPane layoutX="57.0" layoutY="159.0" prefHeight="552.0" prefWidth="913.0" style="-fx-background-color: white; -fx-background-radius: 5;">
          <children>
             <Text layoutX="22.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Activities">
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <TextArea layoutX="43.0" layoutY="60.0" prefHeight="451.0" prefWidth="829.0" promptText=" We didn’t find any payments. Want to try again with different dates?" style="-fx-background-color: white;">
-               <font>
-                  <Font size="16.0" />
-               </font></TextArea>
          </children>
       </AnchorPane>
-      <ToolBar prefHeight="62.0" prefWidth="808.0" style="-fx-background-color: #369E53;">
+      <ToolBar prefHeight="62.0" prefWidth="829.0" style="-fx-background-color: #369E53;">
          <items>
-            <Button mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Wallet" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -45,7 +40,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Transaction" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Transaction" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -53,7 +48,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button defaultButton="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Activity">
+            <Button defaultButton="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Activity">
                <font>
                   <Font size="18.0" />
                </font>
@@ -63,17 +58,9 @@
             </Button>
          </items>
       </ToolBar>
-      <ToolBar layoutX="807.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="62.0" prefWidth="217.0" style="-fx-background-color: #369E53;">
+      <ToolBar layoutX="828.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="62.0" prefWidth="197.0" style="-fx-background-color: #369E53;">
          <items>
-            <Button mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Sign Out" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" style="-fx-background-color: #369E53;" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -87,6 +74,14 @@
                      </cursor>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -26,6 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -38,6 +40,8 @@ import models.Account;
  */
 public class FXMLLoginController implements Initializable {
 
+    @FXML
+    private Button signinBtn;
     @FXML
     private Label wrongformat;
 
@@ -141,5 +145,4 @@ public class FXMLLoginController implements Initializable {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
     }
-
 }

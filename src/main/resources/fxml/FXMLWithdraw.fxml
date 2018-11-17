@@ -48,9 +48,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ToolBar prefHeight="62.0" prefWidth="808.0" style="-fx-background-color: #369E53;">
+      <ToolBar prefHeight="62.0" prefWidth="829.0" style="-fx-background-color: #369E53;">
          <items>
-            <Button mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Wallet" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -58,7 +58,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Transaction" textFill="WHITE">
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Transaction" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -66,7 +66,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Activity" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" text="Activity" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -76,17 +76,9 @@
             </Button>
          </items>
       </ToolBar>
-      <ToolBar layoutX="807.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="62.0" prefWidth="217.0" style="-fx-background-color: #369E53;">
+      <ToolBar layoutX="828.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="62.0" prefWidth="197.0" style="-fx-background-color: #369E53;">
          <items>
-            <Button mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Sign Out" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" style="-fx-background-color: #369E53;" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -100,6 +92,14 @@
                      </cursor>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

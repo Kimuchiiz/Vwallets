@@ -1,9 +1,10 @@
+package UI;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -22,8 +26,54 @@ import javafx.stage.Stage;
  *
  * @author USER
  */
-public class FXMLAccountController implements Initializable {
+public class FXMLAddAccountController implements Initializable {
+
+    @FXML
+    private Label bankAccLabel, pinLabel;
+
+    @FXML
+    private TextField bankAcc;
     
+     @FXML
+    private PasswordField pin;
+
+    @FXML
+    private void confirmButtonAction(ActionEvent event) throws IOException {
+        if (bankAcc.getText().isEmpty()) {
+            bankAccLabel.setText("Please fill the bank account");
+            pinLabel.setText("");
+        } else if (!bankAcc.getText().matches("[0-9]*")) {
+            bankAccLabel.setText("Bank account must be 0-9");
+            pinLabel.setText("");
+        } else if (bankAcc.getText().length() != 10) {
+            bankAccLabel.setText("Bank account must have 10 digit");
+            pinLabel.setText("");
+
+        } else if (pin.getText().isEmpty()) {
+            pinLabel.setText("Please fill the pin");
+            bankAccLabel.setText("");
+        } else if (!pin.getText().matches("[0-9]*")) {
+            pinLabel.setText("PIN must be 0-9");
+            bankAccLabel.setText("");
+        } else if (pin.getText().length() != 4) {
+            pinLabel.setText("PIN must have 4 digit");
+            bankAccLabel.setText("");
+
+        }else {
+            pinLabel.setText("");
+            bankAccLabel.setText("");
+            bankAcc.getText();
+            pin.getText();
+
+            Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
+            Scene walletScene = new Scene(walletParent);
+            walletScene.getStylesheets().add("/styles/CSS.css");
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(walletScene);
+            window.show();
+        }
+    }
+
     @FXML
     private void transactionButtonAction(ActionEvent event) throws IOException {
         Parent transactionParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLTransaction.fxml"));
@@ -33,7 +83,7 @@ public class FXMLAccountController implements Initializable {
         window.setScene(transactionScene);
         window.show();
     }
-    
+
     @FXML
     private void walletButtonAction(ActionEvent event) throws IOException {
         Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
@@ -53,7 +103,7 @@ public class FXMLAccountController implements Initializable {
         window.setScene(activityScene);
         window.show();
     }
-    
+
     @FXML
     private void optionButtonAction(ActionEvent event) throws IOException {
         Parent optionParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLAccount.fxml"));

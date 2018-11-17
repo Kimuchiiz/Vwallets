@@ -36,13 +36,13 @@ import VWallet.VWallet;
 public class FXMLRegistrationController implements Initializable {
 
     @FXML
-    private Label usernameLabel, pswLabel,pswLabel2, nameLabel;
+    private Label usernameLabel, pswLabel, pswLabel2, nameLabel;
 
     @FXML
     private TextField username, name;
 
     @FXML
-    private PasswordField psw,psw2;
+    private PasswordField psw, psw2;
 
     @FXML
     private void signupButtonAction(ActionEvent event) throws IOException {
@@ -61,14 +61,14 @@ public class FXMLRegistrationController implements Initializable {
             nameLabel.setText("");
             psw.clear();
             psw2.clear();
-        } else if (username.getText().length() <= 6 || username.getText().length() >= 12) {
-            usernameLabel.setText("Username must have 6-12 characters");
+        } else if (username.getText().length() <= 4 || username.getText().length() >= 12) {
+            usernameLabel.setText("Username must have 4-12 characters");
             pswLabel.setText("");
             pswLabel2.setText("");
             nameLabel.setText("");
             psw.clear();
             psw2.clear();
-            
+
         } else if (name.getText().isEmpty()) {
             nameLabel.setText("Please fill the name");
             usernameLabel.setText("");
@@ -83,7 +83,7 @@ public class FXMLRegistrationController implements Initializable {
             pswLabel2.setText("");
             psw.clear();
             psw2.clear();
-            
+
         } else if (psw.getText().isEmpty()) {
             pswLabel.setText("Please fill the password");
             usernameLabel.setText("");
@@ -113,7 +113,7 @@ public class FXMLRegistrationController implements Initializable {
             nameLabel.setText("");
             psw.clear();
             psw2.clear();
-        }*/else if (!psw.getText().matches(psw2.getText())){
+        }*/ else if (!psw.getText().matches(psw2.getText())) {
             pswLabel2.setText("Password not match");
             usernameLabel.setText("");
             pswLabel.setText("");
@@ -131,15 +131,14 @@ public class FXMLRegistrationController implements Initializable {
             alert.showAndWait();
 
             if (alert.getResult() == ButtonType.YES) {
-                if(VWallet.setRegister(username.getText(), psw.getText(), name.getText())){
-                    Parent loginParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLDocument.fxml"));
+                if (VWallet.setRegister(username.getText(), psw.getText(), name.getText())) {
+                    Parent loginParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
                     Scene loginScene = new Scene(loginParent);
-
+                    loginScene.getStylesheets().add("/styles/CSS.css");
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     window.setScene(loginScene);
                     window.show();
-                }
-                else{
+                } else {
                     usernameLabel.setText("Username Already Taken!!");
                     pswLabel.setText("");
                     nameLabel.setText("");
@@ -148,7 +147,7 @@ public class FXMLRegistrationController implements Initializable {
                     psw2.clear();
                 }
             }
-            
+
             if (alert.getResult() == ButtonType.NO) {
                 username.clear();
                 psw.clear();
@@ -158,21 +157,34 @@ public class FXMLRegistrationController implements Initializable {
 
         }
     }
+
     @FXML
     private void backButtonAction(ActionEvent event) throws IOException {
         Parent loginParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
         Scene loginScene = new Scene(loginParent);
-
+        loginScene.getStylesheets().add("/styles/CSS.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(loginScene);
         window.show();
     }
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
         // TODO
+        username.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\sa-zA-Z0-9*")) {
+                username.setText(newValue.replaceAll("[^\\sa-zA-Z0-9]", ""));
+            }
+        });
+        
+         name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\sa-zA-Z*")) {
+                name.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
+         
+         
     }
 
 }

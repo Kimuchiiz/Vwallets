@@ -5,6 +5,7 @@
  */
 package UI;
 
+import static java.awt.SystemColor.window;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -23,7 +28,10 @@ import javafx.stage.Stage;
  * @author USER
  */
 public class FXMLWalletController implements Initializable {
-
+    
+    @FXML
+    private GridPane accountGrid;
+    
     @FXML
     private void transactionButtonAction(ActionEvent event) throws IOException {
         Parent transactionParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLTransaction.fxml"));
@@ -65,8 +73,18 @@ public class FXMLWalletController implements Initializable {
     }
 
     @FXML
+    private void addAccountButtonAction(ActionEvent event) throws IOException {
+        Parent addAccountParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLAddAccount.fxml"));
+        Scene addAccountScene = new Scene(addAccountParent);
+        addAccountScene.getStylesheets().add("/styles/CSS.css");
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(addAccountScene);
+        window.show();
+    }
+    
+    @FXML
     private void signoutButtonAction(ActionEvent event) throws IOException {
-        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLDocument.fxml"));
+        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
         Scene signoutScene = new Scene(signoutParent);
         signoutScene.getStylesheets().add("/styles/CSS.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -79,4 +97,17 @@ public class FXMLWalletController implements Initializable {
         // TODO
     }    
     
+    public void createAccount(ActionEvent event) throws IOException{
+        Parent gridParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
+        Button acc1Btn = new Button();
+        GridPane.setConstraints(acc1Btn,1,0);
+        accountGrid.getChildren().addAll(acc1Btn);
+        
+        
+        Scene gridScene = new Scene(gridParent);
+        gridScene.getStylesheets().add("/styles/CSS.css");
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(gridScene);
+        window.show();
+    }
 }
