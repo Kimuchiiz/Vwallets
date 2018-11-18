@@ -8,6 +8,8 @@ package UI;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,13 +30,44 @@ public class FXMLTransactionController implements Initializable {
     private Account account;
 
     public void setAccount(Account account) {
-        this.account = account;
+        this.account = VWallet.VWallet.refreshAccount(account);
+        
+    }
+
+    @FXML
+    private void transactionButtonAction(ActionEvent event) throws IOException {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLTransaction.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLTransactionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLTransactionController display = Loader.getController();
+        display.setAccount(account);
+
+        Parent p = Loader.getRoot();
+        Scene transactionScene = new Scene(p);
+        transactionScene.getStylesheets().add("/styles/CSS.css");
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(transactionScene);
+        window.show();
     }
 
     @FXML
     private void walletButtonAction(ActionEvent event) throws IOException {
-        Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
-        Scene walletScene = new Scene(walletParent);
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLWalletController display = Loader.getController();
+        display.setAccount(account);
+
+        Parent p = Loader.getRoot();
+        Scene walletScene = new Scene(p);
         walletScene.getStylesheets().add("/styles/CSS.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(walletScene);
@@ -43,8 +76,18 @@ public class FXMLTransactionController implements Initializable {
 
     @FXML
     private void activityButtonAction(ActionEvent event) throws IOException {
-        Parent activityParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLActivity.fxml"));
-        Scene activityScene = new Scene(activityParent);
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLActivity.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLActivityController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLActivityController display = Loader.getController();
+        display.setAccount(account);
+
+        Parent p = Loader.getRoot();
+        Scene activityScene = new Scene(p);
         activityScene.getStylesheets().add("/styles/CSS.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(activityScene);
@@ -53,17 +96,27 @@ public class FXMLTransactionController implements Initializable {
 
     @FXML
     private void optionButtonAction(ActionEvent event) throws IOException {
-        Parent optionParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLAccount.fxml"));
-        Scene optionScene = new Scene(optionParent);
-        optionScene.getStylesheets().add("/styles/CSS.css");
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLAccount.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLAccountController display = Loader.getController();
+        display.setAccount(account);
+
+        Parent p = Loader.getRoot();
+        Scene accountScene = new Scene(p);
+        accountScene.getStylesheets().add("/styles/CSS.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(optionScene);
+        window.setScene(accountScene);
         window.show();
     }
 
     @FXML
     private void signoutButtonAction(ActionEvent event) throws IOException {
-        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLDocument.fxml"));
+        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
         Scene signoutScene = new Scene(signoutParent);
         signoutScene.getStylesheets().add("/styles/CSS.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

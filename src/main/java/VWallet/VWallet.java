@@ -100,16 +100,25 @@ public class VWallet {
     public static int addBankAccount(Account account, String number, String pin) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
-        TypedQuery<BankAccount> query = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
-        List<BankAccount> result = query.getResultList();
-        for (BankAccount i : result) {
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        Account acc = null;
+        for(Account i : accountresult){
+            if(i.getUsername().equals(account.getUsername())){
+                acc = i;
+                break;
+            }
+        }
+        TypedQuery<BankAccount> bankquery = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
+        List<BankAccount> bankresult = bankquery.getResultList();
+        for (BankAccount i : bankresult) {
             if (i.getNumber().equals(number)) {
                 if(i.getPin().equals(pin)){
                     em.getTransaction().begin();
-                    account.addBankaccount(i);
-                    i.addAccount(account);
+                    acc.addBankaccount(i);
+                    i.addAccount(acc);
                     em.persist(i);
-                    em.persist(account);
+                    em.persist(acc);
                     em.getTransaction().commit();
                     em.close();
                     emf.close();
@@ -136,6 +145,19 @@ public class VWallet {
                     em.getTransaction().commit();
                     em.close();
                     emf.close();
+    }
+    
+    public static Account refreshAccount(Account account){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        for(Account i : accountresult){
+            if(i.getUsername().equals(account.getUsername())){
+                return i;
+            }
+        }
+        return null;
     }
     
     public static void main(String[] args) {

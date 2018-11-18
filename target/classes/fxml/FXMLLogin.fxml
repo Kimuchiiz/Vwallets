@@ -11,9 +11,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLLoginController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLLoginController">
     <children>
-        <Button fx:id="signinBtn" defaultButton="true" layoutX="354.0" layoutY="391.0" onAction="#signinButtonAction" prefHeight="40.0" prefWidth="320.0" style="-fx-background-color: #369E53;" text="Sign In" textFill="WHITE">
+      <TextField fx:id="username" layoutX="353.0" layoutY="264.0" prefHeight="40.0" prefWidth="320.0" promptText="Username">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <PasswordField fx:id="psw" layoutX="353.0" layoutY="321.0" prefHeight="40.0" prefWidth="320.0" promptText="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+        <Button fx:id="signinBtn" defaultButton="true" layoutX="354.0" layoutY="391.0" onAction="#signinButtonAction" prefHeight="40.0" prefWidth="320.0" text="Sign In" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -23,30 +32,26 @@
          <font>
             <Font size="18.0" />
          </font></Button>
+      <Button fx:id="signupBtn" layoutX="354.0" layoutY="483.0" onAction="#signupButtonAction" prefHeight="40.0" prefWidth="320.0" text="Sign Up" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
         <Label fx:id="wrongformat" alignment="CENTER" layoutX="281.0" layoutY="613.0" minHeight="16" minWidth="69" prefHeight="38.0" prefWidth="461.0" textFill="RED">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button fx:id="signupBtn" accessibleRole="HYPERLINK" defaultButton="true" layoutX="354.0" layoutY="482.0" mnemonicParsing="false" onAction="#signupButtonAction" prefHeight="40.0" prefWidth="320.0" style="-fx-background-color: #DBDBDB;" text="Sign Up" textFill="#828282">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-      <TextField fx:id="username" layoutX="353.0" layoutY="264.0" prefHeight="40.0" prefWidth="320.0" promptText="Username">
-         <font>
-            <Font size="18.0" />
-         </font></TextField>
       <Text fill="#828282" layoutX="505.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or">
          <font>
             <Font size="16.0" />
          </font></Text>
       <Line id="loginLie" endX="21.33331298828125" layoutX="460.0" layoutY="456.0" startX="-103.00003051757812" stroke="#828282" />
-      <PasswordField fx:id="psw" layoutX="353.0" layoutY="321.0" prefHeight="40.0" prefWidth="320.0" promptText="Password">
-         <font>
-            <Font size="18.0" />
-         </font></PasswordField>
       <Line id="loginLie" endX="21.33331298828125" layoutX="652.0" layoutY="456.0" startX="-103.00003051757812" stroke="#828282" />
     </children>
 </AnchorPane>
