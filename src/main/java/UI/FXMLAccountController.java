@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.Account;
 
@@ -28,6 +30,9 @@ import models.Account;
 public class FXMLAccountController implements Initializable {
     
     private Account account;
+    
+    @FXML
+    private AnchorPane rootPane;
 
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
@@ -111,7 +116,7 @@ public class FXMLAccountController implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(accountScene);
         window.show();
-        p.requestFocus();     //unselect first button (BUG?)
+        p.requestFocus();     //unselect first node
     }
 
     @FXML
@@ -127,6 +132,7 @@ public class FXMLAccountController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Platform.runLater( () -> rootPane.requestFocus() );      
     }    
     
 }
