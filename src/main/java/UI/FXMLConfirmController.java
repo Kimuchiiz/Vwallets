@@ -5,7 +5,6 @@
  */
 package UI;
 
-import static java.awt.SystemColor.window;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,10 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -27,11 +24,23 @@ import javafx.stage.Stage;
  *
  * @author USER
  */
-public class FXMLWalletController implements Initializable {
-    
+public class FXMLConfirmController implements Initializable {
+
+     @FXML
+    private Label transactionType, fromUser, toUser, fromName, toName, amount;
+
     @FXML
-    private GridPane accountGrid;
-    
+    private void confirmButtonAction(ActionEvent event) throws IOException {
+
+        Parent receiptParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLReceipt.fxml"));
+        Scene receiptScene = new Scene(receiptParent);
+       receiptScene.getStylesheets().add("/styles/CSS.css");
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(receiptScene);
+        window.show();
+
+    }
+
     @FXML
     private void transactionButtonAction(ActionEvent event) throws IOException {
         Parent transactionParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLTransaction.fxml"));
@@ -40,8 +49,8 @@ public class FXMLWalletController implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(transactionScene);
         window.show();
-    }   
-    
+    }
+
     @FXML
     private void walletButtonAction(ActionEvent event) throws IOException {
         Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
@@ -51,7 +60,7 @@ public class FXMLWalletController implements Initializable {
         window.setScene(walletScene);
         window.show();
     }
-    
+
     @FXML
     private void activityButtonAction(ActionEvent event) throws IOException {
         Parent activityParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLActivity.fxml"));
@@ -73,17 +82,6 @@ public class FXMLWalletController implements Initializable {
     }
 
     @FXML
-    private void addAccountButtonAction(ActionEvent event) throws IOException {
-        
-        Parent addAccountParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLAddAccount.fxml"));
-        Scene addAccountScene = new Scene(addAccountParent);
-        addAccountScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(addAccountScene);
-        window.show();
-    }
-    
-    @FXML
     private void signoutButtonAction(ActionEvent event) throws IOException {
         Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
         Scene signoutScene = new Scene(signoutParent);
@@ -98,17 +96,4 @@ public class FXMLWalletController implements Initializable {
         // TODO
     }    
     
-    /*public void createAccount(ActionEvent event) throws IOException{
-        Parent gridParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
-        Button acc1Btn = new Button();
-        GridPane.setConstraints(acc1Btn,1,0);
-        accountGrid.getChildren().addAll(acc1Btn);
-        
-        
-        Scene gridScene = new Scene(gridParent);
-        gridScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(gridScene);
-        window.show();
-    }*/
 }

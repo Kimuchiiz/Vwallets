@@ -59,11 +59,11 @@ public class FXMLTransferController implements Initializable {
             username.getText();
             amount.getText();
 
-           Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
-            Scene walletScene = new Scene(walletParent);
-            walletScene.getStylesheets().add("/styles/CSS.css");
+           Parent confirmParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLConfirm.fxml"));
+            Scene confirmScene = new Scene(confirmParent);
+            confirmScene.getStylesheets().add("/styles/CSS.css");
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(walletScene);
+            window.setScene(confirmScene);
             window.show();
         }
     }

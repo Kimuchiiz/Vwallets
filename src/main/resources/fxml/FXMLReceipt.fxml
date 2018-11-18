@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLReceiptController">
+   <children>
+      <Text layoutX="479.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receipt">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button defaultButton="true" layoutX="814.0" layoutY="694.0" mnemonicParsing="false" onAction="#confirmButtonAction" style="-fx-background-color: #369E53;" text="Confirm" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ToolBar prefHeight="62.0" prefWidth="829.0" style="-fx-background-color: #369E53;">
+         <items>
+            <Button mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Transaction" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" text="Activity" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </items>
+      </ToolBar>
+      <ToolBar layoutX="828.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="62.0" prefWidth="197.0" style="-fx-background-color: #369E53;">
+         <items>
+            <Button mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/option2.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </items>
+      </ToolBar>
+      <AnchorPane layoutX="130.0" layoutY="195.0" prefHeight="426.0" prefWidth="768.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+         <children>
+            <Text layoutX="94.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transaction ID">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Label fx:id="transactionID" layoutX="266.0" layoutY="61.0" prefHeight="32.0" prefWidth="236.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Text layoutX="95.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Label fx:id="transactionType" layoutX="184.0" layoutY="115.0" prefHeight="32.0" prefWidth="226.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Text layoutX="360.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="---&gt;">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="57.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Label fx:id="formUser" layoutX="96.0" layoutY="174.0" prefHeight="32.0" prefWidth="243.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="fromName" layoutX="96.0" layoutY="221.0" prefHeight="32.0" prefWidth="243.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="toUser" layoutX="431.0" layoutY="174.0" prefHeight="32.0" prefWidth="243.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="toName" layoutX="431.0" layoutY="221.0" prefHeight="32.0" prefWidth="243.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Text layoutX="94.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Label fx:id="amount" layoutX="220.0" layoutY="279.0" prefHeight="32.0" prefWidth="234.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Text layoutX="95.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Label fx:id="date" layoutX="187.0" layoutY="331.0" prefHeight="32.0" prefWidth="228.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

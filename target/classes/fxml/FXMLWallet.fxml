@@ -79,7 +79,7 @@
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <Button layoutX="66.0" layoutY="14.0" mnemonicParsing="false" onAction="#addAccountButtonAction" prefHeight="50.0" prefWidth="120.0" text="+" textFill="WHITE">
+            <Button fx:id="addAccountBtn" layoutX="66.0" layoutY="14.0" mnemonicParsing="false" onAction="#addAccountButtonAction" prefHeight="50.0" prefWidth="120.0" text="+" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
