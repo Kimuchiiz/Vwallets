@@ -3,20 +3,30 @@ package UI;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
-        
+
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/CSS.css");
-        
+        /*scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                Node focusOwner = scene.getFocusOwner();
+                if (focusOwner instanceof Button) {
+                    ((Button) focusOwner).fire();
+                }
+            }
+        });*/
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
         stage.show();

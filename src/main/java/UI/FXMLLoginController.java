@@ -26,6 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -37,6 +39,9 @@ import models.Account;
  * @author USER
  */
 public class FXMLLoginController implements Initializable {
+
+    @FXML
+    private Button signinBtn, signupBtn;
 
     @FXML
     private Label wrongformat;
@@ -52,37 +57,40 @@ public class FXMLLoginController implements Initializable {
         //"[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+" for email
         if (!username.getText().matches("[a-zA-Z0-9]*") || username.getText().isEmpty()) {
             wrongformat.setText("username must be a-z A-Z 0-9");
+            psw.clear();
         } else if (username.getText().length() <= 6 || username.getText().length() >= 12) {
             wrongformat.setText("username must have 6-12 digit");
+            psw.clear();
         } else if (psw.getText().isEmpty()) {
             wrongformat.setText("Please fill the password");
         } else if (!psw.getText().matches("[a-zA-Z0-9]*")) {
             wrongformat.setText("password must be a-z A-Z 0-9");
+            psw.clear();
         } else {
-            username.getText();
-            psw.getText();
             wrongformat.setText("");
 
             Account account = VWallet.isLogin(username.getText(), psw.getText());
             if (account != null) {
                 FXMLLoader Loader = new FXMLLoader();
-                Loader.setLocation(getClass().getResource("/fxml/FXMLTransaction.fxml"));
+                Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
                 try {
                     Loader.load();
                 } catch (IOException ex) {
-                    Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //Scene transactionScene = new Scene(transactionParent);
-                //transactionScene.getStylesheets().add("/styles/CSS.css");
-                FXMLTransactionController display = Loader.getController();
+                FXMLWalletController display = Loader.getController();
                 display.setAccount(account);
 
                 Parent p = Loader.getRoot();
-                Scene transactionScene = new Scene(p);
-                transactionScene.getStylesheets().add("/styles/CSS.css");
+                Scene walletScene = new Scene(p);
+                walletScene.getStylesheets().add("/styles/CSS.css");
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(transactionScene);
+                window.setScene(walletScene);
                 window.show();
+            }
+            else{
+                wrongformat.setText("Username and Password not match");
+                psw.clear();
             }
         }
     }
@@ -101,7 +109,7 @@ public class FXMLLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        
         ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
         username.setOnKeyTyped(event -> {
             int maxCharacters = 12;
@@ -141,5 +149,4 @@ public class FXMLLoginController implements Initializable {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
     }
-
 }

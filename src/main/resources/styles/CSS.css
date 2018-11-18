@@ -1,4 +1,18 @@
+.button{
+    -fx-background-color: #369E53;
+
+}
+
 .button:hover{
     -fx-text-fill: black;
+}
+
+.button:focused{
+    -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,4),5,0,0,1);
     
 }
+
+#signupBtn{
+    -fx-background-color: #DBDBDB;
+}
+

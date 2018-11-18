@@ -3,15 +3,19 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLWalletController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLWalletController">
    <children>
       <AnchorPane layoutX="38.0" layoutY="121.0" prefHeight="241.0" prefWidth="326.0" style="-fx-background-radius: 5; -fx-background-color: white;">
          <children>
@@ -27,18 +31,18 @@
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <Label layoutX="59.0" layoutY="89.0" text="0.00 Bath" textFill="#828282">
+            <Label fx:id="balance" layoutX="59.0" layoutY="89.0" textFill="#828282">
                <font>
                   <Font size="18.0" />
                </font></Label>
          </children>
       </AnchorPane>
-      <Text fill="#828282" layoutX="404.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Account">
+      <Text fill="#828282" layoutX="404.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Account">
          <font>
             <Font size="20.0" />
          </font></Text>
-      <Line endX="477.666748046875" endY="7.62939453125E-6" layoutX="505.0" layoutY="147.0" startX="-100.0" stroke="#828282" />
-      <AnchorPane layoutX="435.0" layoutY="190.0" prefHeight="160.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+      <Line endX="477.666748046875" endY="7.62939453125E-6" layoutX="505.0" layoutY="130.0" startX="-100.0" stroke="#828282" />
+      <AnchorPane layoutX="50.0" layoutY="403.0" prefHeight="160.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 20;">
          <children>
             <Text fill="#828282" layoutX="54.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account number">
                <font>
@@ -50,7 +54,7 @@
                </font></Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="738.0" layoutY="197.0" prefHeight="160.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+      <AnchorPane layoutX="50.0" layoutY="574.0" prefHeight="160.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 20;">
          <children>
             <Text fill="#828282" layoutX="106.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
                <font>
@@ -61,19 +65,7 @@
                <font>
                   <Font size="18.0" />
                </font></Text>
-         </children>
-      </AnchorPane>
-      <ToolBar prefHeight="62.0" prefWidth="808.0" style="-fx-background-color: #369E53;">
-         <items>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Wallet">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Transaction" textFill="WHITE">
+            <Button layoutX="66.0" layoutY="14.0" mnemonicParsing="false" onAction="#addAccountButtonAction" prefHeight="50.0" prefWidth="120.0" text="+" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -81,7 +73,27 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Activity" textFill="WHITE">
+         </children>
+      </AnchorPane>
+      <ToolBar prefHeight="62.0" prefWidth="829.0" style="-fx-background-color: #369E53;">
+         <items>
+            <Button fx:id="walletBtn" mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="transactionBtn" mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Transaction" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="activityBtn" mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" text="Activity" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -91,17 +103,9 @@
             </Button>
          </items>
       </ToolBar>
-      <ToolBar layoutX="807.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="62.0" prefWidth="217.0" style="-fx-background-color: #369E53;">
+      <ToolBar layoutX="828.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="62.0" prefWidth="197.0" style="-fx-background-color: #369E53;">
          <items>
-            <Button mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #369E53;" text="Sign Out" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" style="-fx-background-color: #369E53;" textFill="WHITE">
+            <Button fx:id="optionBtn" mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -119,7 +123,43 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button fx:id="signoutBtn" mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </items>
       </ToolBar>
+      <ScrollPane layoutX="422.0" layoutY="155.0" prefHeight="358.0" prefWidth="566.0" style="-fx-background: #E8EEE6; -fx-border-color: #E8EEE6;">
+         <content>
+            <GridPane fx:id="BankAccountGrid" hgap="50.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="352.0" prefWidth="542.0" vgap="50.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="266.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="265.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" minHeight="151.0" prefHeight="151.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Text fill="#828282" layoutX="404.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit Card">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Line endX="477.666748046875" endY="7.62939453125E-6" layoutX="505.0" layoutY="570.0" startX="-100.0" stroke="#828282" />
+      <GridPane fx:id="CreditCardGrid" hgap="50.0" layoutX="422.0" layoutY="583.0" prefHeight="151.0" prefWidth="544.0" vgap="50.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="266.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="265.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
    </children>
 </AnchorPane>

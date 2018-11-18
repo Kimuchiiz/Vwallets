@@ -110,7 +110,7 @@ public class FXMLTransferController implements Initializable {
 
     @FXML
     private void signoutButtonAction(ActionEvent event) throws IOException {
-        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLDocument.fxml"));
+        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
         Scene signoutScene = new Scene(signoutParent);
         signoutScene.getStylesheets().add("/styles/CSS.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
