@@ -9,10 +9,41 @@
 
 .button:focused{
     -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,4),5,0,0,1);
-    
+
 }
 
 #signupBtn{
     -fx-background-color: #DBDBDB;
 }
 
+.scroll-pane:focused{
+    -fx-background-color: transparent;
+}
+
+#bankccBtn{
+    -fx-min-width:247;
+    -fx-min-height:151;
+    -fx-max-width:247;
+    -fx-max-height:151;
+    -fx-pref-width:247;
+    -fx-pref-height:151;
+    -fx-border-radius:8;
+    -fx-background-radius:8;
+    -fx-background-color: white;
+    -fx-text-fill:gray;
+}
+
+#bankccBtn:hover{
+    -fx-background-insets: 0;
+    -fx-border-color:black;
+    -fx-border-radius:8;
+    -fx-background-radius:8;
+    -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,4),5,0,0,1);
+}
+
+#bankccBtn:focused{
+    -fx-border-radius:8;
+    -fx-background-radius:8;
+    -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,4),5,0,0,1);
+    -fx-border-color:black
+}

@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,9 +26,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import models.Account;
@@ -38,15 +43,21 @@ import models.BankAccount;
  *
  * @author USER
  */
-public class FXMLWalletController implements Initializable {
+public class FXMLWalletController extends SceneChangeController implements Initializable {
 
     private Account account;
 
     @FXML
     private GridPane BankAccountGrid, CreditCardGrid;
-    
+
     @FXML
     private Label balance;
+
+    @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private ScrollPane bankaccScroll;
 
     @FXML
     private void transactionButtonAction(ActionEvent event) throws IOException {
@@ -160,22 +171,35 @@ public class FXMLWalletController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO       
+        // TODO 
+        bankaccScroll.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                rootPane.requestFocus();
+            }
+        });
     }
 
     @FXML
     public void createBankAccount() {
+        VBox box = new VBox();
+        box.setAlignment(Pos.CENTER);
+        Label label1 = new Label("    +    ");
+        label1.setFont(new Font("Regular", 40));
+        label1.setTextFill(Color.GRAY);
+        Label label2 = new Label("Add Bank Account");
+        label2.setFont(new Font("Regular", 18));
+        label2.setTextFill(Color.GRAY);
+
         int column = 0;
         int row = 0;
         for (BankAccount i : account.getBankaccount()) {
             Button temp = new Button("Account Number\n    " + i.getNumber() + "\n" + i.getName());
-            temp.setPrefSize(247, 151);
-            temp.setMinSize(247, 151);
-            temp.setMaxSize(247, 151);
+            temp.setId("bankccBtn");
             temp.setStyle("-fx-font: 20 Regular;");
             temp.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(ActionEvent e) {
+                public void handle(ActionEvent event) {
                     System.out.println(i.getNumber());
                 }
             });
@@ -187,35 +211,32 @@ public class FXMLWalletController implements Initializable {
             }
         }
         Button temp = new Button();
-        temp.setPrefSize(247, 151);
-        temp.setMinSize(247, 151);
-        temp.setMaxSize(247, 151);
-        VBox box = new VBox();
-        box.setAlignment(Pos.CENTER);
-        Label label1 = new Label("    +    ");
-        label1.setFont(new Font("Regular", 40));
-        Label label2 = new Label("Add Bank Account");
-        label2.setFont(new Font("Regular", 18));
+        temp.setId("bankccBtn");
         box.getChildren().addAll(label1, label2);
         temp.setGraphic(box);
         temp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent e) {
-                TextField banknumField = new TextField();
-                TextField pinField = new TextField();
-                Label banknum = new Label("Bank Account Number");
-                Label pin = new Label("PIN");
-                Label banknumCheck = new Label("");
-                Label pinCheck = new Label("");
-                Button submit = new Button("Sumbit");
-                box.getChildren().clear();
-                box.getChildren().addAll(banknum, banknumField, banknumCheck, pin, pinField, pinCheck, submit);
-                submit.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        System.out.print("Test");
-                    }
-                });
+            public void handle(ActionEvent event) {
+                try {
+                    changeScene((Stage) ((Node) event.getSource()).getScene().getWindow(),"/fxml/FXMLAddBankAccount.fxml");
+//                FXMLLoader Loader = new FXMLLoader();
+//                Loader.setLocation(getClass().getResource("/fxml/FXMLAddBankAccount.fxml"));
+//                try {
+//                    Loader.load();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(FXMLAddBankAccountController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                FXMLAddBankAccountController display = Loader.getController();
+//                display.setAccount(account);
+//
+//                Parent p = Loader.getRoot();
+//                Scene addBankAccountScene = new Scene(p);
+//                addBankAccountScene.getStylesheets().add("/styles/CSS.css");
+//                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//                window.setScene(addBankAccountScene);
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         BankAccountGrid.add(temp, column, row);
