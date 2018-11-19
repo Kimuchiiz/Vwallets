@@ -12,8 +12,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -46,6 +49,7 @@ import models.BankAccount;
 public class FXMLWalletController extends SceneChangeController implements Initializable {
 
     private Account account;
+    private BankAccount bankaccount;
 
     @FXML
     private GridPane BankAccountGrid, CreditCardGrid;
@@ -60,122 +64,54 @@ public class FXMLWalletController extends SceneChangeController implements Initi
     private ScrollPane bankaccScroll;
 
     @FXML
-    private void transactionButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLTransaction.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLTransactionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLTransactionController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene transactionScene = new Scene(p);
-        transactionScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(transactionScene);
-        window.show();
+    private void transactionButtonAction(ActionEvent event) {
+        transactionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void walletButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLWalletController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene walletScene = new Scene(p);
-        walletScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(walletScene);
-        window.show();
+    private void walletButtonAction(ActionEvent event) {
+        walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void activityButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLActivity.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLActivityController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLActivityController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene activityScene = new Scene(p);
-        activityScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(activityScene);
-        window.show();
+    private void activityButtonAction(ActionEvent event) {
+        activityScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void optionButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLAccount.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLAccountController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene accountScene = new Scene(p);
-        accountScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(accountScene);
-        window.show();
+    private void optionButtonAction(ActionEvent event) {
+        optionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void addAccountButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLAddBankAccount.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLAddBankAccountController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLAddBankAccountController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene addBankAccountScene = new Scene(p);
-        addBankAccountScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(addBankAccountScene);
-        window.show();
+    private void signoutButtonAction(ActionEvent event) {
+        loginScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
     @FXML
-    private void signoutButtonAction(ActionEvent event) throws IOException {
-        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
-        Scene signoutScene = new Scene(signoutParent);
-        signoutScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signoutScene);
-        window.show();
+    private void removeBankAccount(ActionEvent event) {
+        rootPane.requestFocus();
+        if (bankaccount != null) {
+            VWallet.VWallet.removeBankAccount(account, bankaccount);
+            walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
+        } else {
+            System.out.println("Please Selected Bank Account");
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO 
-        bankaccScroll.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
+
+        rootPane.setOnMouseClicked((MouseEvent evt) -> {
+            rootPane.requestFocus();
+            bankaccount = null;
+        });
+
+        bankaccScroll.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (newValue == true) {
                 rootPane.requestFocus();
+                bankaccount = null;
             }
         });
     }
@@ -200,9 +136,13 @@ public class FXMLWalletController extends SceneChangeController implements Initi
             temp.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    System.out.println(i.getNumber());
+                    bankaccount = i;
                 }
             });
+//            temp.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+//                focusState(newValue);
+//            });
+
             BankAccountGrid.add(temp, column, row);
             column++;
             if (column == 2) {
@@ -217,48 +157,23 @@ public class FXMLWalletController extends SceneChangeController implements Initi
         temp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                try {
-                    changeScene((Stage) ((Node) event.getSource()).getScene().getWindow(),"/fxml/FXMLAddBankAccount.fxml");
-//                FXMLLoader Loader = new FXMLLoader();
-//                Loader.setLocation(getClass().getResource("/fxml/FXMLAddBankAccount.fxml"));
-//                try {
-//                    Loader.load();
-//                } catch (IOException ex) {
-//                    Logger.getLogger(FXMLAddBankAccountController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                FXMLAddBankAccountController display = Loader.getController();
-//                display.setAccount(account);
-//
-//                Parent p = Loader.getRoot();
-//                Scene addBankAccountScene = new Scene(p);
-//                addBankAccountScene.getStylesheets().add("/styles/CSS.css");
-//                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//                window.setScene(addBankAccountScene);
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                addBankAccountScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
             }
         });
         BankAccountGrid.add(temp, column, row);
     }
 
+//    private void focusState(boolean value) {
+//        if (value) {
+//            System.out.println("Focus Gained");
+//        } else {
+//            System.out.println("Focus Lost");
+//        }
+//    }
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
         balance.setText(Double.toString(account.getBalance()) + " Baht");
         createBankAccount();
     }
 
-    /*public void createAccount(ActionEvent event) throws IOException{
-        Parent gridParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
-        Button acc1Btn = new Button();
-        GridPane.setConstraints(acc1Btn,1,0);
-        accountGrid.getChildren().addAll(acc1Btn);
-        
-        
-        Scene gridScene = new Scene(gridParent);
-        gridScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(gridScene);
-        window.show();
-    }*/
 }

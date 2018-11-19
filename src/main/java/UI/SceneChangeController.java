@@ -10,9 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Account;
@@ -21,18 +23,101 @@ import models.Account;
  *
  * @author Xclos
  */
-public class SceneChangeController {
-    
+public abstract class SceneChangeController {
+
     private double xOffset = 0;
     private double yOffset = 0;
-    
-    public void changeScene(Stage stage,String fxml) throws IOException{
+
+    public void loginScene(Stage stage) {
         FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource(fxml));
-        Loader.load();
-//        if(account!=null){
-//        display.setAccount(account);
-//        }
+        Loader.setLocation(getClass().getResource("/fxml/FXMLLogin.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        changeScene(stage, Loader);
+    }
+
+    public void signupScene(Stage stage) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLRegistration.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        changeScene(stage, Loader);
+    }
+
+    public void walletScene(Stage stage, Account account) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLWalletController display = Loader.getController();
+        display.setAccount(account);
+        changeScene(stage, Loader);
+    }
+
+    public void transactionScene(Stage stage, Account account) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLTransaction.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLTransactionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLTransactionController display = Loader.getController();
+        display.setAccount(account);
+        changeScene(stage, Loader);
+    }
+
+    public void activityScene(Stage stage, Account account) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLActivity.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLActivityController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLActivityController display = Loader.getController();
+        display.setAccount(account);
+        changeScene(stage, Loader);
+    }
+
+    public void optionScene(Stage stage, Account account) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLAccount.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLAccountController display = Loader.getController();
+        display.setAccount(account);
+        changeScene(stage, Loader);
+    }
+
+    public void addBankAccountScene(Stage stage, Account account) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLAddBankAccount.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAddBankAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLAddBankAccountController display = Loader.getController();
+        display.setAccount(account);
+        display.setStage(stage);
+        
+        popupScene(stage,Loader);
+    }
+
+    public void changeScene(Stage stage, FXMLLoader Loader) {
         Parent root = Loader.getRoot();
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -55,5 +140,36 @@ public class SceneChangeController {
         scene.getStylesheets().add("/styles/CSS.css");
         stage.setScene(scene);
         stage.show();
+        root.requestFocus();     //unselect first node
+    }
+
+    public void popupScene(Stage stage, FXMLLoader Loader) {
+        final Stage popup = new Stage();
+        popup.setTitle("PopUp");
+        popup.initStyle(StageStyle.UNDECORATED);
+        Parent root = Loader.getRoot();
+//        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                xOffset = event.getSceneX();
+//                yOffset = event.getSceneY();
+//            }
+//        });
+//
+//        //move around here
+//        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                popup.setX(event.getScreenX() - xOffset);
+//                popup.setY(event.getScreenY() - yOffset);
+//            }
+//        });      
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.initOwner(stage);
+        Scene popupScene = new Scene(root);
+        popupScene.getStylesheets().add("/styles/CSS.css");
+        popup.setScene(popupScene);
+        popup.show();
+        root.requestFocus();     //unselect first node
     }
 }

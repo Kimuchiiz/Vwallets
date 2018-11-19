@@ -1,6 +1,6 @@
 .button{
     -fx-background-color: #369E53;
-
+    -fx-cursor:hand;
 }
 
 .button:hover{
@@ -12,12 +12,12 @@
 
 }
 
-#signupBtn{
-    -fx-background-color: #DBDBDB;
+.hyperlink:pressed{
+    -fx-border-color: transparent;
 }
 
-.scroll-pane:focused{
-    -fx-background-color: transparent;
+#signupBtn{
+    -fx-background-color: #DBDBDB;
 }
 
 #bankccBtn{

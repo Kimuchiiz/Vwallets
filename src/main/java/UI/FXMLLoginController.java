@@ -38,8 +38,8 @@ import models.Account;
  *
  * @author USER
  */
-public class FXMLLoginController implements Initializable {
-
+public class FXMLLoginController extends SceneChangeController implements Initializable {
+    
     @FXML
     private Button signinBtn, signupBtn;
 
@@ -53,7 +53,7 @@ public class FXMLLoginController implements Initializable {
     private PasswordField psw;
 
     @FXML
-    private void signinButtonAction(ActionEvent event) throws IOException {
+    private void signinButtonAction(ActionEvent event){
         //"[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+" for email
         if (!username.getText().matches("[a-zA-Z0-9]*") || username.getText().isEmpty()) {
             wrongformat.setText("username must be a-z A-Z 0-9");
@@ -71,22 +71,7 @@ public class FXMLLoginController implements Initializable {
 
             Account account = VWallet.isLogin(username.getText(), psw.getText());
             if (account != null) {
-                FXMLLoader Loader = new FXMLLoader();
-                Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
-                try {
-                    Loader.load();
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                FXMLWalletController display = Loader.getController();
-                display.setAccount(account);
-
-                Parent p = Loader.getRoot();
-                Scene walletScene = new Scene(p);
-                walletScene.getStylesheets().add("/styles/CSS.css");
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(walletScene);
-                window.show();
+                walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(),account);
             }
             else{
                 wrongformat.setText("Username and Password not match");
@@ -96,14 +81,8 @@ public class FXMLLoginController implements Initializable {
     }
 
     @FXML
-    private void signupButtonAction(ActionEvent event) throws Exception {
-        Parent registrationParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLRegistration.fxml"));
-        Scene registrationScene = new Scene(registrationParent);
-        registrationScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(registrationScene);
-        window.show();
-
+    private void signupButtonAction(ActionEvent event) {
+        signupScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
     @Override
