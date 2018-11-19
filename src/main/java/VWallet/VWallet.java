@@ -18,7 +18,7 @@ import models.BankAccount;
  * @author Xclos
  */
 public class VWallet {
- 
+
     public static boolean setRegister(String username, String password, String name) { //func register ถ้าสมัครได้ return true ไม่ได้ return false
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
@@ -27,7 +27,9 @@ public class VWallet {
         TypedQuery<Account> query = em.createQuery("SELECT a from Account a", Account.class);
         List<Account> result = query.getResultList();
         for (Account i : result) {
-            if (i.getUsername().equals(username) ) return false;
+            if (i.getUsername().equals(username)) {
+                return false;
+            }
         }
         em.getTransaction().begin();
         account.setUsername(username);
@@ -52,7 +54,7 @@ public class VWallet {
         }
         return null;
     }
-    
+
     public static boolean editAccount(Account account, String password, String name) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
@@ -103,8 +105,8 @@ public class VWallet {
         TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
         List<Account> accountresult = accountquery.getResultList();
         Account acc = null;
-        for(Account i : accountresult){
-            if(i.getUsername().equals(account.getUsername())){
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
                 acc = i;
                 break;
             }
@@ -113,53 +115,74 @@ public class VWallet {
         List<BankAccount> bankresult = bankquery.getResultList();
         for (BankAccount i : bankresult) {
             if (i.getNumber().equals(number)) {
-                if(i.getPin().equals(pin)){
-                    em.getTransaction().begin();
-                    acc.addBankaccount(i);
-                    i.addAccount(acc);
-                    em.persist(i);
-                    em.persist(acc);
-                    em.getTransaction().commit();
-                    em.close();
-                    emf.close();
-                    return 0;
-                }
-                else{
+                if (i.getPin().equals(pin)) {
+                    if (!acc.getBankaccount().contains(i)) {
+                        em.getTransaction().begin();
+                        acc.addBankaccount(i);
+                        i.addAccount(acc);
+                        em.persist(i);
+                        em.persist(acc);
+                        em.getTransaction().commit();
+                        em.close();
+                        emf.close();
+                        return 0;
+                    } else {
+                        System.out.println("Already Add This Bank Account!!!");
+                        return 1;
+                    }
+                } else {
                     System.out.println("Invalid Pin!!!");
-                    return 1;
+                    return 2;
                 }
             }
         }
         System.out.println("No Bank Account!!!");
-        return 2;
+        return 3;
     }
-    
-    public static void removeBankAccount(Account account, BankAccount bankaccount){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-                    account.removeBankaccount(bankaccount);
-                    bankaccount.removeAccount(account);
-                    em.persist(account);
-                    em.persist(bankaccount);
-                    em.getTransaction().commit();
-                    em.close();
-                    emf.close();
-    }
-    
-    public static Account refreshAccount(Account account){
+
+    public static void removeBankAccount(Account account, BankAccount bankaccount) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
         TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
         List<Account> accountresult = accountquery.getResultList();
-        for(Account i : accountresult){
-            if(i.getUsername().equals(account.getUsername())){
+        Account acc = null;
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
+                acc = i;
+                break;
+            }
+        }
+        TypedQuery<BankAccount> bankquery = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
+        List<BankAccount> bankresult = bankquery.getResultList();
+        for (BankAccount i : bankresult) {
+            if (i.getNumber().equals(bankaccount.getNumber())) {
+                em.getTransaction().begin();
+                acc.removeBankaccount(i);
+                i.removeAccount(acc);
+                em.persist(acc);
+                em.persist(i);
+                em.getTransaction().commit();
+                em.close();
+                emf.close();
+            }
+        }
+    }
+    
+    
+
+    public static Account refreshAccount(Account account) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
                 return i;
             }
         }
         return null;
     }
-    
+
     public static void main(String[] args) {
 
     }

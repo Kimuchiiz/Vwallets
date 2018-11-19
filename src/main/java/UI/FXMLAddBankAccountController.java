@@ -31,9 +31,11 @@ import models.Account;
  *
  * @author USER
  */
-public class FXMLAddBankAccountController implements Initializable {
+public class FXMLAddBankAccountController extends SceneChangeController implements Initializable {
 
     private Account account;
+    
+    private Stage stage;
 
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
@@ -83,25 +85,28 @@ public class FXMLAddBankAccountController implements Initializable {
                 Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
             }
             FXMLWalletController display = Loader.getController();
-            
-            Parent p = Loader.getRoot();
-            Scene walletScene = new Scene(p);
-            walletScene.getStylesheets().add("/styles/CSS.css");
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(walletScene);
+            display.setAccount(account);
             Alert alert = new Alert(AlertType.ERROR);
             switch (i) {
                 case 0:
-                    display.setAccount(account);
-                    window.show();
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                    changeScene(stage, Loader);
                     break;
                 case 1:
-                    pinLabel.setText("Invalid PIN!");
-                    bankAccLabel.setText("");
+                    alert.setTitle("Error alert");
+                    alert.setHeaderText("Already Add This Bank Account");
+                    alert.setContentText("");
+
+                    alert.showAndWait();
+                    ((Node) event.getSource()).getScene().getWindow().hide();
                     break;
-                case 2:
-                    pinLabel.setText("Invalid Bank Account Number!");
+                case 2:                 
                     bankAccLabel.setText("");
+                    pinLabel.setText("Invalid PIN!");
+                    break;
+                case 3:
+                    bankAccLabel.setText("Invalid Bank Account Number!");
+                    pinLabel.setText("");
                     break;
                 default:
                     alert.setTitle("Error alert");
@@ -117,98 +122,17 @@ public class FXMLAddBankAccountController implements Initializable {
     }
 
     @FXML
-    private void transactionButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLTransaction.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLTransactionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLTransactionController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene transactionScene = new Scene(p);
-        transactionScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(transactionScene);
-        window.show();
-    }
-
-    @FXML
-    private void walletButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLWalletController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene walletScene = new Scene(p);
-        walletScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(walletScene);
-        window.show();
-    }
-
-    @FXML
-    private void activityButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLActivity.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLActivityController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLActivityController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene activityScene = new Scene(p);
-        activityScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(activityScene);
-        window.show();
-    }
-
-    @FXML
-    private void optionButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLAccount.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLAccountController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene accountScene = new Scene(p);
-        accountScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(accountScene);
-        window.show();
-    }
-
-    @FXML
-    private void signoutButtonAction(ActionEvent event) throws IOException {
-        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
-        Scene signoutScene = new Scene(signoutParent);
-        signoutScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signoutScene);
-        window.show();
+    private void closePopupAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
 }

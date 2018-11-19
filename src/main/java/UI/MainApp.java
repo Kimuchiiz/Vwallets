@@ -17,7 +17,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));        
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -45,10 +45,11 @@ public class MainApp extends Application {
                 }
             }
         });*/
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("VWallet");
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+        root.requestFocus();     //unselect first node
     }
 
     /**

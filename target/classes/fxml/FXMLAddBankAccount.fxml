@@ -6,16 +6,12 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="407.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLAddBankAccountController">
    <children>
-      <Text layoutX="129.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Bank Account">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
       <Text layoutX="189.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PIN">
          <font>
             <Font size="18.0" />
@@ -46,5 +42,23 @@
          </cursor>
       </Button>
       <PasswordField fx:id="pin" layoutX="58.0" layoutY="293.0" prefHeight="41.0" prefWidth="290.0" />
+      <Rectangle fill="DODGERBLUE" height="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: #369E53;" width="407.0" />
+      <Label layoutX="123.0" layoutY="9.0" text="Add Bank Account" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button cancelButton="true" layoutX="360.0" layoutY="3.0" maxHeight="41.0" maxWidth="43.0" minHeight="41.0" minWidth="43.0" mnemonicParsing="false" onAction="#closePopupAction" prefHeight="41.0" prefWidth="43.0" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <graphic>
+            <Label id="close" focusTraversable="false" text="X" textFill="WHITE">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
