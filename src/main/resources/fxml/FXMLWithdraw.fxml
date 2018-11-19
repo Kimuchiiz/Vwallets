@@ -11,38 +11,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLWithdrawController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLWithdrawController">
    <children>
-      <Text layoutX="447.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdraw Account">
+      <Text layoutX="455.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdraw ">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="580.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="157.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
+      <Text layoutX="150.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Account number">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="151.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Account">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextField fx:id="bankAcc" layoutX="150.0" layoutY="307.0" prefHeight="41.0" prefWidth="290.0" />
-      <TextField fx:id="amount" layoutX="149.0" layoutY="459.0" prefHeight="41.0" prefWidth="290.0" />
-      <Label fx:id="bankAccLabel" alignment="CENTER" layoutX="511.0" layoutY="313.0" prefHeight="26.0" prefWidth="455.0" textFill="RED">
+      <TextField fx:id="bankAcc" layoutX="150.0" layoutY="300.0" prefHeight="41.0" prefWidth="290.0" />
+      <TextField fx:id="amount" layoutX="580.0" layoutY="300.0" prefHeight="41.0" prefWidth="290.0" />
+      <Label fx:id="bankAccLabel" alignment="CENTER" layoutX="99.0" layoutY="370.0" prefHeight="26.0" prefWidth="390.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="amountLabel" alignment="CENTER" layoutX="509.0" layoutY="467.0" prefHeight="26.0" prefWidth="455.0" textFill="RED">
+      <Label fx:id="amountLabel" alignment="CENTER" layoutX="528.0" layoutY="370.0" prefHeight="26.0" prefWidth="390.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button defaultButton="true" layoutX="457.0" layoutY="628.0" mnemonicParsing="false" onAction="#confirmButtonAction" style="-fx-background-color: #369E53;" text="Confirm" textFill="WHITE">
+      <Button defaultButton="true" layoutX="452.0" layoutY="635.0" minHeight="45.0" minWidth="120.0" mnemonicParsing="false" onAction="#confirmButtonAction" text="Next" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />

@@ -27,6 +27,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import VWallet.VWallet;
+import java.util.function.UnaryOperator;
+import javafx.scene.control.TextFormatter;
 
 /**
  * FXML Controller class
@@ -61,7 +63,7 @@ public class FXMLRegistrationController implements Initializable {
             nameLabel.setText("");
             psw.clear();
             psw2.clear();
-        } else if (username.getText().length() <= 4 || username.getText().length() >= 12) {
+        } else if (username.getText().length() < 4 || username.getText().length() > 12) {
             usernameLabel.setText("Username must have 4-12 characters");
             pswLabel.setText("");
             pswLabel2.setText("");
@@ -171,8 +173,58 @@ public class FXMLRegistrationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
-        // TODO
-        username.textProperty().addListener((observable, oldValue, newValue) -> {
+        ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
+        username.setOnKeyTyped(event -> {
+            int maxCharacters = 12;
+            if (username.getText().length() >= maxCharacters) {
+                event.consume();
+            }
+        });
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //////////////////////////////////////////// Username Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> usernameFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[A-Za-z0-9]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> usernameformatter = new TextFormatter<>(usernameFilter);
+        username.setTextFormatter(usernameformatter);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+         //////////////////////////////////////////// name Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> nameFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[A-Z]?[a-z]* ?[A-Z]?[a-z]* ?[A-Z]?[a-z]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> nameformatter = new TextFormatter<>(nameFilter);
+        name.setTextFormatter(nameformatter);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //////////////////////////////////////////// Password Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> pswFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[A-Za-z0-9]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> pswformatterr = new TextFormatter<>(pswFilter);
+        username.setTextFormatter(pswformatterr);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        /*username.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\sa-zA-Z0-9*")) {
                 username.setText(newValue.replaceAll("[^\\sa-zA-Z0-9]", ""));
             }
@@ -182,9 +234,9 @@ public class FXMLRegistrationController implements Initializable {
             if (!newValue.matches("\\sa-zA-Z*")) {
                 name.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
             }
-        });
+        });*/
          
-         
+       
     }
 
 }

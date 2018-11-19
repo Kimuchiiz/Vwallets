@@ -65,11 +65,11 @@ public class FXMLWithdrawController implements Initializable {
             bankAcc.getText();
             amount.getText();
 
-            Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
-            Scene walletScene = new Scene(walletParent);
-            walletScene.getStylesheets().add("/styles/CSS.css");
+            Parent confirmParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLConfirm.fxml"));
+            Scene confirmScene = new Scene(confirmParent);
+            confirmScene.getStylesheets().add("/styles/CSS.css");
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(walletScene);
+            window.setScene(confirmScene);
             window.show();
         }
     }
@@ -127,7 +127,7 @@ public class FXMLWithdrawController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
         bankAcc.setOnKeyTyped(event -> {
             int maxCharacters = 10;
@@ -136,44 +136,36 @@ public class FXMLWithdrawController implements Initializable {
             }
         });
         /////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        //////////////////////////////////// Number format/////////////////////////////////////
-        UnaryOperator<Change> integerFilter = change -> {
+
+        //////////////////////////////////////////// Bank account number Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> bankAccFilter = change -> {
             String newText = change.getControlNewText();
-            // if proposed change results in a valid value, return change as-is:
-            if (newText.matches("([0-9]*)")) { // "-?([1-9][0-9]*)?" Can input - and follow number
+            if (newText.matches("[A-Za-z0-9]*")) {
                 return change;
-
             }
-            // invalid change, veto it by returning null:
             return null;
-        };
 
-bankAcc.setTextFormatter(
-    new TextFormatter<Integer>(new IntegerStringConverter(), null, integerFilter));
-    
+        };
+        TextFormatter<String> bankAccformatter = new TextFormatter<>(bankAccFilter);
+        bankAcc.setTextFormatter(bankAccformatter);
+
         /////////////////////////////////////////////////////////////////////////////////////////////////
         
-        //////////////////////////////////// Amount format /////////////////////////////////////
-        UnaryOperator<Change> amountFilter = change -> {
+         //////////////////////////////////////////// Amount Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> amountFilter = change -> {
             String newText = change.getControlNewText();
-            // if proposed change results in a valid value, return change as-is:
-            if (newText.matches("([1-9][0-9]*)")) { // "-?([1-9][0-9]*)?" Can input - and follow number
+            if (newText.matches("([1-9][0-9]*)?")) {
                 return change;
-
             }
-            // invalid change, veto it by returning null:
             return null;
+
         };
+        TextFormatter<String> amountformatter = new TextFormatter<>(amountFilter);
+        amount.setTextFormatter(amountformatter);
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////
         
-amount.setTextFormatter(
-    new TextFormatter<Integer>(new IntegerStringConverter(), null, amountFilter));
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
- ///////////////////////////////////// Can't type String 1///////////////////////////////////////
+        ///////////////////////////////////// Can't type String 1///////////////////////////////////////
         /*bankAcc.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
@@ -183,7 +175,7 @@ amount.setTextFormatter(
                 }
             }
         });*/
- ////////////////////////////////////////////////////////////////////////////////////////////      
+        ////////////////////////////////////////////////////////////////////////////////////////////      
     }
 
 }
