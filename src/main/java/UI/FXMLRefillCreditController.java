@@ -41,9 +41,9 @@ public class FXMLRefillCreditController implements Initializable {
     private void confirmButtonAction(ActionEvent event) throws IOException {
         if (firstname.getText().isEmpty()) {
             wrongformat.setText("Please fill the firstname");
-        } else if (!firstname.getText().matches("[A-Z][a-z]*")) {
+        } else if (!firstname.getText().matches("[A-Z][a-z]*") && !firstname.getText().matches("[A-Z][a-z]* [A-Z][a-z]*"))  {
             wrongformat.setText("Firstname must be A-Z and follow a-z");
-
+            
         } else if (lastname.getText().isEmpty()) {
             wrongformat.setText("Please fill the lastname");
         } else if (!lastname.getText().matches("[A-Z][a-z]*")) {
@@ -51,23 +51,23 @@ public class FXMLRefillCreditController implements Initializable {
 
         } else if (address1.getText().isEmpty()) {
             wrongformat.setText("Please fill the address");
-        } else if (!address2.getText().matches("[a-zA-Z0-9]*")) {
+        } else if (!address2.getText().matches("[a-zA-Z0-9-. ]*")) {
             wrongformat.setText("Address must be a-z A-Z 0-9");
 
         } else if (address2.getText().isEmpty()) {
             wrongformat.setText("Please fill the address");
-        } else if (!address2.getText().matches("[a-zA-Z0-9]*")) {
+        } else if (!address2.getText().matches("[a-zA-Z0-9-. ]*")) {
             wrongformat.setText("Address must be a-z A-Z 0-9");
 
         } else if (city.getText().isEmpty()) {
             wrongformat.setText("Please fill the city");
-        } else if (!city.getText().matches("[a-zA-Z]*")) {
-            wrongformat.setText("City must be a-z A-Z");
+        } else if (!city.getText().matches("[a-zA-Z0-9-. ]*")) {
+            wrongformat.setText("City must be a-z A-Z 0-9");
 
         } else if (state.getText().isEmpty()) {
             wrongformat.setText("Please fill the state");
-        } else if (!state.getText().matches("[a-zA-Z]*")) {
-            wrongformat.setText("State must be a-z A-Z");
+        } else if (!state.getText().matches("[a-zA-Z0-9-. ]*")) {
+            wrongformat.setText("State must be a-z A-Z 0-9");
 
         } else if (zip.getText().isEmpty()) {
             wrongformat.setText("Please fill the zip code");
@@ -78,7 +78,7 @@ public class FXMLRefillCreditController implements Initializable {
 
         } else if (country.getText().isEmpty()) {
             wrongformat.setText("Please fill the country");
-        } else if (!country.getText().matches("[a-zA-Z]*")) {
+        } else if (!country.getText().matches("[a-zA-Z0-9-. ]*")) {
             wrongformat.setText("Country must be a-z A-Z");
 
         } else if (phone.getText().isEmpty()) {
@@ -89,16 +89,16 @@ public class FXMLRefillCreditController implements Initializable {
             wrongformat.setText("Phone number must have 10 digit");
 
         } else if (email.getText().isEmpty()) {
-            wrongformat.setText("Please fill the city");
-        } else if (!email.getText().matches("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+")) {
+            wrongformat.setText("Please fill the email");
+        } else if (!email.getText().matches("[a-zA-Z0-9][a-zA-Z0-9-._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+")) {
             wrongformat.setText("Email must have @ and . Ex. abc@hotmail.com");
 
         } else if (cardNumber.getText().isEmpty()) {
             wrongformat.setText("Please fill the card number");
         } else if (!cardNumber.getText().matches("[0-9]*")) {
             wrongformat.setText("Card number must be 0-9");
-        } else if (cardNumber.getText().length() != 13) {
-            wrongformat.setText("Card number must have 13 digit");
+        } else if (cardNumber.getText().length() != 12) {
+            wrongformat.setText("Card number must have 12 digit");
 
         } else if (expdate.getText().isEmpty()) {
             wrongformat.setText("Please fill the expiration date");
@@ -238,13 +238,12 @@ public class FXMLRefillCreditController implements Initializable {
         };
         TextFormatter<String> firstnameformatter = new TextFormatter<>(firstnameFilter);
         firstname.setTextFormatter(firstnameformatter);
-        
+
         /////////////////////////////////////////////////////////////////////////////////////////////////
-        
-         //////////////////////////////////////////// Lastname Format ///////////////////////////////////
-         UnaryOperator<TextFormatter.Change> lastnameFilter = change -> {
+        //////////////////////////////////////////// Lastname Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> lastnameFilter = change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("[A-Z]?[a-z]* ?[A-Z]?[a-z]*")) {
+            if (newText.matches("[A-Z]?[a-z]*")) {
                 return change;
             }
             return null;
@@ -254,6 +253,68 @@ public class FXMLRefillCreditController implements Initializable {
         lastname.setTextFormatter(lastnameformatter);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////// String Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> stringFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[A-Za-z0-9-. ]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> address1formatter = new TextFormatter<>(stringFilter);
+        address1.setTextFormatter(address1formatter);
+
+        TextFormatter<String> address2formatter = new TextFormatter<>(stringFilter);
+        address2.setTextFormatter(address2formatter);
+
+        TextFormatter<String> cityformatter = new TextFormatter<>(stringFilter);
+        city.setTextFormatter(cityformatter);
+
+        TextFormatter<String> stateformatter = new TextFormatter<>(stringFilter);
+        state.setTextFormatter(stateformatter);
+
+        TextFormatter<String> countryformatter = new TextFormatter<>(stringFilter);
+        country.setTextFormatter(countryformatter);
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //////////////////////////////////////////// Number Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> numberFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[0-9]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> zipformatter = new TextFormatter<>(numberFilter);
+        zip.setTextFormatter(zipformatter);
+
+        TextFormatter<String> phoneformatter = new TextFormatter<>(numberFilter);
+        phone.setTextFormatter(phoneformatter);
+
+        TextFormatter<String> cardNumberformatter = new TextFormatter<>(numberFilter);
+        cardNumber.setTextFormatter(cardNumberformatter);
+
+        TextFormatter<String> cvvformatter = new TextFormatter<>(numberFilter);
+        cvv.setTextFormatter(cvvformatter);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //////////////////////////////////////////// Amount Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> amountFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("([1-9][0-9]*)?")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> amountformatter = new TextFormatter<>(amountFilter);
+        amount.setTextFormatter(amountformatter);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
         //////////////////////////////////////////// Amount Format ///////////////////////////////////
         /*UnaryOperator<TextFormatter.Change> amountFilter = change -> {
             String newText = change.getControlNewText();
