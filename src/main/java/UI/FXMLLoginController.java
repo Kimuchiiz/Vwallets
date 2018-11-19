@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -56,8 +57,8 @@ public class FXMLLoginController implements Initializable {
         //"[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+" for email
         if (!username.getText().matches("[a-zA-Z0-9]*") || username.getText().isEmpty()) {
             wrongformat.setText("username must be a-z A-Z 0-9");
-        } else if (username.getText().length() <= 6 || username.getText().length() >= 12) {
-            wrongformat.setText("username must have 6-12 digit");
+        } else if (username.getText().length() < 4 || username.getText().length() > 12) {
+            wrongformat.setText("username must have 4-12 digit");
         } else if (psw.getText().isEmpty()) {
             wrongformat.setText("Please fill the password");
         } else if (!psw.getText().matches("[a-zA-Z0-9]*")) {
@@ -116,20 +117,19 @@ public class FXMLLoginController implements Initializable {
         /////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////// Username Format ///////////////////////////////////
-        UnaryOperator<TextFormatter.Change> stringFilter = change -> {
+        /* UnaryOperator<TextFormatter.Change> stringFilter = change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("[a-zA-Z0-9]*")) {
+            if (newText.matches("[a-zA-Z]+[a-zA-Z0-9]*@?[a-zA-Z0-9]*")) {
                 return change;
             }
             return null;
 
         };
         TextFormatter<String> formatter = new TextFormatter<>(stringFilter);
-        username.setTextFormatter(formatter);
-
+        username.setTextFormatter(formatter);*/
         /////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////// Password format /////////////////////////////////////
-        UnaryOperator<TextFormatter.Change> passwordFilter = change -> {
+        /*UnaryOperator<TextFormatter.Change> passwordFilter = change -> {
             String newText = change.getControlNewText();
             // if proposed change results in a valid value, return change as-is:
             if (newText.matches("[a-zA-Z0-9]*")) { // "-?([1-9][0-9]*)?" Can input - and follow number
@@ -141,8 +141,30 @@ public class FXMLLoginController implements Initializable {
         };
 
         psw.setTextFormatter(
-                new TextFormatter<Integer>(new IntegerStringConverter(), null, passwordFilter));
+                new TextFormatter<Integer>(new IntegerStringConverter(), null, passwordFilter));*/
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////// Username Format ///////////////////////////////////
+        UnaryOperator<Change> usernameFilter = change -> {
+            String input = change.getText();
+            if (input.matches("[a-zA-Z0-9]*")) {
+                return change;
+            }
+            return null;
+        };
 
+        username.setTextFormatter(new TextFormatter<String>(usernameFilter));
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////// Password format /////////////////////////////////////
+        UnaryOperator<Change> pswFilter = change -> {
+            String input = change.getText();
+            if (input.matches("[a-zA-Z0-9]*")) {
+                return change;
+            }
+            return null;
+        };
+
+        username.setTextFormatter(new TextFormatter<String>(pswFilter));
         /////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }

@@ -61,7 +61,7 @@ public class FXMLRegistrationController implements Initializable {
             nameLabel.setText("");
             psw.clear();
             psw2.clear();
-        } else if (username.getText().length() <= 4 || username.getText().length() >= 12) {
+        } else if (username.getText().length() < 4 || username.getText().length() > 12) {
             usernameLabel.setText("Username must have 4-12 characters");
             pswLabel.setText("");
             pswLabel2.setText("");
@@ -76,7 +76,7 @@ public class FXMLRegistrationController implements Initializable {
             pswLabel2.setText("");
             psw.clear();
             psw2.clear();
-        } else if (!name.getText().matches("[A-Z][a-z]* [A-Z][a-z]*")) {
+        } else if (!name.getText().matches("[A-Z][a-z]* ?[A-Z][a-z]*")) {
             nameLabel.setText("Please Enter your first and surname separate with ' ', both must be a-z A-Z and their first alphabet must be Uppercase");
             usernameLabel.setText("");
             pswLabel.setText("");
@@ -173,14 +173,14 @@ public class FXMLRegistrationController implements Initializable {
     ) {
         // TODO
         username.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\sa-zA-Z0-9*")) {
-                username.setText(newValue.replaceAll("[^\\sa-zA-Z0-9]", ""));
+            if (!newValue.matches("")) {
+                username.setText(newValue.replaceAll("[^a-zA-Z0-9]", ""));
             }
         });
         
          name.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\sa-zA-Z*")) {
-                name.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            if (!newValue.matches("\\sa-zA-Z *")) {
+                name.setText(newValue.replaceAll("[^\\sa-zA-Z ]", ""));
             }
         });
          
