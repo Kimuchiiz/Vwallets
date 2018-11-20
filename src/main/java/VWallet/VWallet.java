@@ -28,6 +28,8 @@ public class VWallet {
         List<Account> result = query.getResultList();
         for (Account i : result) {
             if (i.getUsername().equals(username)) {
+                em.close();
+                emf.close();
                 return false;
             }
         }
@@ -49,9 +51,13 @@ public class VWallet {
         List<Account> result = query.getResultList();
         for (Account i : result) {
             if (i.getPassword().equals(password) && i.getUsername().equals(username)) {
+                em.close();
+                emf.close();
                 return i; //ไม่ close em ,emf ?
             }
         }
+        em.close();
+        emf.close();
         return null;
     }
 
@@ -71,9 +77,13 @@ public class VWallet {
                     emf.close();
                     return true;
                 }
+                em.close();
+                emf.close();
                 return false;
             }
         }
+        em.close();
+        emf.close();
         return false;
     }
 
@@ -93,9 +103,13 @@ public class VWallet {
                     emf.close();
                     return true;
                 }
+                em.close();
+                emf.close();
                 return false;
             }
         }
+        em.close();
+        emf.close();
         return false;
     }
 
@@ -128,15 +142,21 @@ public class VWallet {
                         return 0;
                     } else {
                         System.out.println("Already Add This Bank Account!!!");
+                        em.close();
+                        emf.close();
                         return 1;
                     }
                 } else {
                     System.out.println("Invalid Pin!!!");
+                    em.close();
+                    emf.close();
                     return 2;
                 }
             }
         }
         System.out.println("No Bank Account!!!");
+        em.close();
+        emf.close();
         return 3;
     }
 
@@ -167,8 +187,96 @@ public class VWallet {
             }
         }
     }
+
+    public static int withdraw(Account account, String number, String withdrawAmount, String password) {
+        Double amount = Double.parseDouble(withdrawAmount);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        Account acc = null;
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
+                if (i.getPassword().equals(password)) {
+                    acc = i;
+                    break;
+                } else {
+                    System.out.print("Wrong Password!");
+                    em.close();
+                    emf.close();
+                    return 1;
+                }
+            }
+        }
+        TypedQuery<BankAccount> bankquery = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
+        List<BankAccount> bankresult = bankquery.getResultList();
+        BankAccount bacc = null;
+        for (BankAccount i : bankresult) {
+            if (i.getNumber().equals(number)) {
+                bacc = i;
+                break;
+            }
+        }       
+        if (acc.getBalance() >= amount) {
+            em.getTransaction().begin();
+            acc.withdraw(bacc, amount);
+            em.persist(acc);
+            em.persist(bacc);
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+            return 0;
+        } else {
+            em.close();
+            emf.close();
+            return 2;
+        }
+    }
     
-    
+    public static int addBalance(Account account, String number, String addAmount, String password) {
+        Double amount = Double.parseDouble(addAmount);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        Account acc = null;
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
+                if (i.getPassword().equals(password)) {
+                    acc = i;
+                    break;
+                } else {
+                    System.out.print("Wrong Password!");
+                    em.close();
+                    emf.close();
+                    return 1;
+                }
+            }
+        }
+        TypedQuery<BankAccount> bankquery = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
+        List<BankAccount> bankresult = bankquery.getResultList();
+        BankAccount bacc = null;
+        for (BankAccount i : bankresult) {
+            if (i.getNumber().equals(number)) {
+                bacc = i;
+                break;
+            }
+        }       
+        if (bacc.getBalance() >= amount) {
+            em.getTransaction().begin();
+            acc.chargeBank(bacc, amount);
+            em.persist(acc);
+            em.persist(bacc);
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+            return 0;
+        } else {
+            em.close();
+            emf.close();
+            return 2;
+        }
+    }
 
     public static Account refreshAccount(Account account) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
@@ -177,9 +285,13 @@ public class VWallet {
         List<Account> accountresult = accountquery.getResultList();
         for (Account i : accountresult) {
             if (i.getUsername().equals(account.getUsername())) {
+                em.close();
+                emf.close();
                 return i;
             }
         }
+        em.close();
+        emf.close();
         return null;
     }
 

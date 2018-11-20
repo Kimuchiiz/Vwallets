@@ -34,6 +34,7 @@ import models.Account;
 public class FXMLAddBankAccountController extends SceneChangeController implements Initializable {
 
     private Account account;
+    private String previous;
     
     private Stage stage;
 
@@ -77,20 +78,16 @@ public class FXMLAddBankAccountController extends SceneChangeController implemen
             bankAccLabel.setText("");
 
             int i = VWallet.VWallet.addBankAccount(account, bankAcc.getText(), pin.getText());
-            FXMLLoader Loader = new FXMLLoader();
-            Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
-            try {
-                Loader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            FXMLWalletController display = Loader.getController();
-            display.setAccount(account);
             Alert alert = new Alert(AlertType.ERROR);
             switch (i) {
                 case 0:
                     ((Node) event.getSource()).getScene().getWindow().hide();
-                    changeScene(stage, Loader);
+                    if(previous.equals("wallet")){
+                    walletScene(stage, account);
+                    }
+                    else{
+                        selectBankAccountScene(stage, account, previous);
+                    }
                     break;
                 case 1:
                     alert.setTitle("Error alert");
@@ -135,4 +132,8 @@ public class FXMLAddBankAccountController extends SceneChangeController implemen
         this.stage = stage;
     }
 
+    public void setPrevious(String previous) {
+        this.previous = previous;
+    }
+    
 }

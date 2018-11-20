@@ -157,7 +157,7 @@ public class FXMLWalletController extends SceneChangeController implements Initi
         temp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                addBankAccountScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
+                addBankAccountScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, "wallet");
             }
         });
         BankAccountGrid.add(temp, column, row);

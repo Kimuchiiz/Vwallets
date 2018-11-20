@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Account;
+import models.BankAccount;
 
 /**
  *
@@ -102,7 +103,7 @@ public abstract class SceneChangeController {
         changeScene(stage, Loader);
     }
 
-    public void addBankAccountScene(Stage stage, Account account) {
+    public void addBankAccountScene(Stage stage, Account account, String previous) {
         FXMLLoader Loader = new FXMLLoader();
         Loader.setLocation(getClass().getResource("/fxml/FXMLAddBankAccount.fxml"));
         try {
@@ -113,8 +114,57 @@ public abstract class SceneChangeController {
         FXMLAddBankAccountController display = Loader.getController();
         display.setAccount(account);
         display.setStage(stage);
+        display.setPrevious(previous);
         
         popupScene(stage,Loader);
+    }
+    
+    public void selectBankAccountScene(Stage stage, Account account,String option){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLSelectBankAccount.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLSelectBankAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLSelectBankAccountController display = Loader.getController();
+        display.setAccount(account);
+        display.setOption(option);
+        changeScene(stage, Loader);
+    }
+    
+    public void refillAccountScene(Stage stage, Account account, BankAccount bankaccount){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLRefillAccount.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLRefillAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLRefillAccountController display = Loader.getController();
+        display.setAccount(account);
+        if(bankaccount != null){
+            display.autoCompleted(bankaccount);
+        }
+        
+        changeScene(stage, Loader);
+    }
+    
+    public void withdrawScene(Stage stage, Account account, BankAccount bankaccount){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLWithdraw.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLWithdrawController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLWithdrawController display = Loader.getController();
+        display.setAccount(account);
+        if(bankaccount != null){
+            display.autoCompleted(bankaccount);
+        }
+        
+        changeScene(stage, Loader);
     }
 
     public void changeScene(Stage stage, FXMLLoader Loader) {
@@ -148,22 +198,22 @@ public abstract class SceneChangeController {
         popup.setTitle("PopUp");
         popup.initStyle(StageStyle.UNDECORATED);
         Parent root = Loader.getRoot();
-//        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                xOffset = event.getSceneX();
-//                yOffset = event.getSceneY();
-//            }
-//        });
-//
-//        //move around here
-//        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                popup.setX(event.getScreenX() - xOffset);
-//                popup.setY(event.getScreenY() - yOffset);
-//            }
-//        });      
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        //move around here
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                popup.setX(event.getScreenX() - xOffset);
+                popup.setY(event.getScreenY() - yOffset);
+            }
+        });      
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initOwner(stage);
         Scene popupScene = new Scene(root);

@@ -25,7 +25,7 @@ import models.Account;
  *
  * @author USER
  */
-public class FXMLTransactionController implements Initializable {
+public class FXMLTransactionController extends SceneChangeController implements Initializable {
     
     private Account account;
 
@@ -35,93 +35,28 @@ public class FXMLTransactionController implements Initializable {
     }
 
     @FXML
-    private void transactionButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLTransaction.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLTransactionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLTransactionController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene transactionScene = new Scene(p);
-        transactionScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(transactionScene);
-        window.show();
+    private void transactionButtonAction(ActionEvent event) {
+        transactionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void walletButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLWalletController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene walletScene = new Scene(p);
-        walletScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(walletScene);
-        window.show();
+    private void walletButtonAction(ActionEvent event) {
+        walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void activityButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLActivity.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLActivityController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLActivityController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene activityScene = new Scene(p);
-        activityScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(activityScene);
-        window.show();
+    private void activityButtonAction(ActionEvent event) {
+        activityScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void optionButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLAccount.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLAccountController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene accountScene = new Scene(p);
-        accountScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(accountScene);
-        window.show();
+    private void optionButtonAction(ActionEvent event) {
+        optionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void signoutButtonAction(ActionEvent event) throws IOException {
-        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
-        Scene signoutScene = new Scene(signoutParent);
-        signoutScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signoutScene);
-        window.show();
+    private void signoutButtonAction(ActionEvent event) {
+        loginScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
     @FXML
@@ -136,32 +71,17 @@ public class FXMLTransactionController implements Initializable {
 
     @FXML
     private void refillCreditButtonAction(ActionEvent event) throws IOException {
-        Parent refillCreditParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLRefillCredit.fxml"));
-         Scene refillCreditScene = new Scene(refillCreditParent);
-         refillCreditScene.getStylesheets().add("/styles/CSS.css");
-         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-         window.setScene(refillCreditScene);
-         window.show();
+        selectBankAccountScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, "addbalance");
     }
 
     @FXML
     private void refillAccButtonAction(ActionEvent event) throws IOException {
-        Parent refillAccParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLRefillAccount.fxml"));
-         Scene refillAccScene = new Scene(refillAccParent);
-         refillAccScene.getStylesheets().add("/styles/CSS.css");
-         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-         window.setScene(refillAccScene);
-         window.show();
+        selectBankAccountScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, "addbalance");
     }
 
     @FXML
     private void withdrawButtonAction(ActionEvent event) throws IOException {
-        Parent withdrawParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWithdraw.fxml"));
-         Scene withdrawScene = new Scene(withdrawParent);
-         withdrawScene.getStylesheets().add("/styles/CSS.css");
-         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-         window.setScene(withdrawScene);
-         window.show();
+        selectBankAccountScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, "withdraw");
     }
 
     @FXML
