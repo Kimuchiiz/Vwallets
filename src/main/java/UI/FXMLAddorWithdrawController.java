@@ -72,7 +72,7 @@ public class FXMLAddorWithdrawController extends SceneChangeController implement
         }
         numberLabel.setText(bankaccount.getNumber());
         nameLabel.setText(bankaccount.getName());
-        balanceLabel.setText(bankaccount.getBalance() + " THB");
+        balanceLabel.setText(account.getBalance() + " THB");
     }
 
     @FXML
