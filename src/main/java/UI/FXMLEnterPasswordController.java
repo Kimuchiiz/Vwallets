@@ -86,7 +86,7 @@ public class FXMLEnterPasswordController extends SceneChangeController implement
             if(option.equals("addbalance")){
                 i = VWallet.VWallet.addBalance(account, bankaccount, amount, psw.getText());
             }
-            else if(option.equals("addbalance")){
+            else if(option.equals("withdraw")){
                 i = VWallet.VWallet.withdraw(account, bankaccount, amount, psw.getText());
             }
             Alert alert = new Alert(Alert.AlertType.ERROR);

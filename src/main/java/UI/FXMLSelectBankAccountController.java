@@ -22,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import models.Account;
 import models.BankAccount;
@@ -97,7 +98,8 @@ public class FXMLSelectBankAccountController extends SceneChangeController imple
         int column = 0;
         int row = 0;
         for (BankAccount i : account.getBankaccount()) {
-            Button temp = new Button("Account Number\n    " + i.getNumber() + "\n" + i.getName());
+            Button temp = new Button("Account Number\n" + i.getNumber() + "\n" + i.getName());
+            temp.setTextAlignment(TextAlignment.CENTER);
             temp.setId("bankccBtn");
             temp.setStyle("-fx-font: 20 Regular;");
             temp.setOnAction(new EventHandler<ActionEvent>() {

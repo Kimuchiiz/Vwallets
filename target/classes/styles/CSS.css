@@ -47,3 +47,25 @@
     -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,4),5,0,0,1);
     -fx-border-color:black
 }
+
+#closebutton {
+  -fx-background-color: lightgrey,linear-gradient(#ff5400, #be1d00);
+  -fx-background-radius: 16.4, 15;
+  -fx-background-insets: -1.4, 0;
+  -fx-border-radius: 15;
+  -fx-border-width: 2;
+  -fx-border-color: dimgrey;
+  -fx-padding: 0;
+  -fx-font-size: 0;
+}
+
+#closebutton:focused{
+  -fx-background-color: -fx-focus-color, linear-gradient(#ff5400, #be1d00);
+}
+
+#closebutton:hover {
+  -fx-background-color: -fx-focus-color, linear-gradient(#ff5400, #be1d00);
+}
+#closebutton:pressed{
+    -fx-effect: innershadow(gaussian, #101010, 15, 0, 0, 0);
+}

@@ -37,6 +37,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import models.Account;
 import models.BankAccount;
@@ -130,7 +131,8 @@ public class FXMLWalletController extends SceneChangeController implements Initi
         int column = 0;
         int row = 0;
         for (BankAccount i : account.getBankaccount()) {
-            Button temp = new Button("Account Number\n    " + i.getNumber() + "\n" + i.getName());
+            Button temp = new Button("Account Number\n" + i.getNumber() + "\n" + i.getName());
+            temp.setTextAlignment(TextAlignment.CENTER);
             temp.setId("bankccBtn");
             temp.setStyle("-fx-font: 20 Regular;");
             temp.setOnAction(new EventHandler<ActionEvent>() {
@@ -172,7 +174,7 @@ public class FXMLWalletController extends SceneChangeController implements Initi
 //    }
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
-        balance.setText(Double.toString(account.getBalance()) + " Baht");
+        balance.setText(Double.toString(this.account.getBalance()) + " Baht");
         createBankAccount();
     }
 

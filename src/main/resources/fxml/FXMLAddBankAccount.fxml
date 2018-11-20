@@ -48,17 +48,10 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button cancelButton="true" layoutX="360.0" layoutY="3.0" maxHeight="41.0" maxWidth="43.0" minHeight="41.0" minWidth="43.0" mnemonicParsing="false" onAction="#closePopupAction" prefHeight="41.0" prefWidth="43.0" textAlignment="CENTER">
+      <Button id="closebutton" cancelButton="true" layoutX="375.0" layoutY="8.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closePopupAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
          <font>
             <Font size="17.0" />
          </font>
-         <graphic>
-            <Label id="close" focusTraversable="false" text="X" textFill="WHITE">
-               <font>
-                  <Font size="29.0" />
-               </font>
-            </Label>
-         </graphic>
       </Button>
    </children>
 </AnchorPane>

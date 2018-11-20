@@ -26,7 +26,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button defaultButton="true" layoutX="461.0" layoutY="609.0" mnemonicParsing="false" onAction="#confirmButtonAction" prefHeight="50.0" prefWidth="94.0" style="-fx-background-color: #369E53; -fx-background-radius: 30;" text="Next" textFill="WHITE">
+      <Button defaultButton="true" layoutX="461.0" layoutY="609.0" mnemonicParsing="false" onAction="#confirmButtonAction" prefHeight="50.0" prefWidth="94.0" style="-fx-background-color: #369E53; -fx-background-radius: 30;" text="Confirm" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
