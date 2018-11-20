@@ -67,10 +67,10 @@ public class CreateBankAccount {
                         em.getTransaction().commit();
                         em.close();
                         emf.close();
-                    } else {
-                        System.out.println("Invalid Number!!!");
                     }
                 }
+                em.close();
+                emf.close();
             }
         }
     }

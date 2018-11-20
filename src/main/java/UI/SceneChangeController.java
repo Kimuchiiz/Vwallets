@@ -166,6 +166,40 @@ public abstract class SceneChangeController {
         
         changeScene(stage, Loader);
     }
+    
+    public void addOrWithdrawScene(Stage stage, Account account, BankAccount bankaccount, String option){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLAddorWithdraw.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAddorWithdrawController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLAddorWithdrawController display = Loader.getController();
+        display.setAccount(account);
+        display.setBankaccount(bankaccount);
+        display.setLabel(option);
+        
+        changeScene(stage, Loader);
+    }
+    
+    public void enterPasswordScene(Stage stage, Account account, BankAccount bankaccount, String amount, String option) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLEnterPassword.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLEnterPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLEnterPasswordController display = Loader.getController();
+        display.setAccount(account);
+        display.setStage(stage);
+        display.setOption(option);
+        display.setBankAccount(bankaccount);
+        display.setAmount(amount);
+        
+        popupScene(stage,Loader);
+    }
 
     public void changeScene(Stage stage, FXMLLoader Loader) {
         Parent root = Loader.getRoot();

@@ -92,25 +92,25 @@
             </Button>
          </items>
       </ToolBar>
-      <Rectangle arcHeight="60.0" arcWidth="60.0" fill="WHITE" height="242.0" layoutX="334.0" layoutY="173.0" stroke="BLACK" strokeType="INSIDE" width="358.0" />
+      <Rectangle arcHeight="60.0" arcWidth="60.0" fill="WHITE" height="242.0" layoutX="333.0" layoutY="196.0" stroke="BLACK" strokeType="INSIDE" width="358.0" />
       <Label fx:id="titleLabel" alignment="CENTER" layoutX="363.0" layoutY="103.0" prefHeight="49.0" prefWidth="290.0" text="Title" textAlignment="CENTER">
          <font>
-            <Font name="TH SarabunPSK" size="40.0" />
+            <Font size="35.0" />
          </font>
       </Label>
-      <Label layoutX="422.0" layoutY="212.0" text="Account Number">
+      <Label alignment="CENTER" layoutX="338.0" layoutY="221.0" prefHeight="45.0" prefWidth="339.0" text="Account Number">
          <font>
-            <Font name="TH SarabunPSK" size="35.0" />
+            <Font size="27.0" />
          </font>
       </Label>
-      <Label fx:id="numberLabel" layoutX="449.0" layoutY="275.0" text="0000000000">
+      <Label fx:id="numberLabel" alignment="CENTER" layoutX="382.0" layoutY="292.0" prefHeight="51.0" prefWidth="260.0" text="0000000000">
          <font>
-            <Font name="TH SarabunPSK" size="35.0" />
+            <Font size="27.0" />
          </font>
       </Label>
-      <Label fx:id="nameLabel" alignment="CENTER" layoutX="347.0" layoutY="339.0" prefHeight="17.0" prefWidth="332.0" text="Firstname SurName">
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="345.0" layoutY="373.0" prefHeight="17.0" prefWidth="332.0" text="Firstname SurName">
          <font>
-            <Font name="TH SarabunPSK" size="30.0" />
+            <Font size="23.0" />
          </font>
       </Label>
       <VBox layoutX="23.0" layoutY="75.0" prefHeight="54.0" prefWidth="189.0" style="-fx-background-color: white; -fx-background-radius: 20;">
@@ -120,7 +120,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="balanceLabel" alignment="TOP_CENTER" prefHeight="24.0" prefWidth="190.0" text="00.00 THB">
+            <Label fx:id="balanceLabel" alignment="TOP_CENTER" prefHeight="24.0" prefWidth="190.0" text="100.00 THB">
                <font>
                   <Font size="18.0" />
                </font>

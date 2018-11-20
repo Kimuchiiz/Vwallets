@@ -30,7 +30,8 @@ public class FXMLAddorWithdrawController extends SceneChangeController implement
 
     private Account account;
     private BankAccount bankaccount;
-    
+    private String option;
+
     @FXML
     private TextField amount;
     @FXML
@@ -51,14 +52,29 @@ public class FXMLAddorWithdrawController extends SceneChangeController implement
     private Label numberLabel;
     @FXML
     private Label nameLabel;
+    @FXML
+    private Label balanceLabel;
 
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
     }
 
-    public void setLabel(String option) {
+    public void setBankaccount(BankAccount bankaccount) {
+        this.bankaccount = bankaccount;
     }
-    
+
+    public void setLabel(String option) {
+        this.option = option;
+        if (option.equals("addbalance")) {
+            titleLabel.setText("Add Balance");
+        } else if (option.equals("withdraw")) {
+            titleLabel.setText("Withdraw");
+        }
+        numberLabel.setText(bankaccount.getNumber());
+        nameLabel.setText(bankaccount.getName());
+        balanceLabel.setText(bankaccount.getBalance() + " THB");
+    }
+
     @FXML
     private void confirmButtonAction(ActionEvent event) throws IOException {
         if (amount.getText().isEmpty()) {
@@ -67,10 +83,10 @@ public class FXMLAddorWithdrawController extends SceneChangeController implement
             amountLabel.setText("Amount Can't be 0");
         } else {
             amountLabel.setText("");
-            amount.getText();
+            enterPasswordScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, bankaccount, amount.getText(), option);
         }
     }
-    
+
     @FXML
     private void transactionButtonAction(ActionEvent event) {
         transactionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);

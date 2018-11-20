@@ -188,7 +188,7 @@ public class VWallet {
         }
     }
 
-    public static int withdraw(Account account, String number, String withdrawAmount, String password) {
+    public static int withdraw(Account account, BankAccount bankaccount, String withdrawAmount, String password) {
         Double amount = Double.parseDouble(withdrawAmount);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
@@ -212,7 +212,7 @@ public class VWallet {
         List<BankAccount> bankresult = bankquery.getResultList();
         BankAccount bacc = null;
         for (BankAccount i : bankresult) {
-            if (i.getNumber().equals(number)) {
+            if (i.getNumber().equals(bankaccount.getNumber())) {
                 bacc = i;
                 break;
             }
@@ -227,13 +227,14 @@ public class VWallet {
             emf.close();
             return 0;
         } else {
+            System.out.println("Insufficient Fund!");
             em.close();
             emf.close();
             return 2;
         }
     }
     
-    public static int addBalance(Account account, String number, String addAmount, String password) {
+    public static int addBalance(Account account, BankAccount bankaccount, String addAmount, String password) {
         Double amount = Double.parseDouble(addAmount);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
@@ -257,7 +258,7 @@ public class VWallet {
         List<BankAccount> bankresult = bankquery.getResultList();
         BankAccount bacc = null;
         for (BankAccount i : bankresult) {
-            if (i.getNumber().equals(number)) {
+            if (i.getNumber().equals(bankaccount.getNumber())) {
                 bacc = i;
                 break;
             }
@@ -272,6 +273,7 @@ public class VWallet {
             emf.close();
             return 0;
         } else {
+            System.out.println("Insufficient Fund!");
             em.close();
             emf.close();
             return 2;
