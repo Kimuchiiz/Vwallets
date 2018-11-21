@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import models.Account;
 import models.BankAccount;
+import models.CreditCard;
 
 /**
  *
@@ -188,6 +189,62 @@ public class VWallet {
         }
     }
 
+    public static boolean addCreditCard(Account account, String firstname, String lastname, String address1, String address2, String city, String state, String zip, String country, String phone, String cardNumber, String expdate) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        Account acc = null;
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
+                acc = i;
+                break;
+            }
+        }
+        for (CreditCard i : acc.getCreditcard()) {
+            if (i.getCardNumber().equals(cardNumber)) {
+                return false;
+            }
+        }
+        em.getTransaction().begin();
+        acc.addCreditcard(new CreditCard(firstname, lastname, address1, address2, city, state, zip, country, phone, cardNumber, expdate));
+        em.persist(acc);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        return true;
+    }
+
+    public static void removeCreditCard(Account account, CreditCard creditcard) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        Account acc = null;
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
+                acc = i;
+                break;
+            }
+        }
+        TypedQuery<CreditCard> creditcardquery = em.createQuery("SELECT a from CreditCard a", CreditCard.class);
+        List<CreditCard> creditcardresult = creditcardquery.getResultList();
+        CreditCard cc = null;
+        for (CreditCard i : creditcardresult) {
+            if (i.getCardNumber().equals(creditcard.getCardNumber())) {
+                cc = i;
+                break;
+            }
+        }
+        em.getTransaction().begin();
+        acc.removeCreditcard(cc);
+        em.remove(cc);
+        em.persist(acc);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+
     public static int withdraw(Account account, BankAccount bankaccount, String withdrawAmount, String password) {
         Double amount = Double.parseDouble(withdrawAmount);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
@@ -216,7 +273,7 @@ public class VWallet {
                 bacc = i;
                 break;
             }
-        }       
+        }
         if (acc.getBalance() >= amount) {
             em.getTransaction().begin();
             acc.withdraw(bacc, amount);
@@ -233,7 +290,7 @@ public class VWallet {
             return 2;
         }
     }
-    
+
     public static int addBalance(Account account, BankAccount bankaccount, String addAmount, String password) {
         Double amount = Double.parseDouble(addAmount);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
@@ -262,7 +319,7 @@ public class VWallet {
                 bacc = i;
                 break;
             }
-        }       
+        }
         if (bacc.getBalance() >= amount) {
             em.getTransaction().begin();
             acc.chargeBank(bacc, amount);
@@ -277,6 +334,24 @@ public class VWallet {
             em.close();
             emf.close();
             return 2;
+        }
+    }
+
+    public static void addbalanceCC(Account account, String addAmount) {
+        Double amount = Double.parseDouble(addAmount);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
+                em.getTransaction().begin();
+                i.addBalance(amount);
+                em.persist(i);
+                em.getTransaction().commit();
+                em.close();
+                emf.close();
+            }
         }
     }
 

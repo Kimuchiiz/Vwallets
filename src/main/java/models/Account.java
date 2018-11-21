@@ -25,6 +25,9 @@ public class Account implements Serializable{
     private Long id;    
     private String username,password,name;
     private double balance;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private List<CreditCard> creditcard;
     
     @ManyToMany(mappedBy="account",cascade= {CascadeType.PERSIST, 

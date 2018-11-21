@@ -30,64 +30,74 @@ public class NewClass {
     System.out.println("BankAccount " + account2.getNumber());
     System.out.println("Has a balance of " + account2.getBalance());*/
     
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+//        EntityManager em = emf.createEntityManager();
+//        Account account = new Account();
+//        BankAccount bankaccount = new BankAccount();
+//        bankaccount.genNumber();
+//        TransactionLog transactionlog = new TransactionLog();
+//
+//        /*TypedQuery<Account> query = em.createQuery("SELECT a from Account a", Account.class);
+//        List<Account> result = query.getResultList();
+//        for (Account i : result) {
+//            if (i.getUser_username().equals(username) ) return false;
+//            else if(i.getEmail().equals(email)) return false;
+//        }*/
+//        em.getTransaction().begin();
+//        account.setUsername("test");
+//        account.setPassword("pass1234");
+//        bankaccount.setName("Time K");
+//        bankaccount.setPin("1234");
+//        account.addBankaccount(bankaccount);
+//        bankaccount.addAccount(account);
+//        //em.persist(transactionlog);
+//        em.persist(account);
+//        em.persist(bankaccount);
+//        //em.persist(bankaccount2);
+//        em.getTransaction().commit();
+//        TypedQuery<BankAccount> query = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
+//        List<BankAccount> result = query.getResultList();
+//        BankAccount t = result.get(0);
+//        em.getTransaction().begin();
+//        Account account3 = new Account();
+//        account3.setUsername("test2");
+//        account3.setPassword("pass1234");
+//        account3.addBankaccount(bankaccount);
+//        bankaccount.addAccount(account3);
+//        transactionlog.setType("withdraw");
+//        account3.addTransactionlog(transactionlog);
+//        transactionlog.setAccount(account3);
+//        em.persist(account3);
+//        account.remove();
+//        em.remove(account);
+//        //em.remove(t);
+//        /*List<BankAccount> ba = account.getBankAccount();
+//        for (BankAccount k : ba){
+//        if(k.getNumber() == t.getNumber())
+//            account.removeBankAccount(k);
+//        }*/
+//        em.getTransaction().commit();     
+//        BankAccount bankaccount2 = new BankAccount();
+//        em.getTransaction().begin();
+//        bankaccount2.genNumber();
+//        bankaccount2.setPin("1112");
+//        bankaccount2.setName("Pizza Company");
+//        em.persist(bankaccount2);
+//        //em.remove(account3);
+//        //t.setBalance(1000);
+//        //em.persist(t);
+//        //em.remove(transactionlog);
+//        em.getTransaction().commit();
+//        em.close();
+//        emf.close();
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
-        Account account = new Account();
-        BankAccount bankaccount = new BankAccount();
-        bankaccount.genNumber();
-        TransactionLog transactionlog = new TransactionLog();
-
-        /*TypedQuery<Account> query = em.createQuery("SELECT a from Account a", Account.class);
+        TypedQuery<Account> query = em.createQuery("SELECT a from Account a", Account.class);
         List<Account> result = query.getResultList();
-        for (Account i : result) {
-            if (i.getUser_username().equals(username) ) return false;
-            else if(i.getEmail().equals(email)) return false;
-        }*/
+        Account t = result.get(0);
         em.getTransaction().begin();
-        account.setUsername("test");
-        account.setPassword("pass1234");
-        bankaccount.setName("Time K");
-        bankaccount.setPin("1234");
-        account.addBankaccount(bankaccount);
-        bankaccount.addAccount(account);
-        //em.persist(transactionlog);
-        em.persist(account);
-        em.persist(bankaccount);
-        //em.persist(bankaccount2);
-        em.getTransaction().commit();
-        TypedQuery<BankAccount> query = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
-        List<BankAccount> result = query.getResultList();
-        BankAccount t = result.get(0);
-        em.getTransaction().begin();
-        Account account3 = new Account();
-        account3.setUsername("test2");
-        account3.setPassword("pass1234");
-        account3.addBankaccount(bankaccount);
-        bankaccount.addAccount(account3);
-        transactionlog.setType("withdraw");
-        account3.addTransactionlog(transactionlog);
-        transactionlog.setAccount(account3);
-        em.persist(account3);
-        account.remove();
-        em.remove(account);
-        //em.remove(t);
-        /*List<BankAccount> ba = account.getBankAccount();
-        for (BankAccount k : ba){
-        if(k.getNumber() == t.getNumber())
-            account.removeBankAccount(k);
-        }*/
+        em.remove(t);
         em.getTransaction().commit();     
-        BankAccount bankaccount2 = new BankAccount();
-        em.getTransaction().begin();
-        bankaccount2.genNumber();
-        bankaccount2.setPin("1112");
-        bankaccount2.setName("Pizza Company");
-        em.persist(bankaccount2);
-        //em.remove(account3);
-        //t.setBalance(1000);
-        //em.persist(t);
-        //em.remove(transactionlog);
-        em.getTransaction().commit();
         em.close();
         emf.close();
 }

@@ -27,6 +27,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import VWallet.VWallet;
+import java.util.function.UnaryOperator;
+import javafx.scene.control.TextFormatter;
 
 /**
  * FXML Controller class
@@ -76,8 +78,8 @@ public class FXMLRegistrationController implements Initializable {
             pswLabel2.setText("");
             psw.clear();
             psw2.clear();
-        } else if (!name.getText().matches("[A-Z][a-z]* [A-Z][a-z]*")) {
-            nameLabel.setText("Please Enter your first and surname separate with ' ', both must be a-z A-Z and their first alphabet must be Uppercase");
+        } else if (!name.getText().matches("[A-Z][a-z]* [A-Z][a-z]*") && !name.getText().matches("[A-Z][a-z]* [A-Z][a-z]*")) {
+            nameLabel.setText("Please Enter your first and surname separate with ' ', both must be alphabet and their first alphabet must be Uppercase");
             usernameLabel.setText("");
             pswLabel.setText("");
             pswLabel2.setText("");
@@ -167,22 +169,65 @@ public class FXMLRegistrationController implements Initializable {
         window.setScene(loginScene);
         window.show();
     }
+    
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
-        // TODO
-        username.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\sa-zA-Z0-9*")) {
-                username.setText(newValue.replaceAll("[^\\sa-zA-Z0-9]", ""));
+       ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
+        username.setOnKeyTyped(event -> {
+            int maxCharacters = 12;
+            if (username.getText().length() >= maxCharacters) {
+                event.consume();
             }
         });
+        /////////////////////////////////////////////////////////////////////////////////////////////////
         
-         name.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\sa-zA-Z*")) {
-                name.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+        //////////////////////////////////////////// Username Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> usernameFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[A-Za-z0-9]*")) {
+                return change;
             }
-        });
+            return null;
+
+        };
+        TextFormatter<String> usernameformatter = new TextFormatter<>(usernameFilter);
+        username.setTextFormatter(usernameformatter);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+         //////////////////////////////////////////// name Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> nameFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[A-Z]?[a-z]* ?[A-Z]?[a-z]* ?[A-Z]?[a-z]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> nameformatter = new TextFormatter<>(nameFilter);
+        name.setTextFormatter(nameformatter);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //////////////////////////////////////////// Password Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> pswFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[A-Za-z0-9]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> pswformatterr = new TextFormatter<>(pswFilter);
+        username.setTextFormatter(pswformatterr);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
          
          
     }

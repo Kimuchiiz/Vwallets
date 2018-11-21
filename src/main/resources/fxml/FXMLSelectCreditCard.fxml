@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="768.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLSelectCreditCardController">
+   <children>
+      <Text fill="#828282" layoutX="434.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Credit Card">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Line endX="652.0" layoutX="236.0" layoutY="133.0" startX="-100.0" stroke="#828282" />
+      <ScrollPane fx:id="creditCardScroll" focusTraversable="false" layoutX="77.0" layoutY="162.0" prefHeight="518.0" prefWidth="871.0" style="-fx-background: #E8EEE6; -fx-border-color: #E8EEE6;">
+         <content>
+            <GridPane fx:id="CreditCardGrid" hgap="50.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="160.0" prefWidth="542.0" translateX="10.0" vgap="50.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="247.0" prefWidth="247.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="247.0" prefWidth="247.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="247.0" prefWidth="247.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="151" minHeight="151.0" prefHeight="151.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Rectangle fx:id="menubar" arcHeight="5.0" arcWidth="5.0" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
+      <Button fx:id="optionBtn1" layoutX="790.0" layoutY="6.0" mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="45.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/option2.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="signoutBtn1" layoutX="858.0" layoutY="6.0" mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button id="closebutton" layoutX="995.0" layoutY="4.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closeBtnAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="walletBtn" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="transactionBtn" layoutX="130.0" layoutY="6.0" mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Transaction" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="activityBtn" layoutX="255.0" layoutY="6.0" mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" text="Activity" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="479.0" layoutY="693.0" mnemonicParsing="false" onAction="#skipButtonAction" style="-fx-background-radius: 20;" text="Skip">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

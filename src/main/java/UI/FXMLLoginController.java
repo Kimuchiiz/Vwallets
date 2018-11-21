@@ -58,8 +58,8 @@ public class FXMLLoginController extends SceneChangeController implements Initia
         if (!username.getText().matches("[a-zA-Z0-9]*") || username.getText().isEmpty()) {
             wrongformat.setText("username must be a-z A-Z 0-9");
             psw.clear();
-        } else if (username.getText().length() <= 6 || username.getText().length() >= 12) {
-            wrongformat.setText("username must have 6-12 digit");
+        } else if (username.getText().length() < 4 || username.getText().length() > 12) {
+            wrongformat.setText("username must have 4-12 digit");
             psw.clear();
         } else if (psw.getText().isEmpty()) {
             wrongformat.setText("Please fill the password");
@@ -71,12 +71,14 @@ public class FXMLLoginController extends SceneChangeController implements Initia
 
             Account account = VWallet.isLogin(username.getText(), psw.getText());
             if (account != null) {
-                walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(),account);
+                walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
             }
             else{
                 wrongformat.setText("Username and Password not match");
                 psw.clear();
+                
             }
+             
         }
     }
 
@@ -85,11 +87,15 @@ public class FXMLLoginController extends SceneChangeController implements Initia
         signupScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         
-        ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
+         ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
         username.setOnKeyTyped(event -> {
             int maxCharacters = 12;
             if (username.getText().length() >= maxCharacters) {
@@ -97,34 +103,32 @@ public class FXMLLoginController extends SceneChangeController implements Initia
             }
         });
         /////////////////////////////////////////////////////////////////////////////////////////////////
-
+        
         //////////////////////////////////////////// Username Format ///////////////////////////////////
-        UnaryOperator<TextFormatter.Change> stringFilter = change -> {
+        UnaryOperator<TextFormatter.Change> usernameFilter = change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("[a-zA-Z0-9]*")) {
+            if (newText.matches("[A-Za-z0-9]*")) {
                 return change;
             }
             return null;
 
         };
-        TextFormatter<String> formatter = new TextFormatter<>(stringFilter);
-        username.setTextFormatter(formatter);
+        TextFormatter<String> usernameformatter = new TextFormatter<>(usernameFilter);
+        username.setTextFormatter(usernameformatter);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////// Password format /////////////////////////////////////
-        UnaryOperator<TextFormatter.Change> passwordFilter = change -> {
+        
+        //////////////////////////////////////////// Password Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> pswFilter = change -> {
             String newText = change.getControlNewText();
-            // if proposed change results in a valid value, return change as-is:
-            if (newText.matches("[a-zA-Z0-9]*")) { // "-?([1-9][0-9]*)?" Can input - and follow number
+            if (newText.matches("[A-Za-z0-9]*")) {
                 return change;
-
             }
-            // invalid change, veto it by returning null:
             return null;
-        };
 
-        psw.setTextFormatter(
-                new TextFormatter<Integer>(new IntegerStringConverter(), null, passwordFilter));
+        };
+        TextFormatter<String> pswformatterr = new TextFormatter<>(pswFilter);
+        psw.setTextFormatter(pswformatterr);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
     }

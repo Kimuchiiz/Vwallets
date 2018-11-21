@@ -59,7 +59,7 @@ public class FXMLTransferController implements Initializable {
             username.getText();
             amount.getText();
 
-           Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
+            Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
             Scene walletScene = new Scene(walletParent);
             walletScene.getStylesheets().add("/styles/CSS.css");
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -120,7 +120,7 @@ public class FXMLTransferController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
         ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
         username.setOnKeyTyped(event -> {
             int maxCharacters = 12;
@@ -131,7 +131,7 @@ public class FXMLTransferController implements Initializable {
         /////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////// Username Format ///////////////////////////////////
-        UnaryOperator<TextFormatter.Change> stringFilter = change -> {
+        UnaryOperator<TextFormatter.Change> usernameFilter = change -> {
             String newText = change.getControlNewText();
             if (newText.matches("[A-Za-z0-9]*")) {
                 return change;
@@ -139,27 +139,27 @@ public class FXMLTransferController implements Initializable {
             return null;
 
         };
-        TextFormatter<String> formatter = new TextFormatter<>(stringFilter);
-        username.setTextFormatter(formatter);
+        TextFormatter<String> usernameformatter = new TextFormatter<>(usernameFilter);
+        username.setTextFormatter(usernameformatter);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        //////////////////////////////////// Amount format /////////////////////////////////////
+        //////////////////////////////////////////// Amount Format ///////////////////////////////////
         UnaryOperator<TextFormatter.Change> amountFilter = change -> {
             String newText = change.getControlNewText();
-            // if proposed change results in a valid value, return change as-is:
-            if (newText.matches("([1-9][0-9]*)")) { // "-?([1-9][0-9]*)?" Can input - and follow number
+            if (newText.matches("([1-9][0-9]*)?")) {
                 return change;
-
             }
-            // invalid change, veto it by returning null:
             return null;
+
         };
+        TextFormatter<String> amountformatter = new TextFormatter<>(amountFilter);
+        amount.setTextFormatter(amountformatter);
 
-        amount.setTextFormatter(
-                new TextFormatter<Integer>(new IntegerStringConverter(), null, amountFilter));
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    }
 }

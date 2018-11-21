@@ -41,6 +41,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import models.Account;
 import models.BankAccount;
+import models.CreditCard;
 
 /**
  * FXML Controller class
@@ -51,6 +52,7 @@ public class FXMLWalletController extends SceneChangeController implements Initi
 
     private Account account;
     private BankAccount bankaccount;
+    private CreditCard creditcard;
 
     @FXML
     private GridPane BankAccountGrid, CreditCardGrid;
@@ -62,7 +64,7 @@ public class FXMLWalletController extends SceneChangeController implements Initi
     private AnchorPane rootPane;
 
     @FXML
-    private ScrollPane bankaccScroll;
+    private ScrollPane bankaccScroll, creditCardScroll;
 
     @FXML
     private void transactionButtonAction(ActionEvent event) {
@@ -92,11 +94,22 @@ public class FXMLWalletController extends SceneChangeController implements Initi
     @FXML
     private void removeBankAccount(ActionEvent event) {
         rootPane.requestFocus();
-        if (bankaccount != null) {
-            VWallet.VWallet.removeBankAccount(account, bankaccount);
+        if (creditcard != null) {
+            VWallet.VWallet.removeCreditCard(account, creditcard);
             walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
         } else {
-            System.out.println("Please Selected Bank Account");
+            System.out.println("Please Select Bank Account");
+        }
+    }
+    
+    @FXML
+    private void removeCreditCard(ActionEvent event) {
+        rootPane.requestFocus();
+        if (creditcard != null) {
+            VWallet.VWallet.removeCreditCard(account, creditcard);
+            walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
+        } else {
+            System.out.println("Please Select Credit Card");
         }
     }
 
@@ -107,12 +120,22 @@ public class FXMLWalletController extends SceneChangeController implements Initi
         rootPane.setOnMouseClicked((MouseEvent evt) -> {
             rootPane.requestFocus();
             bankaccount = null;
+            creditcard = null;
         });
 
         bankaccScroll.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (newValue == true) {
                 rootPane.requestFocus();
                 bankaccount = null;
+                creditcard = null;
+            }
+        });
+
+        creditCardScroll.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (newValue == true) {
+                rootPane.requestFocus();
+                bankaccount = null;
+                creditcard = null;
             }
         });
     }
@@ -139,6 +162,7 @@ public class FXMLWalletController extends SceneChangeController implements Initi
                 @Override
                 public void handle(ActionEvent event) {
                     bankaccount = i;
+                    creditcard = null;
                 }
             });
 //            temp.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
@@ -165,6 +189,52 @@ public class FXMLWalletController extends SceneChangeController implements Initi
         BankAccountGrid.add(temp, column, row);
     }
 
+    @FXML
+    public void createCreditCard() {
+        VBox box = new VBox();
+        box.setAlignment(Pos.CENTER);
+        Label label1 = new Label("    +    ");
+        label1.setFont(new Font("Regular", 40));
+        label1.setTextFill(Color.GRAY);
+        Label label2 = new Label("Add Credit Card");
+        label2.setFont(new Font("Regular", 18));
+        label2.setTextFill(Color.GRAY);
+
+        int column = 0;
+        int row = 0;
+        for (CreditCard i : account.getCreditcard()) {
+            Button temp = new Button("Credit Card Number\n" + i.getCardNumber() + "\n" + i.getFirstname()+ " " +i.getLastname());
+            temp.setTextAlignment(TextAlignment.CENTER);
+            temp.setId("bankccBtn");
+            temp.setStyle("-fx-font: 20 Regular;");
+            temp.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    creditcard = i;
+                    bankaccount = null;
+                }
+            });
+
+            CreditCardGrid.add(temp, column, row);
+            column++;
+            if (column == 2) {
+                row++;
+                column = 0;
+            }
+        }
+        Button temp = new Button();
+        temp.setId("bankccBtn");
+        box.getChildren().addAll(label1, label2);
+        temp.setGraphic(box);
+        temp.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                addCreditCardScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, "wallet");
+            }
+        });
+        CreditCardGrid.add(temp, column, row);
+    }
+
 //    private void focusState(boolean value) {
 //        if (value) {
 //            System.out.println("Focus Gained");
@@ -176,6 +246,12 @@ public class FXMLWalletController extends SceneChangeController implements Initi
         this.account = VWallet.VWallet.refreshAccount(account);
         balance.setText(Double.toString(this.account.getBalance()) + " Baht");
         createBankAccount();
+        createCreditCard();
+    }
+
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
     }
 
 }

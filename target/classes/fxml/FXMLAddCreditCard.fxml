@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="829.0" style="-fx-background-color: #E8EEE6; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLAddCreditCardController">
+   <children>
+      <Button defaultButton="true" layoutX="362.0" layoutY="515.0" mnemonicParsing="false" onAction="#confirmButtonAction" prefHeight="47.0" prefWidth="91.0" style="-fx-background-color: #369E53;" text="Confirm" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Rectangle fill="DODGERBLUE" height="47.0" layoutX="1.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: #369E53;" width="827.0" />
+      <Label layoutX="344.0" layoutY="10.0" text="Add Credit Card" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button id="closebutton" cancelButton="true" layoutX="793.0" layoutY="8.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closePopupAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <TextField fx:id="firstname" layoutX="183.0" layoutY="90.0" prefHeight="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="lastname" layoutX="519.0" layoutY="89.0" prefHeight="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="address1" layoutX="185.0" layoutY="135.0" prefHeight="40.0" prefWidth="558.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="address2" layoutX="185.0" layoutY="182.0" prefHeight="40.0" prefWidth="558.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="city" layoutX="183.0" layoutY="229.0" prefHeight="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="state" layoutX="519.0" layoutY="229.0" prefHeight="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="phone" layoutX="183.0" layoutY="328.0" prefHeight="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="cardNumber" layoutX="184.0" layoutY="377.0" prefHeight="40.0" prefWidth="558.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="expdate" layoutX="183.0" layoutY="428.0" prefHeight="40.0" promptText="MMYY (example : 1218)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Text fill="#828282" layoutX="79.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="426.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="78.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="78.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="77.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="442.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="77.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="48.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Number">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="42.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration Date">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="zip" layoutX="183.0" layoutY="279.0" prefHeight="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Text fill="#828282" layoutX="71.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zipcode">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="431.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="country" layoutX="519.0" layoutY="279.0" prefHeight="40.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label fx:id="wrongformat" alignment="CENTER" layoutX="127.0" layoutY="468.0" prefHeight="39.0" prefWidth="575.0" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

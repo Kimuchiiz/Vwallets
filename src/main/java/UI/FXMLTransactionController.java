@@ -71,7 +71,7 @@ public class FXMLTransactionController extends SceneChangeController implements 
 
     @FXML
     private void refillCreditButtonAction(ActionEvent event) throws IOException {
-        selectBankAccountScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, "addbalance");
+        selectCreditCardScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
@@ -109,4 +109,9 @@ public class FXMLTransactionController extends SceneChangeController implements 
         // TODO
     }
 
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    }
+    
 }

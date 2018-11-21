@@ -106,9 +106,9 @@ public class FXMLSelectBankAccountController extends SceneChangeController imple
                 @Override
                 public void handle(ActionEvent event) {
                     if (option.equals("addbalance")) {
-                        addOrWithdrawScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, i,"addbalance");
+                        addOrWithdrawScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, i, "addbalance");
                     } else if (option.equals("withdraw")) {
-                        addOrWithdrawScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, i,"withdraw");
+                        addOrWithdrawScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, i, "withdraw");
                     }
                 }
             });
@@ -132,7 +132,7 @@ public class FXMLSelectBankAccountController extends SceneChangeController imple
         BankAccountGrid.add(temp, column, row);
     }
 
-public void setAccount(Account account) {
+    public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
         createBankAccount();
     }
@@ -141,4 +141,8 @@ public void setAccount(Account account) {
         this.option = option;
     }
 
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    }
 }

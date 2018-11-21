@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Account;
 import models.BankAccount;
+import models.CreditCard;
 
 /**
  *
@@ -119,6 +120,22 @@ public abstract class SceneChangeController {
         popupScene(stage,Loader);
     }
     
+    public void addCreditCardScene(Stage stage, Account account, String previous) {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLAddCreditCard.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAddCreditCardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLAddCreditCardController display = Loader.getController();
+        display.setAccount(account);
+        display.setStage(stage);
+        display.setPrevious(previous);
+        
+        popupScene(stage,Loader);
+    }
+    
     public void selectBankAccountScene(Stage stage, Account account,String option){
         FXMLLoader Loader = new FXMLLoader();
         Loader.setLocation(getClass().getResource("/fxml/FXMLSelectBankAccount.fxml"));
@@ -133,36 +150,16 @@ public abstract class SceneChangeController {
         changeScene(stage, Loader);
     }
     
-    public void refillAccountScene(Stage stage, Account account, BankAccount bankaccount){
+    public void selectCreditCardScene(Stage stage, Account account){
         FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLRefillAccount.fxml"));
+        Loader.setLocation(getClass().getResource("/fxml/FXMLSelectCreditCard.fxml"));
         try {
             Loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(FXMLRefillAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLSelectCreditCardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        FXMLRefillAccountController display = Loader.getController();
+        FXMLSelectCreditCardController display = Loader.getController();
         display.setAccount(account);
-        if(bankaccount != null){
-            display.autoCompleted(bankaccount);
-        }
-        
-        changeScene(stage, Loader);
-    }
-    
-    public void withdrawScene(Stage stage, Account account, BankAccount bankaccount){
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLWithdraw.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLWithdrawController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLWithdrawController display = Loader.getController();
-        display.setAccount(account);
-        if(bankaccount != null){
-            display.autoCompleted(bankaccount);
-        }
         
         changeScene(stage, Loader);
     }
@@ -201,6 +198,21 @@ public abstract class SceneChangeController {
         popupScene(stage,Loader);
     }
 
+     public void refillCreditScene(Stage stage, Account account, CreditCard creditcard){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLRefillCredit.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLRefillCreditController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLRefillCreditController display = Loader.getController();
+        display.setAccount(account);
+        display.autofill(creditcard);
+        
+        changeScene(stage, Loader);
+    }
+    
     public void changeScene(Stage stage, FXMLLoader Loader) {
         Parent root = Loader.getRoot();
         root.setOnMousePressed(new EventHandler<MouseEvent>() {

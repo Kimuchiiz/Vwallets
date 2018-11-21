@@ -122,6 +122,12 @@ public class FXMLActivityController implements Initializable {
         window.setScene(signoutScene);
         window.show();
     }
+    
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    }
+    
     /**
      * Initializes the controller class.
      */

@@ -112,6 +112,11 @@ public class FXMLAddorWithdrawController extends SceneChangeController implement
         loginScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    }
+    
     /**
      * Initializes the controller class.
      */

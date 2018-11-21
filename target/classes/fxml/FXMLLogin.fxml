@@ -53,5 +53,10 @@
          </font></Text>
       <Line id="loginLie" endX="21.33331298828125" layoutX="460.0" layoutY="456.0" startX="-103.00003051757812" stroke="#828282" />
       <Line id="loginLie" endX="21.33331298828125" layoutX="652.0" layoutY="456.0" startX="-103.00003051757812" stroke="#828282" />
+      <Button id="closebutton" layoutX="995.0" layoutY="5.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closeBtnAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

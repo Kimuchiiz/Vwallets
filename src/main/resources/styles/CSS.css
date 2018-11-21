@@ -54,7 +54,7 @@
   -fx-background-insets: -1.4, 0;
   -fx-border-radius: 15;
   -fx-border-width: 2;
-  -fx-border-color: dimgrey;
+  -fx-border-color: #BBBBBB;
   -fx-padding: 0;
   -fx-font-size: 0;
 }
@@ -69,3 +69,12 @@
 #closebutton:pressed{
     -fx-effect: innershadow(gaussian, #101010, 15, 0, 0, 0);
 }
+
+#menubar{
+    -fx-background-color : #369E53;
+}
+
+/*#walletBtn{
+    -fx-graphic : url("/image/Vwallet0.PNG");
+
+}*/

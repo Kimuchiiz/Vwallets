@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLRegistrationController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLRegistrationController">
    <children>
       <Text fill="#828282" layoutX="59.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Account">
          <font>
@@ -82,10 +82,15 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="backbtn" cancelButton="true" layoutX="942.0" layoutY="29.0" mnemonicParsing="false" onAction="#backButtonAction" text="Button">
+      <Button fx:id="backbtn" cancelButton="true" layoutX="940.0" layoutY="8.0" mnemonicParsing="false" onAction="#backButtonAction" style="-fx-background-radius: 20;" text="Back">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </Button>
+      <Button id="closebutton" layoutX="990.0" layoutY="8.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closeBtnAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

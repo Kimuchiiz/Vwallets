@@ -4,16 +4,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLRefillCreditController">
    <children>
-      <Button defaultButton="true" layoutX="465.0" layoutY="715.0" mnemonicParsing="false" onAction="#confirmButtonAction" style="-fx-background-color: #369E53;" text="Confirm" textFill="WHITE">
+      <Button defaultButton="true" layoutX="491.0" layoutY="672.0" mnemonicParsing="false" onAction="#confirmButtonAction" style="-fx-background-color: #369E53;" text="Confirm" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -21,208 +21,201 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="firstname" layoutX="260.0" layoutY="238.0" prefHeight="40.0">
+      <TextField fx:id="firstname" layoutX="292.0" layoutY="171.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="lastname" layoutX="596.0" layoutY="237.0" prefHeight="40.0">
+      <TextField fx:id="lastname" layoutX="628.0" layoutY="170.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="address1" layoutX="262.0" layoutY="283.0" prefHeight="40.0" prefWidth="558.0">
+      <TextField fx:id="address1" layoutX="294.0" layoutY="216.0" prefHeight="40.0" prefWidth="558.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="address2" layoutX="262.0" layoutY="330.0" prefHeight="40.0" prefWidth="558.0">
+      <TextField fx:id="address2" layoutX="294.0" layoutY="263.0" prefHeight="40.0" prefWidth="558.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="city" layoutX="260.0" layoutY="377.0" prefHeight="40.0">
+      <TextField fx:id="city" layoutX="292.0" layoutY="310.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="state" layoutX="596.0" layoutY="377.0" prefHeight="40.0">
+      <TextField fx:id="state" layoutX="628.0" layoutY="310.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="email" layoutX="596.0" layoutY="476.0" prefHeight="40.0">
+      <TextField fx:id="phone" layoutX="292.0" layoutY="409.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="phone" layoutX="260.0" layoutY="476.0" prefHeight="40.0">
+      <TextField fx:id="cardNumber" layoutX="293.0" layoutY="458.0" prefHeight="40.0" prefWidth="558.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="cardNumber" layoutX="261.0" layoutY="525.0" prefHeight="40.0" prefWidth="558.0">
+      <TextField fx:id="cvv" layoutX="628.0" layoutY="509.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="cvv" layoutX="596.0" layoutY="576.0" prefHeight="40.0">
+      <TextField fx:id="expdate" layoutX="292.0" layoutY="509.0" prefHeight="40.0" promptText="MMYY (example : 1218)">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="expdate" layoutX="260.0" layoutY="576.0" prefHeight="40.0">
+      <Text fill="#828282" layoutX="188.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="535.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="187.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="187.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="186.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="551.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="186.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="157.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Number">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="151.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration Date">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#828282" layoutX="555.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CVV">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="amount" layoutX="292.0" layoutY="562.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Text fill="#828282" layoutX="156.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname">
+      <Text fill="#828282" layoutX="169.0" layoutY="589.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="#828282" layoutX="503.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="155.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address1">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="155.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address2">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="154.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="519.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="516.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="154.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="125.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Number">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="119.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration Date">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="523.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CVV">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextField fx:id="amount" layoutX="260.0" layoutY="629.0" prefHeight="40.0">
+      <TextField fx:id="zip" layoutX="292.0" layoutY="360.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Text fill="#828282" layoutX="137.0" layoutY="656.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
+      <Text fill="#828282" layoutX="180.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zipcode">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="zip" layoutX="260.0" layoutY="427.0" prefHeight="40.0">
+      <Text fill="#828282" layoutX="540.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="country" layoutX="628.0" layoutY="360.0" prefHeight="40.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Text fill="#828282" layoutX="148.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zipcode">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Text fill="#828282" layoutX="508.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextField fx:id="country" layoutX="596.0" layoutY="427.0" prefHeight="40.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <Label fx:id="wrongformat" alignment="CENTER" layoutX="251.0" layoutY="179.0" prefHeight="39.0" prefWidth="575.0" textFill="RED">
+      <Label fx:id="wrongformat" alignment="CENTER" layoutX="268.0" layoutY="612.0" prefHeight="39.0" prefWidth="575.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ToolBar prefHeight="62.0" prefWidth="829.0" style="-fx-background-color: #369E53;">
-         <items>
-            <Button fx:id="walletBtn" mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
+      <Rectangle fx:id="menubar" arcHeight="5.0" arcWidth="5.0" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
+      <Button fx:id="optionBtn1" layoutX="790.0" layoutY="6.0" mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="45.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/option2.png" />
+               </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </Button>
-            <Button fx:id="transactionBtn" mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Transaction" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="activityBtn" mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" text="Activity" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </items>
-      </ToolBar>
-      <ToolBar layoutX="828.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="62.0" prefWidth="197.0" style="-fx-background-color: #369E53;">
-         <items>
-            <Button fx:id="optionBtn" mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/option2.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="signoutBtn" mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </items>
-      </ToolBar>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="signoutBtn1" layoutX="858.0" layoutY="6.0" mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button id="closebutton" layoutX="995.0" layoutY="4.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closeBtnAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="walletBtn" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="transactionBtn" layoutX="130.0" layoutY="6.0" mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Transaction" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="activityBtn" layoutX="255.0" layoutY="6.0" mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" text="Activity" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="384.0" layoutY="95.0" text="Add Balance by Credit Card" textFill="#369e53">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

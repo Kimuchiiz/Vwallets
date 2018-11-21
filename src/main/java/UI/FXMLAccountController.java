@@ -129,6 +129,11 @@ public class FXMLAccountController implements Initializable {
         window.show();
     }
     
+    @FXML
+    private void closeBtnAction(ActionEvent event) {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
