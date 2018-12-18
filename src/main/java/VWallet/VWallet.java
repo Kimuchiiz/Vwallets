@@ -11,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import models.Account;
+import models.ActivityHistory;
 import models.BankAccount;
 import models.CreditCard;
 
@@ -277,8 +278,18 @@ public class VWallet {
         if (acc.getBalance() >= amount) {
             em.getTransaction().begin();
             acc.withdraw(bacc, amount);
+            ActivityHistory acchis = new ActivityHistory();
+            acchis.setAccount(acc);
+            acchis.setAmount(amount);
+            acchis.setFromname(acc.getName());
+            acchis.setFromuser(acc.getUsername());
+            acchis.setToname(bacc.getName());
+            acchis.setTouser(bacc.getNumber());
+            acchis.setType("Withdraw");
+            acc.addActivityHistory(acchis);
             em.persist(acc);
             em.persist(bacc);
+            em.persist(acchis);
             em.getTransaction().commit();
             em.close();
             emf.close();
@@ -323,8 +334,18 @@ public class VWallet {
         if (bacc.getBalance() >= amount) {
             em.getTransaction().begin();
             acc.chargeBank(bacc, amount);
+            ActivityHistory acchis = new ActivityHistory();
+            acchis.setAccount(acc);
+            acchis.setAmount(amount);
+            acchis.setFromname(acc.getName());
+            acchis.setFromuser(acc.getUsername());
+            acchis.setToname(bacc.getName());
+            acchis.setTouser(bacc.getNumber());
+            acchis.setType("Add Balance");
+            acc.addActivityHistory(acchis);
             em.persist(acc);
             em.persist(bacc);
+            em.persist(acchis);
             em.getTransaction().commit();
             em.close();
             emf.close();
@@ -337,7 +358,7 @@ public class VWallet {
         }
     }
 
-    public static void addbalanceCC(Account account, String addAmount) {
+    public static void addbalanceCC(Account account, String addAmount ,String cardNumber ,String firstname ,String lastname) {
         Double amount = Double.parseDouble(addAmount);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
@@ -347,7 +368,17 @@ public class VWallet {
             if (i.getUsername().equals(account.getUsername())) {
                 em.getTransaction().begin();
                 i.addBalance(amount);
+                ActivityHistory acchis = new ActivityHistory();
+                acchis.setAccount(i);
+                acchis.setAmount(amount);
+                acchis.setFromname(firstname + " " + lastname);
+                acchis.setFromuser(cardNumber);
+                acchis.setToname(i.getName());
+                acchis.setTouser(i.getUsername());
+                acchis.setType("Refill via CreditCard");
+                i.addActivityHistory(acchis);
                 em.persist(i);
+                em.persist(acchis);
                 em.getTransaction().commit();
                 em.close();
                 emf.close();

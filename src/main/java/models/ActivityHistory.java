@@ -20,12 +20,12 @@ import javax.persistence.ManyToOne;
  * @author Xclos
  */
 @Entity
-public class TransactionLog implements Serializable{
+public class ActivityHistory implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    
-    private String type,user,touser,name,toname;
+    private String type,fromuser,touser,fromname,toname;
     private Date date;
     private double amount;
     
@@ -33,15 +33,15 @@ public class TransactionLog implements Serializable{
     @JoinColumn(name = "id")
     private Account account;
 
-    public TransactionLog() {
+    public ActivityHistory() {
         this.date = new Date();
     }
 
-    public TransactionLog(String type, String user, String touser, String name, String toname, double amount, Account account) {
+    public ActivityHistory(String type, String fromuser, String touser, String fromname, String toname, double amount, Account account) {
         this.type = type;
-        this.user = user;
+        this.fromuser = fromuser;
         this.touser = touser;
-        this.name = name;
+        this.fromname = fromname;
         this.toname = toname;
         this.date = new Date();
         this.amount = amount;
@@ -64,12 +64,12 @@ public class TransactionLog implements Serializable{
         this.type = type;
     }
 
-    public String getUser() {
-        return user;
+    public String getFromuser() {
+        return fromuser;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setFromuser(String fromuser) {
+        this.fromuser = fromuser;
     }
 
     public String getTouser() {
@@ -80,12 +80,12 @@ public class TransactionLog implements Serializable{
         this.touser = touser;
     }
 
-    public String getName() {
-        return name;
+    public String getFromname() {
+        return fromname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFromname(String fromname) {
+        this.fromname = fromname;
     }
 
     public String getToname() {

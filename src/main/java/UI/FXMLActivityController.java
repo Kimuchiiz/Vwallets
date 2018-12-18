@@ -17,110 +17,53 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.Account;
+import models.ActivityHistory;
 
 /**
  * FXML Controller class
  *
  * @author USER
  */
-public class FXMLActivityController implements Initializable {
+public class FXMLActivityController extends SceneChangeController implements Initializable {
+    
+    @FXML
+    private TableView activitytable;
     
     private Account account;
 
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
+        createActivityTable();
     }
     
     @FXML
-    private void transactionButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLTransaction.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLTransactionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLTransactionController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene transactionScene = new Scene(p);
-        transactionScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(transactionScene);
-        window.show();
+    private void transactionButtonAction(ActionEvent event) {
+        transactionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void walletButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLWallet.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLWalletController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLWalletController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene walletScene = new Scene(p);
-        walletScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(walletScene);
-        window.show();
+    private void walletButtonAction(ActionEvent event) {
+        walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void activityButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLActivity.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLActivityController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLActivityController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene activityScene = new Scene(p);
-        activityScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(activityScene);
-        window.show();
+    private void activityButtonAction(ActionEvent event) {
+        activityScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void optionButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLAccount.fxml"));
-        try {
-            Loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FXMLAccountController display = Loader.getController();
-        display.setAccount(account);
-
-        Parent p = Loader.getRoot();
-        Scene accountScene = new Scene(p);
-        accountScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(accountScene);
-        window.show();
+    private void optionButtonAction(ActionEvent event) {
+        optionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void signoutButtonAction(ActionEvent event) throws IOException {
-        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
-        Scene signoutScene = new Scene(signoutParent);
-        signoutScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signoutScene);
-        window.show();
+    private void signoutButtonAction(ActionEvent event) {
+        loginScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
     
     @FXML
@@ -134,6 +77,35 @@ public class FXMLActivityController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    } 
     
+    @FXML
+    public void createActivityTable() {
+        
+        TableColumn dateColumn = new TableColumn("Date");
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        
+        TableColumn fromUserColumn = new TableColumn("From");
+        fromUserColumn.setCellValueFactory(new PropertyValueFactory<>("fromuser"));
+        
+        TableColumn fromNameColumn = new TableColumn("From Name");
+        fromNameColumn.setCellValueFactory(new PropertyValueFactory<>("fromname"));
+        
+        TableColumn toUserColumn = new TableColumn("To");
+        toUserColumn.setCellValueFactory(new PropertyValueFactory<>("touser"));
+
+        TableColumn toNameColumn = new TableColumn("To Name");
+        toNameColumn.setCellValueFactory(new PropertyValueFactory<>("toname"));
+        
+        TableColumn amountColumn = new TableColumn("Amount");
+        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        
+        TableColumn typeColumn = new TableColumn("Type");
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+
+        activitytable.getColumns().addAll(dateColumn, fromUserColumn, fromNameColumn, toUserColumn, toNameColumn, amountColumn, typeColumn);
+        for(ActivityHistory i : this.account.getActivityHistory()){
+            activitytable.getItems().add(i);
+        }
+    }
 }

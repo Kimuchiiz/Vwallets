@@ -182,7 +182,7 @@ public class FXMLRefillCreditController extends SceneChangeController implements
 
             // If transaction was successful reads the responses from BluePay
             if (payment.isSuccessful()) {
-                VWallet.VWallet.addbalanceCC(account, amount.getText());
+                VWallet.VWallet.addbalanceCC(account, amount.getText() ,cardNumber.getText() ,firstname.getText() ,lastname.getText());
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText("Success");

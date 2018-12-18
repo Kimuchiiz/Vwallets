@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import models.Account;
 import models.BankAccount;
-import models.TransactionLog;
+import models.ActivityHistory;
 
 /**
  *
@@ -46,6 +46,8 @@ public class CreateBankAccount {
                 em.getTransaction().commit();
                 em.close();
                 emf.close();
+                System.out.print("Bank Account Number : ");
+                System.out.println(bankaccount.getNumber());
             }
             if (menu == 2) {
                 input.nextLine();
@@ -65,8 +67,6 @@ public class CreateBankAccount {
                         i.setBalance(balance);
                         em.persist(i);
                         em.getTransaction().commit();
-                        em.close();
-                        emf.close();
                     }
                 }
                 em.close();

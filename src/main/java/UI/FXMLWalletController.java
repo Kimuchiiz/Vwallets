@@ -27,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -58,7 +59,7 @@ public class FXMLWalletController extends SceneChangeController implements Initi
     private GridPane BankAccountGrid, CreditCardGrid;
 
     @FXML
-    private Label balance;
+    private Label balance,name;
 
     @FXML
     private AnchorPane rootPane;
@@ -98,7 +99,12 @@ public class FXMLWalletController extends SceneChangeController implements Initi
             VWallet.VWallet.removeCreditCard(account, creditcard);
             walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
         } else {
-            System.out.println("Please Select Bank Account");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error alert");
+            alert.setHeaderText("Didn't Select any Bank Account");
+            alert.setContentText("Please select a Bank Account");
+
+            alert.showAndWait();
         }
     }
     
@@ -109,7 +115,12 @@ public class FXMLWalletController extends SceneChangeController implements Initi
             VWallet.VWallet.removeCreditCard(account, creditcard);
             walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
         } else {
-            System.out.println("Please Select Credit Card");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error alert");
+            alert.setHeaderText("Didn't Select any CreditCard");
+            alert.setContentText("Please select a CreditCard");
+
+            alert.showAndWait();
         }
     }
 
@@ -245,6 +256,7 @@ public class FXMLWalletController extends SceneChangeController implements Initi
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
         balance.setText(Double.toString(this.account.getBalance()) + " Baht");
+        name.setText(this.account.getName());
         createBankAccount();
         createCreditCard();
     }

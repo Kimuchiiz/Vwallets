@@ -54,6 +54,8 @@ public class FXMLAddorWithdrawController extends SceneChangeController implement
     private Label nameLabel;
     @FXML
     private Label balanceLabel;
+    @FXML
+    private Label bankaccbalance;
 
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
@@ -73,6 +75,7 @@ public class FXMLAddorWithdrawController extends SceneChangeController implement
         numberLabel.setText(bankaccount.getNumber());
         nameLabel.setText(bankaccount.getName());
         balanceLabel.setText(account.getBalance() + " THB");
+        bankaccbalance.setText(bankaccount.getBalance() + " THB");
     }
 
     @FXML

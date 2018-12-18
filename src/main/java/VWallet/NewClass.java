@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import models.Account;
 import models.BankAccount;
-import models.TransactionLog;
+import models.ActivityHistory;
 
 /**
  *
@@ -94,8 +94,9 @@ public class NewClass {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Account> query = em.createQuery("SELECT a from Account a", Account.class);
         List<Account> result = query.getResultList();
-        Account t = result.get(0);
+        Account t = result.get(1);
         em.getTransaction().begin();
+        t.remove();
         em.remove(t);
         em.getTransaction().commit();     
         em.close();

@@ -29,13 +29,14 @@ import javafx.stage.Stage;
 import VWallet.VWallet;
 import java.util.function.UnaryOperator;
 import javafx.scene.control.TextFormatter;
+import models.Account;
 
 /**
  * FXML Controller class
  *
  * @author USER
  */
-public class FXMLRegistrationController implements Initializable {
+public class FXMLRegistrationController extends SceneChangeController implements Initializable {
 
     @FXML
     private Label usernameLabel, pswLabel, pswLabel2, nameLabel;
@@ -63,7 +64,7 @@ public class FXMLRegistrationController implements Initializable {
             nameLabel.setText("");
             psw.clear();
             psw2.clear();
-        } else if (username.getText().length() <= 4 || username.getText().length() >= 12) {
+        } else if (username.getText().length() < 4 || username.getText().length() > 12) {
             usernameLabel.setText("Username must have 4-12 characters");
             pswLabel.setText("");
             pswLabel2.setText("");
@@ -101,6 +102,14 @@ public class FXMLRegistrationController implements Initializable {
             psw.clear();
             psw2.clear();
 
+        } else if (psw.getText().length() < 6 ) {
+            pswLabel.setText("Password must have at least 6 characters");
+            usernameLabel.setText("");
+            pswLabel2.setText("");
+            nameLabel.setText("");
+            psw.clear();
+            psw2.clear();
+
         } /*else if (psw2.getText().isEmpty()) {
             pswLabel2.setText("Please fill the re-password");
             usernameLabel.setText("");
@@ -129,17 +138,9 @@ public class FXMLRegistrationController implements Initializable {
             nameLabel.setText("");
             pswLabel2.setText("");
 
-            Alert alert = new Alert(AlertType.CONFIRMATION, "Confirm ?", ButtonType.YES, ButtonType.NO);
-            alert.showAndWait();
-
-            if (alert.getResult() == ButtonType.YES) {
                 if (VWallet.setRegister(username.getText(), psw.getText(), name.getText())) {
-                    Parent loginParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
-                    Scene loginScene = new Scene(loginParent);
-                    loginScene.getStylesheets().add("/styles/CSS.css");
-                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    window.setScene(loginScene);
-                    window.show();
+                   Account account = VWallet.isLogin(username.getText(), psw.getText());
+                walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
                 } else {
                     usernameLabel.setText("Username Already Taken!!");
                     pswLabel.setText("");
@@ -148,26 +149,13 @@ public class FXMLRegistrationController implements Initializable {
                     psw.clear();
                     psw2.clear();
                 }
-            }
-
-            if (alert.getResult() == ButtonType.NO) {
-                username.clear();
-                psw.clear();
-                name.clear();
-                psw2.clear();
-            }
 
         }
     }
 
     @FXML
     private void backButtonAction(ActionEvent event) throws IOException {
-        Parent loginParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
-        Scene loginScene = new Scene(loginParent);
-        loginScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(loginScene);
-        window.show();
+        loginScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
     
     @FXML

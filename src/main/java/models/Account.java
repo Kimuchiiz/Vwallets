@@ -35,12 +35,12 @@ public class Account implements Serializable{
     List<BankAccount> bankaccount;
     
     @OneToMany(mappedBy = "account",cascade = CascadeType.PERSIST, orphanRemoval = false)
-    List<TransactionLog> transactionlog;
+    List<ActivityHistory> activityhistory;
 
     public Account() {
         bankaccount = new ArrayList<BankAccount>();
         creditcard = new ArrayList<CreditCard>();
-        transactionlog = new ArrayList<TransactionLog>();
+        activityhistory = new ArrayList<ActivityHistory>();
         this.balance = 0;
     }
     
@@ -51,7 +51,7 @@ public class Account implements Serializable{
         this.balance = 0;
         bankaccount = new ArrayList<BankAccount>();
         creditcard = new ArrayList<CreditCard>();
-        transactionlog = new ArrayList<TransactionLog>();
+        activityhistory = new ArrayList<ActivityHistory>();
     }
 
     public List<BankAccount> getBankaccount() {
@@ -70,8 +70,8 @@ public class Account implements Serializable{
         for(BankAccount bacc : bankaccount) {
             bacc.removeAccount(this);
         }
-        for(TransactionLog tlog : transactionlog){
-            tlog.setAccount(null);
+        for(ActivityHistory acchis : activityhistory){
+            acchis.setAccount(null);
         }
     }
     
@@ -223,20 +223,20 @@ public class Account implements Serializable{
         this.creditcard.remove(creditcard);
     }
 
-    public List<TransactionLog> getTransactionlog() {
-        return transactionlog;
+    public List<ActivityHistory> getActivityHistory() {
+        return activityhistory;
     }
 
-    public void setTransactionlog(List<TransactionLog> transactionlog) {
-        this.transactionlog = transactionlog;
+    public void setActivityHistory(List<ActivityHistory> activityhistory) {
+        this.activityhistory = activityhistory;
     }
     
-    public void addTransactionlog(TransactionLog transactionlog) {
-        this.transactionlog.add(transactionlog);
+    public void addActivityHistory(ActivityHistory activityhistory) {
+        this.activityhistory.add(activityhistory);
     }
     
-    public void removeTransactionlog(TransactionLog transactionlog) {
-        this.transactionlog.remove(transactionlog);
+    public void removeActivityHistory(ActivityHistory activityhistory) {
+        this.activityhistory.remove(activityhistory);
     }
     
     @Override
