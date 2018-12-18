@@ -61,7 +61,7 @@
             <Font size="14.0" />
          </font>
       </Hyperlink>
-      <Rectangle fx:id="menubar" arcHeight="5.0" arcWidth="5.0" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
+      <Rectangle fx:id="menubar" arcHeight="5.0" arcWidth="5.0" fill="#369e53" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
       <Button fx:id="signoutBtn" layoutX="858.0" layoutY="6.0" mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
          <font>
             <Font size="18.0" />

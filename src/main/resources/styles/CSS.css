@@ -74,6 +74,9 @@
     -fx-background-color : #369E53;
 }
 
+.rectantle{
+    -fx-fill: #369E53;
+}
 /*#walletBtn{
     -fx-graphic : url("/image/Vwallet0.PNG");
 

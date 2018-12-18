@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.Account;
@@ -33,10 +34,10 @@ public class FXMLAccountController implements Initializable {
     
     @FXML
     private AnchorPane rootPane;
+    
+    @FXML
+    private Label name,username;
 
-    public void setAccount(Account account) {
-        this.account = VWallet.VWallet.refreshAccount(account);
-    }
     
     @FXML
     private void transactionButtonAction(ActionEvent event) throws IOException {
@@ -140,4 +141,9 @@ public class FXMLAccountController implements Initializable {
         //Platform.runLater( () -> rootPane.requestFocus() );      
     }    
     
+     public void setAccount(Account account) {
+        this.account = VWallet.VWallet.refreshAccount(account);
+        name.setText(this.account.getName());
+        username.setText(this.account.getUsername());
+    }
 }
