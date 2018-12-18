@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -16,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" minHeight="768.0" minWidth="1024.0" prefHeight="0.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLWalletController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" minHeight="768.0" minWidth="1024.0" prefHeight="0.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLWalletController">
    <children>
       <AnchorPane layoutX="38.0" layoutY="200.0" prefHeight="150.0" prefWidth="326.0" style="-fx-background-radius: 5; -fx-background-color: white;">
          <children>
@@ -64,24 +62,6 @@
          </font>
       </Hyperlink>
       <Rectangle fx:id="menubar" arcHeight="5.0" arcWidth="5.0" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
-      <Button fx:id="optionBtn" layoutX="790.0" layoutY="6.0" mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="0.0" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="38.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/option2.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Button fx:id="signoutBtn" layoutX="858.0" layoutY="6.0" mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -151,5 +131,13 @@
             </Label>
          </children>
       </AnchorPane>
+      <Button fx:id="optionBtn1" layoutX="733.0" layoutY="6.0" mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Account" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
