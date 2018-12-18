@@ -6,13 +6,18 @@
 package models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -26,18 +31,20 @@ public class ActivityHistory implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    
     private String type,fromuser,touser,fromname,toname;
-    private Date date;
     private double amount;
+    private Date date;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
-    private Account account;
+    
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(name = "id")
+    private List<Account> account;
 
     public ActivityHistory() {
         this.date = new Date();
+        this.account = new ArrayList<Account>();
     }
 
-    public ActivityHistory(String type, String fromuser, String touser, String fromname, String toname, double amount, Account account) {
+    public ActivityHistory(String type, String fromuser, String touser, String fromname, String toname,Double amount) {
         this.type = type;
         this.fromuser = fromuser;
         this.touser = touser;
@@ -45,7 +52,7 @@ public class ActivityHistory implements Serializable{
         this.toname = toname;
         this.date = new Date();
         this.amount = amount;
-        this.account = account;
+        this.account = new ArrayList<Account>();
     }
 
     public Long getId() {
@@ -104,21 +111,24 @@ public class ActivityHistory implements Serializable{
         this.date = date;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public Account getAccount() {
+    public List<Account> getAccount() {
         return account;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void addAccount(Account account) {
+        this.account.add(account);
     }
     
-    
+    public void removeAccount(Account account) {
+        this.account.remove(account);
+    }
+       
 }

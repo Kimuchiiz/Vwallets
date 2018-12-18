@@ -6,9 +6,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLTransactionController">
+<AnchorPane id="AnchorPane" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLTransactionController">
    <children>
-      <Button fx:id="transferBtn" layoutX="142.0" layoutY="180.0" mnemonicParsing="false" onAction="#transferButtonAction" prefHeight="200.0" prefWidth="200.0" text="Transfer">
+      <Button fx:id="transferBtn" layoutX="680.0" layoutY="180.0" mnemonicParsing="false" onAction="#transferButtonAction" prefHeight="200.0" prefWidth="200.0" text="Transfer">
          <font>
             <Font size="18.0" />
          </font>
@@ -16,7 +16,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="refillCreditBtn" layoutX="412.0" layoutY="180.0" mnemonicParsing="false" onAction="#refillCreditButtonAction" prefHeight="200.0" prefWidth="200.0" text="Refill by Credit">
+      <Button fx:id="refillCreditBtn" layoutX="142.0" layoutY="180.0" mnemonicParsing="false" onAction="#refillCreditButtonAction" prefHeight="200.0" prefWidth="200.0" text="Refill by Credit Card">
          <font>
             <Font size="18.0" />
          </font>
@@ -24,7 +24,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="refillAccountBtn" layoutX="680.0" layoutY="180.0" mnemonicParsing="false" onAction="#refillAccButtonAction" prefHeight="200.0" prefWidth="200.0" text="Refill By Bank account">
+      <Button fx:id="refillAccountBtn" layoutX="412.0" layoutY="180.0" mnemonicParsing="false" onAction="#refillAccButtonAction" prefHeight="200.0" prefWidth="200.0" text="Refill By Bank account">
          <font>
             <Font size="18.0" />
          </font>
@@ -40,7 +40,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="412.0" layoutY="440.0" mnemonicParsing="false" onAction="#shop1ButtonAction" prefHeight="200.0" prefWidth="200.0" text="Shop1">
+      <Button layoutX="412.0" layoutY="440.0" mnemonicParsing="false" onAction="#paymentButtonAction" prefHeight="200.0" prefWidth="200.0" text="Payment">
          <font>
             <Font size="18.0" />
          </font>
@@ -48,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="680.0" layoutY="440.0" mnemonicParsing="false" onAction="#shop2ButtonAction" prefHeight="200.0" prefWidth="200.0" text="Shop2">
+      <Button layoutX="680.0" layoutY="440.0" mnemonicParsing="false" onAction="#genQRCodeButtonAction" prefHeight="200.0" prefWidth="200.0" text="Generate Payment QRCode" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -56,7 +56,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Rectangle fx:id="menubar" arcHeight="5.0" arcWidth="5.0" fill="#369e53" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
+      <Rectangle fx:id="menubar" fill="#369e53" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
       <Button fx:id="walletBtn" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet" textFill="WHITE">
          <font>
             <Font size="18.0" />

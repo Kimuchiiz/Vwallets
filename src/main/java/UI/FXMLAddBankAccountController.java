@@ -8,6 +8,7 @@ package UI;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import models.Account;
 
@@ -126,6 +128,49 @@ public class FXMLAddBankAccountController extends SceneChangeController implemen
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
+        bankAcc.setOnKeyTyped(event -> {
+            int maxCharacters = 10;
+            if (bankAcc.getText().length() >= maxCharacters) {
+                event.consume();
+            }
+        });
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //////////////////////////////////////////// BankAcc Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> bankaccFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[0-9]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> bankaccformatter = new TextFormatter<>(bankaccFilter);
+        bankAcc.setTextFormatter(bankaccformatter);
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
+        pin.setOnKeyTyped(event -> {
+            int maxCharacters = 4;
+            if (pin.getText().length() >= maxCharacters) {
+                event.consume();
+            }
+        });
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //////////////////////////////////////////// BankAcc Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> pinFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[0-9]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> pinformatter = new TextFormatter<>(pinFilter);
+        pin.setTextFormatter(pinformatter);
+        /////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     public void setStage(Stage stage) {

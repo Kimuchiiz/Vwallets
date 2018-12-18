@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLGenQRCodeController">
+   <children>
+      <Text layoutX="439.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Amount">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="amount" layoutX="363.0" layoutY="511.0" prefHeight="41.0" prefWidth="290.0" />
+      <Label fx:id="amountLabel" alignment="CENTER" layoutX="281.0" layoutY="568.0" prefHeight="26.0" prefWidth="455.0" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button defaultButton="true" layoutX="439.0" layoutY="606.0" mnemonicParsing="false" onAction="#confirmButtonAction" prefHeight="50.0" prefWidth="138.0" style="-fx-background-color: #369E53; -fx-background-radius: 30;" text="Save QRCode" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Rectangle arcHeight="60.0" arcWidth="60.0" fill="WHITE" height="242.0" layoutX="333.0" layoutY="196.0" stroke="BLACK" strokeType="INSIDE" width="358.0" />
+      <Label fx:id="titleLabel" alignment="CENTER" layoutX="275.0" layoutY="105.0" prefHeight="51.0" prefWidth="474.0" text="Generate QRCode Payment to" textAlignment="CENTER" textFill="#369e53">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="339.0" layoutY="226.0" prefHeight="45.0" prefWidth="339.0" text="Account Number">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label fx:id="numberLabel" alignment="CENTER" layoutX="382.0" layoutY="292.0" prefHeight="51.0" prefWidth="260.0" text="0000000000">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="346.0" layoutY="367.0" prefHeight="17.0" prefWidth="332.0" text="Firstname SurName">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="menubar" fill="#369e53" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
+      <Button fx:id="signoutBtn" layoutX="858.0" layoutY="6.0" mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="walletBtn" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" onAction="#walletButtonAction" prefHeight="50.0" prefWidth="120.0" text="Wallet">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="transactionBtn" layoutX="130.0" layoutY="6.0" mnemonicParsing="false" onAction="#transactionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Transaction" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="activityBtn" layoutX="255.0" layoutY="6.0" mnemonicParsing="false" onAction="#activityButtonAction" prefHeight="50.0" prefWidth="120.0" text="Activity" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button id="closebutton" cancelButton="true" layoutX="995.0" layoutY="4.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closeBtnAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="optionBtn1" layoutX="733.0" layoutY="6.0" mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Account" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

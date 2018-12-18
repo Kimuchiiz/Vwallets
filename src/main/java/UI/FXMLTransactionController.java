@@ -61,12 +61,7 @@ public class FXMLTransactionController extends SceneChangeController implements 
 
     @FXML
     private void transferButtonAction(ActionEvent event) throws IOException {
-        Parent transferParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLTransfer.fxml"));
-        Scene transferScene = new Scene(transferParent);
-        transferScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(transferScene);
-        window.show();
+        transferScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
@@ -85,23 +80,13 @@ public class FXMLTransactionController extends SceneChangeController implements 
     }
 
     @FXML
-    private void shop1ButtonAction(ActionEvent event) throws IOException {
-        Parent shop1Parent = FXMLLoader.load(getClass().getResource("/fxml/FXMLShop1.fxml"));
-         Scene shop1Scene = new Scene(shop1Parent);
-         shop1Scene.getStylesheets().add("/styles/CSS.css");
-         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-         window.setScene(shop1Scene);
-         window.show();
+    private void paymentButtonAction(ActionEvent event) throws IOException {
+        webcamScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void shop2ButtonAction(ActionEvent event) throws IOException {
-        Parent shop2Parent = FXMLLoader.load(getClass().getResource("/fxml/FXMLShop2.fxml"));
-         Scene shop2Scene = new Scene(shop2Parent);
-         shop2Scene.getStylesheets().add("/styles/CSS.css");
-         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-         window.setScene(shop2Scene);
-         window.show();
+    private void genQRCodeButtonAction(ActionEvent event) throws IOException {
+        selectBankAccountScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, "genQRCode");
     }
 
     @Override

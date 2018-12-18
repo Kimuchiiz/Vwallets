@@ -47,7 +47,7 @@ public class BankAccount implements Serializable {
                 nextnumber = Long.parseLong(result.get(lastacc-1).number) + 1;
             }
         this.number = String.format("%010d", nextnumber);*/
-        account = new ArrayList<Account>();
+        this.account = new ArrayList<Account>();
     }
     
     public BankAccount(String name, String pin) {
@@ -64,7 +64,7 @@ public class BankAccount implements Serializable {
         this.name = name;
         this.pin = pin;
         this.balance = 0;
-        account = new ArrayList<Account>();
+        this.account = new ArrayList<Account>();
     }
     
     public void genNumber(){

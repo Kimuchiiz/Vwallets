@@ -109,6 +109,8 @@ public class FXMLSelectBankAccountController extends SceneChangeController imple
                         addOrWithdrawScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, i, "addbalance");
                     } else if (option.equals("withdraw")) {
                         addOrWithdrawScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, i, "withdraw");
+                    } else if (option.equals("genQRCode")) {
+                        genQRCodeScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, i);
                     }
                 }
             });

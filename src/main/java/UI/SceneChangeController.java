@@ -180,7 +180,7 @@ public abstract class SceneChangeController {
         changeScene(stage, Loader);
     }
     
-    public void enterPasswordScene(Stage stage, Account account, BankAccount bankaccount, String amount, String option) {
+    public void enterPasswordScene(Stage stage, Account account, BankAccount bankaccount, String amount, String option, Account account2) {
         FXMLLoader Loader = new FXMLLoader();
         Loader.setLocation(getClass().getResource("/fxml/FXMLEnterPassword.fxml"));
         try {
@@ -194,6 +194,7 @@ public abstract class SceneChangeController {
         display.setOption(option);
         display.setBankAccount(bankaccount);
         display.setAmount(amount);
+        display.setAccount2(account2);
         
         popupScene(stage,Loader);
     }
@@ -209,6 +210,66 @@ public abstract class SceneChangeController {
         FXMLRefillCreditController display = Loader.getController();
         display.setAccount(account);
         display.autofill(creditcard);
+        
+        changeScene(stage, Loader);
+    }
+     
+    public void transferScene(Stage stage, Account account){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLTransfer.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLTransferController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLTransferController display = Loader.getController();
+        display.setAccount(account);
+        
+        changeScene(stage, Loader);
+    }
+    
+    public void transfer2Scene(Stage stage, Account account, Account account2, String amount){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLTransfer2.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLTransfer2Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLTransfer2Controller display = Loader.getController();
+        display.setAccount(account);
+        display.setAccount2(account2);
+        display.setAmount(amount);
+        display.setLabel();
+        
+        changeScene(stage, Loader);
+    }
+    
+    public void webcamScene(Stage stage, Account account){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLWebCamPreview.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLWebCamPreviewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLWebCamPreviewController display = Loader.getController();
+        
+        popupScene(stage, Loader);
+    }
+    
+    public void genQRCodeScene(Stage stage, Account account, BankAccount bankaccount){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLGenQRCode.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLGenQRCodeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLGenQRCodeController display = Loader.getController();
+        display.setAccount(account);
+        display.setBankaccount(bankaccount);
+        display.setLabel();
         
         changeScene(stage, Loader);
     }

@@ -86,7 +86,7 @@ public class FXMLAddorWithdrawController extends SceneChangeController implement
             amountLabel.setText("Amount Can't be 0");
         } else {
             amountLabel.setText("");
-            enterPasswordScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, bankaccount, amount.getText(), option);
+            enterPasswordScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, bankaccount, amount.getText(), option, null);
         }
     }
 

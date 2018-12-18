@@ -94,9 +94,8 @@ public class FXMLWalletController extends SceneChangeController implements Initi
 
     @FXML
     private void removeBankAccount(ActionEvent event) {
-        rootPane.requestFocus();
-        if (creditcard != null) {
-            VWallet.VWallet.removeCreditCard(account, creditcard);
+        if (bankaccount != null) {
+            VWallet.VWallet.removeBankAccount(account, bankaccount);
             walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -110,7 +109,6 @@ public class FXMLWalletController extends SceneChangeController implements Initi
     
     @FXML
     private void removeCreditCard(ActionEvent event) {
-        rootPane.requestFocus();
         if (creditcard != null) {
             VWallet.VWallet.removeCreditCard(account, creditcard);
             walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);

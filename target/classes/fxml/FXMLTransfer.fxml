@@ -5,40 +5,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLTransferController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLTransferController">
    <children>
-      <Text layoutX="507.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer">
+      <Text layoutX="487.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer to" wrappingWidth="106.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="508.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="157.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
+      <Text layoutX="501.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="151.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextField fx:id="username" layoutX="150.0" layoutY="307.0" prefHeight="41.0" prefWidth="290.0" />
-      <TextField fx:id="amount" layoutX="149.0" layoutY="459.0" prefHeight="41.0" prefWidth="290.0" />
-      <Label fx:id="userLabel" alignment="CENTER" layoutX="511.0" layoutY="313.0" prefHeight="26.0" prefWidth="455.0" textFill="RED">
+      <TextField fx:id="username" layoutX="392.0" layoutY="291.0" prefHeight="41.0" prefWidth="290.0" />
+      <TextField fx:id="amount" layoutX="395.0" layoutY="446.0" prefHeight="41.0" prefWidth="290.0" />
+      <Label fx:id="userLabel" alignment="CENTER" layoutX="313.0" layoutY="344.0" prefHeight="26.0" prefWidth="455.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="amountLabel" alignment="CENTER" layoutX="509.0" layoutY="467.0" prefHeight="26.0" prefWidth="455.0" textFill="RED">
+      <Label fx:id="amountLabel" alignment="CENTER" layoutX="310.0" layoutY="501.0" prefHeight="26.0" prefWidth="455.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button defaultButton="true" layoutX="457.0" layoutY="628.0" mnemonicParsing="false" onAction="#confirmButtonAction" style="-fx-background-color: #369E53;" text="Confirm" textFill="WHITE">
+      <Button defaultButton="true" layoutX="509.0" layoutY="598.0" mnemonicParsing="false" onAction="#confirmButtonAction" style="-fx-background-color: #369E53;" text="Next" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -46,7 +47,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Rectangle fx:id="menubar" arcHeight="5.0" arcWidth="5.0" fill="#369e53" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
+      <Rectangle fx:id="menubar" fill="#369e53" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
       <Button fx:id="signoutBtn1" layoutX="858.0" layoutY="6.0" mnemonicParsing="false" onAction="#signoutButtonAction" prefHeight="50.0" prefWidth="120.0" text="Sign Out" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -92,5 +93,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <VBox layoutX="23.0" layoutY="75.0" prefHeight="54.0" prefWidth="189.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+         <children>
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="190.0" text="Your Wallet Balance">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="balanceLabel" alignment="TOP_CENTER" prefHeight="24.0" prefWidth="190.0" text="100.00 THB">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,20 +26,31 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import models.Account;
 
 /**
  * FXML Controller class
  *
  * @author USER
  */
-public class FXMLTransferController implements Initializable {
-
+public class FXMLTransferController extends SceneChangeController implements Initializable {
+    
+    private Account account;
+    
+    @FXML
+    private Label balanceLabel;
+    
     @FXML
     private Label userLabel, amountLabel;
 
     @FXML
     private TextField username, amount;
 
+    public void setAccount(Account account) {
+        this.account = VWallet.VWallet.refreshAccount(account);
+        balanceLabel.setText(account.getBalance() + " THB");
+    }
+    
     @FXML
     private void confirmButtonAction(ActionEvent event) throws IOException {
         if (username.getText().isEmpty()) {
@@ -50,72 +63,46 @@ public class FXMLTransferController implements Initializable {
         } else if (amount.getText().isEmpty()) {
             amountLabel.setText("Please fill the amount");
             userLabel.setText("");
-        } else if (!amount.getText().matches("[1-9][0-9]*")) {
-            amountLabel.setText("Amount must be 0-9 and");
+        } else if (amount.getText().matches("[0]*([\\.][0]*)?")) {
+            amountLabel.setText("Amount Can't be 0");
             userLabel.setText("");
         } else {
             amountLabel.setText("");
             userLabel.setText("");
-            username.getText();
-            amount.getText();
-
-            Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
-            Scene walletScene = new Scene(walletParent);
-            walletScene.getStylesheets().add("/styles/CSS.css");
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(walletScene);
-            window.show();
+            
+            Account account2 = VWallet.VWallet.checkUsername(account, username.getText());
+            if (account2 != null) {
+                transfer2Scene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, account2, amount.getText());
+            }
+            else{
+                userLabel.setText("Invalid Username");    
+            }
         }
     }
 
     @FXML
-    private void transactionButtonAction(ActionEvent event) throws IOException {
-        Parent transactionParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLTransaction.fxml"));
-        Scene transactionScene = new Scene(transactionParent);
-        transactionScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(transactionScene);
-        window.show();
+    private void transactionButtonAction(ActionEvent event) {
+        transactionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void walletButtonAction(ActionEvent event) throws IOException {
-        Parent walletParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLWallet.fxml"));
-        Scene walletScene = new Scene(walletParent);
-        walletScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(walletScene);
-        window.show();
+    private void walletButtonAction(ActionEvent event) {
+        walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void activityButtonAction(ActionEvent event) throws IOException {
-        Parent activityParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLActivity.fxml"));
-        Scene activityScene = new Scene(activityParent);
-        activityScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(activityScene);
-        window.show();
+    private void activityButtonAction(ActionEvent event) {
+        activityScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void optionButtonAction(ActionEvent event) throws IOException {
-        Parent optionParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLAccount.fxml"));
-        Scene optionScene = new Scene(optionParent);
-        optionScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(optionScene);
-        window.show();
+    private void optionButtonAction(ActionEvent event) {
+        optionScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
     }
 
     @FXML
-    private void signoutButtonAction(ActionEvent event) throws IOException {
-        Parent signoutParent = FXMLLoader.load(getClass().getResource("/fxml/FXMLLogin.fxml"));
-        Scene signoutScene = new Scene(signoutParent);
-        signoutScene.getStylesheets().add("/styles/CSS.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signoutScene);
-        window.show();
+    private void signoutButtonAction(ActionEvent event) {
+        loginScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
     @Override
@@ -144,16 +131,14 @@ public class FXMLTransferController implements Initializable {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////// Amount Format ///////////////////////////////////
-        UnaryOperator<TextFormatter.Change> amountFilter = change -> {
-            String newText = change.getControlNewText();
-            if (newText.matches("([1-9][0-9]*)?")) {
-                return change;
+        amount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*([\\.]\\d{0,2})?")) {
+                    amount.setText(oldValue);
+                }
             }
-            return null;
-
-        };
-        TextFormatter<String> amountformatter = new TextFormatter<>(amountFilter);
-        amount.setTextFormatter(amountformatter);
+        });
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
     }

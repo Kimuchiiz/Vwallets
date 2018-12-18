@@ -30,7 +30,7 @@ import models.BankAccount;
  */
 public class FXMLEnterPasswordController extends SceneChangeController implements Initializable {
 
-    private Account account;
+    private Account account,account2;
     private String option;
     private BankAccount bankaccount;
     private String amount;
@@ -57,6 +57,11 @@ public class FXMLEnterPasswordController extends SceneChangeController implement
     public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
     }
+
+    public void setAccount2(Account account2) {
+        this.account2 = account2;
+    }
+    
     
     public void setBankAccount(BankAccount bankaccount){
         this.bankaccount = bankaccount;
@@ -88,6 +93,9 @@ public class FXMLEnterPasswordController extends SceneChangeController implement
             }
             else if(option.equals("withdraw")){
                 i = VWallet.VWallet.withdraw(account, bankaccount, amount, psw.getText());
+            }
+            else if(option.equals("transfer")){
+                i = VWallet.VWallet.transfer(account, account2, amount, psw.getText());
             }
             Alert alert = new Alert(Alert.AlertType.ERROR);
             switch (i) {
