@@ -72,7 +72,7 @@ public class FXMLTransferController extends SceneChangeController implements Ini
             
             Account account2 = VWallet.VWallet.checkUsername(account, username.getText());
             if (account2 != null) {
-                transfer2Scene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, account2, amount.getText());
+                confirmScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, account2, amount.getText(), null, "Transfer");
             }
             else{
                 userLabel.setText("Invalid Username");    

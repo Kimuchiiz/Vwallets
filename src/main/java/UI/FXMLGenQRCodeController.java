@@ -22,6 +22,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -93,7 +95,13 @@ public class FXMLGenQRCodeController extends SceneChangeController implements In
 
             if (file != null) {
                 try {
-                    generateQRCodeImage(bankaccount.getNumber() + " " + amount.getText(), 350, 350, file.getAbsolutePath());
+                    generateQRCodeImage(account.getUsername() + " " + bankaccount.getNumber() + " " + amount.getText(), 350, 350, file.getAbsolutePath());
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("Success");
+                    alert.setContentText("Generate QRCode successfully!");
+ 
+                    alert.showAndWait();
+                    walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
                 } catch (WriterException e) {
                     System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
                 } catch (IOException e) {

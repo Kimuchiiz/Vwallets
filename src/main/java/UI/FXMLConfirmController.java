@@ -16,17 +16,19 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import models.Account;
+import models.BankAccount;
 
 /**
  * FXML Controller class
  *
  * @author Xclos
  */
-public class FXMLTransfer2Controller extends SceneChangeController implements Initializable {
+public class FXMLConfirmController extends SceneChangeController implements Initializable {
 
-    private Account account,account2;
-    private String amount;
-    
+    private Account account, account2;
+    private String amount, option;
+    private BankAccount bankaccount;
+
     @FXML
     private Rectangle menubar;
     @FXML
@@ -39,6 +41,8 @@ public class FXMLTransfer2Controller extends SceneChangeController implements In
     private Button activityBtn;
     @FXML
     private Button optionBtn1;
+    @FXML
+    private Label titleLabel;
     @FXML
     private Label balanceLabel;
     @FXML
@@ -54,7 +58,7 @@ public class FXMLTransfer2Controller extends SceneChangeController implements In
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     public void setAccount(Account account) {
         this.account = account;
@@ -67,17 +71,31 @@ public class FXMLTransfer2Controller extends SceneChangeController implements In
     public void setAmount(String amount) {
         this.amount = amount;
     }
-    
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
+    public void setBankaccount(BankAccount bankaccount) {
+        this.bankaccount = bankaccount;
+    }
+
     public void setLabel() {
-        usernameLabel.setText("Username: " + account2.getUsername());
-        nameLabel.setText("Name: " + account2.getName());
+        titleLabel.setText(option + " to");
+        if (bankaccount != null) {
+            usernameLabel.setText("BankAccount: " + bankaccount.getNumber());
+            nameLabel.setText("Name: " + bankaccount.getName());
+        } else {
+            usernameLabel.setText("Username: " + account2.getUsername());
+            nameLabel.setText("Name: " + account2.getName());
+        }
         balanceLabel.setText(account.getBalance() + " THB");
         amountLabel.setText(amount + " THB");
     }
 
     @FXML
     private void confirmButtonAction(ActionEvent event) {
-        enterPasswordScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, null, amount, "transfer", account2);
+        enterPasswordScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account, bankaccount, amount, option, account2);
     }
 
     @FXML
@@ -104,7 +122,7 @@ public class FXMLTransfer2Controller extends SceneChangeController implements In
     private void signoutButtonAction(ActionEvent event) {
         loginScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
-    
+
     @FXML
     private void closeBtnAction(ActionEvent event) {
         ((Node) event.getSource()).getScene().getWindow().hide();

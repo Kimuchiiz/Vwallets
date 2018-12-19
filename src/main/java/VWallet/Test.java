@@ -28,10 +28,15 @@ public class Test {
     public static void main(String[] args) throws MessagingException {
         givenUsingApache_whenGeneratingRandomAlphanumericString_thenCorrect();
 
-        String a = "00002.22";
-        System.out.println(Double.parseDouble(a));
-        
-        generateAndSendEmail();
+        String a = "abc";
+        try {
+            double val = Double.parseDouble(a);
+            System.out.println(val);
+        } catch (NumberFormatException e) {
+            System.out.println("fail");
+        }
+
+        //generateAndSendEmail();
     }
 
     public static void givenUsingApache_whenGeneratingRandomAlphanumericString_thenCorrect() {

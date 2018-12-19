@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLTransfer2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLConfirmController">
    <children>
       <Button defaultButton="true" layoutX="498.0" layoutY="606.0" mnemonicParsing="false" onAction="#confirmButtonAction" style="-fx-background-color: #369E53;" text="Confirm" textFill="WHITE">
          <font>
@@ -79,7 +79,7 @@
          </children>
       </VBox>
       <Rectangle arcHeight="60.0" arcWidth="60.0" fill="WHITE" height="330.0" layoutX="358.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="358.0" />
-      <Label alignment="CENTER" layoutX="363.0" layoutY="225.0" prefHeight="45.0" prefWidth="339.0" text="Transfer to">
+      <Label fx:id="titleLabel" alignment="CENTER" layoutX="357.0" layoutY="225.0" prefHeight="45.0" prefWidth="358.0" text="Transfer to">
          <font>
             <Font size="27.0" />
          </font>

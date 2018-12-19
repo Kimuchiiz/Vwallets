@@ -40,7 +40,7 @@ public class VWallet {
 
         return sb.toString();
     }
-    
+
     static String toMD5Hash(String source) {
 
         String result = "";
@@ -322,7 +322,7 @@ public class VWallet {
             acchis.setFromname(acc.getName());
             acchis.setFromuser(acc.getUsername());
             acchis.setToname(bacc.getName());
-            acchis.setTouser(bacc.getNumber());
+            acchis.setTouser(bacc.getNumber()+" (Bank)");
             acchis.setType("Withdraw");
             acc.addActivityHistory(acchis);
             em.persist(acc);
@@ -378,7 +378,7 @@ public class VWallet {
             acchis.setFromname(acc.getName());
             acchis.setFromuser(acc.getUsername());
             acchis.setToname(bacc.getName());
-            acchis.setTouser(bacc.getNumber());
+            acchis.setTouser(bacc.getNumber()+" (Bank)");
             acchis.setType("Add Balance");
             acc.addActivityHistory(acchis);
             em.persist(acc);
@@ -410,7 +410,7 @@ public class VWallet {
                 acchis.addAccount(i);
                 acchis.setAmount(amount);
                 acchis.setFromname(firstname + " " + lastname);
-                acchis.setFromuser(cardNumber);
+                acchis.setFromuser(cardNumber+" (CreditCard)");
                 acchis.setToname(i.getName());
                 acchis.setTouser(i.getUsername());
                 acchis.setType("Refill via CreditCard");
@@ -431,6 +431,23 @@ public class VWallet {
         List<Account> accountresult = accountquery.getResultList();
         for (Account i : accountresult) {
             if (i.getUsername().equals(username) && !i.getUsername().equals(account.getUsername())) {
+                em.close();
+                emf.close();
+                return i;
+            }
+        }
+        em.close();
+        emf.close();
+        return null;
+    }
+
+    public static BankAccount getBankaccount(String bankaccnum) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<BankAccount> bankaccountquery = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
+        List<BankAccount> bankaccountresult = bankaccountquery.getResultList();
+        for (BankAccount i : bankaccountresult) {
+            if (i.getNumber().equals(bankaccnum)) {
                 em.close();
                 emf.close();
                 return i;
@@ -489,6 +506,67 @@ public class VWallet {
                     em.close();
                     emf.close();
                     return 2;
+                }
+            }
+        }
+        return 3;
+    }
+
+    public static int payment(Account account, Account account2, String paymentAmount, String password, BankAccount bankaccount) {
+        Double amount = Double.parseDouble(paymentAmount);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> accountresult = accountquery.getResultList();
+        Account acc = null;
+        for (Account i : accountresult) {
+            if (i.getUsername().equals(account.getUsername())) {
+                if (i.getPassword().equals(toMD5Hash(password))) {
+                    acc = i;
+                    break;
+                } else {
+                    System.out.print("Wrong Password!");
+                    em.close();
+                    emf.close();
+                    return 1;
+                }
+            }
+        }
+        for (Account acc2 : accountresult) {
+            if (acc2.getUsername().equals(account2.getUsername())) {
+                TypedQuery<BankAccount> bankaccountquery = em.createQuery("SELECT a from BankAccount a", BankAccount.class);
+                List<BankAccount> bankaccountresult = bankaccountquery.getResultList();
+                for (BankAccount i : bankaccountresult) {
+                    if (i.getNumber().equals(bankaccount.getNumber())) {
+                        if (acc.getBalance() >= amount) {
+                            em.getTransaction().begin();
+                            acc.withdraw(i, amount);
+                            ActivityHistory acchis = new ActivityHistory();
+                            acchis.addAccount(acc);
+                            acchis.addAccount(acc2);
+                            acchis.setAmount(amount);
+                            acchis.setFromname(acc.getName());
+                            acchis.setFromuser(acc.getUsername());
+                            acchis.setToname(i.getName());
+                            acchis.setTouser(i.getNumber()+" (Bank)");
+                            acchis.setType("Payment");
+                            acc.addActivityHistory(acchis);
+                            acc2.addActivityHistory(acchis);
+                            em.persist(acc);
+                            em.persist(acc2);
+                            em.persist(i);
+                            em.persist(acchis);
+                            em.getTransaction().commit();
+                            em.close();
+                            emf.close();
+                            return 0;
+                        } else {
+                            System.out.println("Insufficient Fund!");
+                            em.close();
+                            emf.close();
+                            return 2;
+                        }
+                    }
                 }
             }
         }

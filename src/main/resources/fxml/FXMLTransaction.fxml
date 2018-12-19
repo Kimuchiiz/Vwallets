@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLTransactionController">
    <children>
-      <Button fx:id="transferBtn" layoutX="680.0" layoutY="180.0" mnemonicParsing="false" onAction="#transferButtonAction" prefHeight="200.0" prefWidth="200.0" text="Transfer">
+      <Button fx:id="transferBtn" layoutX="142.0" layoutY="440.0" mnemonicParsing="false" onAction="#transferButtonAction" prefHeight="200.0" prefWidth="200.0" text="Transfer">
          <font>
             <Font size="18.0" />
          </font>
@@ -32,7 +32,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="withdrawBtn" layoutX="142.0" layoutY="440.0" mnemonicParsing="false" onAction="#withdrawButtonAction" prefHeight="200.0" prefWidth="200.0" text="Withdraw">
+      <Button fx:id="withdrawBtn" layoutX="680.0" layoutY="180.0" mnemonicParsing="false" onAction="#withdrawButtonAction" prefHeight="200.0" prefWidth="200.0" text="Withdraw">
          <font>
             <Font size="18.0" />
          </font>

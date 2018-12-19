@@ -3,31 +3,20 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLActivityController">
    <children>
-      <TextField layoutX="61.0" layoutY="80.0" prefHeight="40.0" prefWidth="260.0" promptText="Date">
-         <font>
-            <Font size="16.0" />
-         </font></TextField>
-      <TextField layoutX="388.0" layoutY="79.0" prefHeight="40.0" prefWidth="260.0" promptText="Search Activities">
-         <font>
-            <Font size="16.0" />
-         </font></TextField>
-      <Line endX="-100.0" endY="22.399993896484375" layoutX="696.0" layoutY="91.0" startX="-100.0" />
-      <AnchorPane layoutX="57.0" layoutY="159.0" prefHeight="552.0" prefWidth="913.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+      <AnchorPane layoutX="35.0" layoutY="87.0" prefHeight="624.0" prefWidth="965.0" style="-fx-background-color: white; -fx-background-radius: 5;">
          <children>
-            <Text layoutX="22.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Activities">
+            <Text layoutX="22.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activities">
                <font>
-                  <Font size="18.0" />
+                  <Font size="23.0" />
                </font></Text>
-            <TableView fx:id="activitytable" layoutX="52.0" layoutY="54.0" prefWidth="810.0">
+            <TableView fx:id="activitytable" layoutX="10.0" layoutY="54.0" prefHeight="555.0" prefWidth="947.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy></TableView>

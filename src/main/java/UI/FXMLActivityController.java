@@ -128,18 +128,18 @@ public class FXMLActivityController extends SceneChangeController implements Ini
                                     .get(currentIndex).getFromuser();
                             if (type.equals("Withdraw")) {
                                 setTextFill(Color.RED);
-                                setText("- " + item);
-                            } else if (type.equals("Transfer")) {
+                                setText("- " + item + " THB");
+                            } else if (type.equals("Transfer") || type.equals("Payment")) {
                                 if (fromuser.matches(account.getUsername())) {
                                     setTextFill(Color.RED);
-                                    setText("- " + item);
+                                    setText("- " + item + " THB");
                                 } else {
                                     setTextFill(Color.GREEN);
-                                    setText("+ " + item);
+                                    setText("+ " + item + " THB");
                                 }
                             } else {
                                 setTextFill(Color.GREEN);
-                                setText("+ " + item);
+                                setText("+ " + item + " THB");
                             }
                         }
                     }

@@ -32,13 +32,28 @@ import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import models.Account;
+import models.BankAccount;
 
 /**
  * This is controller for WebCamPreview FXML.
  *
  * @author Rakesh Bhatt (rakeshbhatt10)
  */
-public class FXMLWebCamPreviewController implements Initializable {
+public class FXMLWebCamQRCodeScannerController extends SceneChangeController implements Initializable {
+
+    private Account account;
+    private Stage stage;
+
+    public void setAccount(Account account) {
+        this.account = VWallet.VWallet.refreshAccount(account);
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     ComboBox<WebCamInfo> cbCameraOptions;
@@ -180,7 +195,7 @@ public class FXMLWebCamPreviewController implements Initializable {
 
                                     Result result = null;
                                     BufferedImage image = grabbedImage;
-                                    
+
                                     LuminanceSource source = new BufferedImageLuminanceSource(image);
                                     BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
@@ -191,9 +206,39 @@ public class FXMLWebCamPreviewController implements Initializable {
                                     }
 
                                     if (result != null) {
-                                        System.out.println(result.getText());
                                         stopCamera = true;
                                         closeCamera();
+                                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                                        alert.setTitle("Error alert");
+                                        alert.setHeaderText("Invalid QRCode");
+                                        alert.setContentText("Please try again");
+                                        String[] payment = result.getText().split(" ");
+                                        if (payment.length == 3) {
+                                            String username = payment[0];
+                                            String bankaccnum = payment[1];
+                                            String amount = payment[2];
+                                            try {
+                                                double val = Double.parseDouble(amount);
+                                                Account account2 = VWallet.VWallet.checkUsername(account, username);
+                                                BankAccount bankaccount = VWallet.VWallet.getBankaccount(bankaccnum);
+                                                if (account2 != null && bankaccount != null) {
+                                                    bpWebCamPaneHolder.getScene().getWindow().hide();
+                                                    confirmScene(stage, account, account2, amount, bankaccount, "Payment");
+                                                } else {
+                                                    alert.showAndWait();
+                                                    stopCamera = false;
+                                                    selWebCam.open();
+                                                }
+                                            } catch (NumberFormatException e) {
+                                                alert.showAndWait();
+                                                stopCamera = false;
+                                                selWebCam.open();
+                                            }
+                                        } else {
+                                            alert.showAndWait();
+                                            stopCamera = false;
+                                            selWebCam.open();
+                                        }
                                     }
 
                                 }

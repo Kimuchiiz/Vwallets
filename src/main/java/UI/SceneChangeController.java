@@ -228,17 +228,19 @@ public abstract class SceneChangeController {
         changeScene(stage, Loader);
     }
     
-    public void transfer2Scene(Stage stage, Account account, Account account2, String amount){
+    public void confirmScene(Stage stage, Account account, Account account2, String amount, BankAccount bankaccount, String option){
         FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLTransfer2.fxml"));
+        Loader.setLocation(getClass().getResource("/fxml/FXMLConfirm.fxml"));
         try {
             Loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(FXMLTransfer2Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLConfirmController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        FXMLTransfer2Controller display = Loader.getController();
+        FXMLConfirmController display = Loader.getController();
         display.setAccount(account);
         display.setAccount2(account2);
+        display.setBankaccount(bankaccount);
+        display.setOption(option);
         display.setAmount(amount);
         display.setLabel();
         
@@ -247,13 +249,15 @@ public abstract class SceneChangeController {
     
     public void webcamScene(Stage stage, Account account){
         FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("/fxml/FXMLWebCamPreview.fxml"));
+        Loader.setLocation(getClass().getResource("/fxml/FXMLWebCamQRCodeScanner.fxml"));
         try {
             Loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(FXMLWebCamPreviewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLWebCamQRCodeScannerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        FXMLWebCamPreviewController display = Loader.getController();
+        FXMLWebCamQRCodeScannerController display = Loader.getController();
+        display.setAccount(account);
+        display.setStage(stage);
         
         popupScene(stage, Loader);
     }
