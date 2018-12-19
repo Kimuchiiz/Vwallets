@@ -23,7 +23,7 @@ public class Account implements Serializable{
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    
-    private String username,password,name;
+    private String username,password,name,email;
     private double balance;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -238,6 +238,14 @@ public class Account implements Serializable{
     
     public void removeActivityHistory(ActivityHistory activityhistory) {
         this.activityhistory.remove(activityhistory);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     @Override

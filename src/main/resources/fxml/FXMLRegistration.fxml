@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLRegistrationController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLRegistrationController">
    <children>
       <Text fill="#828282" layoutX="59.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Account">
          <font>
@@ -19,29 +19,29 @@
          </font>
       </Text>
       <Line endX="810.933349609375" endY="1.52587890625E-5" layoutX="158.0" layoutY="174.0" startX="-100.0" stroke="#828282" />
-      <TextField fx:id="username" layoutX="123.0" layoutY="299.0" prefHeight="40.0" prefWidth="320.0">
+      <TextField fx:id="username" layoutX="123.0" layoutY="271.0" prefHeight="40.0" prefWidth="320.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Text fill="#828282" layoutX="121.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+      <Text fill="#828282" layoutX="121.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="#828282" layoutX="123.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+      <Text fill="#828282" layoutX="123.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="name" layoutX="593.0" layoutY="299.0" prefHeight="40.0" prefWidth="320.0">
+      <TextField fx:id="name" layoutX="593.0" layoutY="271.0" prefHeight="40.0" prefWidth="320.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="psw" layoutX="121.0" layoutY="461.0" prefHeight="40.0" prefWidth="320.0" />
-      <PasswordField fx:id="psw2" layoutX="597.0" layoutY="461.0" prefHeight="40.0" prefWidth="320.0" />
-      <Text fill="#828282" layoutX="593.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fullname">
+      <PasswordField fx:id="psw" layoutX="121.0" layoutY="436.0" prefHeight="40.0" prefWidth="320.0" />
+      <PasswordField fx:id="psw2" layoutX="597.0" layoutY="436.0" prefHeight="40.0" prefWidth="320.0" />
+      <Text fill="#828282" layoutX="593.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fullname">
          <font>
             <Font size="18.0" />
          </font>
@@ -51,27 +51,27 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="pswLabel" alignment="CENTER" layoutX="121.0" layoutY="521.0" prefHeight="38.0" prefWidth="320.0" textFill="RED">
+      <Label fx:id="pswLabel" alignment="CENTER" layoutX="121.0" layoutY="493.0" prefHeight="38.0" prefWidth="320.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="nameLabel" alignment="CENTER" layoutX="537.0" layoutY="339.0" prefHeight="65.0" prefWidth="440.0" textFill="RED" textOverrun="CLIP" wrapText="true">
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="537.0" layoutY="314.0" prefHeight="65.0" prefWidth="440.0" textFill="RED" textOverrun="CLIP" wrapText="true">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Text fill="#828282" layoutX="595.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Re-enter Password">
+      <Text fill="#828282" layoutX="595.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Re-enter Password">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Label fx:id="pswLabel2" alignment="CENTER" layoutX="596.0" layoutY="521.0" prefHeight="38.0" prefWidth="320.0" textFill="RED">
+      <Label fx:id="pswLabel2" alignment="CENTER" layoutX="596.0" layoutY="493.0" prefHeight="38.0" prefWidth="320.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="signupBtn" defaultButton="true" layoutX="351.0" layoutY="622.0" onAction="#signupButtonAction" prefHeight="40.0" prefWidth="320.0" style="-fx-background-color: #369E53;" text="Sign Up" textFill="WHITE">
+      <Button fx:id="signupBtn" defaultButton="true" layoutX="345.0" layoutY="681.0" onAction="#signupButtonAction" prefHeight="40.0" prefWidth="320.0" style="-fx-background-color: #369E53;" text="Sign Up" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -82,7 +82,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="backbtn" cancelButton="true" layoutX="940.0" layoutY="8.0" mnemonicParsing="false" onAction="#backButtonAction" style="-fx-background-radius: 20;" text="Back" textFill="WHITE">
+      <Button fx:id="backbtn" cancelButton="true" layoutX="936.0" layoutY="7.0" mnemonicParsing="false" onAction="#backButtonAction" style="-fx-background-radius: 20;" text="Back" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -92,5 +92,25 @@
             <Font size="17.0" />
          </font>
       </Button>
+      <TextField fx:id="email" layoutX="121.0" layoutY="601.0" prefHeight="40.0" prefWidth="320.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Text fill="#828282" layoutX="119.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Label fx:id="usernameLabel1" alignment="CENTER" layoutX="129.0" layoutY="327.0" prefHeight="38.0" prefWidth="320.0" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailLabel" layoutX="458.0" layoutY="601.0" prefHeight="38.0" prefWidth="221.0" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

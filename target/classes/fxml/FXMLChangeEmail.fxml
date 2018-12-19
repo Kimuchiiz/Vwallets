@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="407.0" style="-fx-background-color: #E8EEE6; -fx-border-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLChangeEmailController">
+   <children>
+      <Rectangle fill="DODGERBLUE" height="47.0" layoutX="1.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: #369E53;" width="405.0" />
+      <Button id="closebutton" cancelButton="true" layoutX="376.0" layoutY="5.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closePopupAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="127.0" layoutY="7.0" text="Change Email" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="confirmBtn" defaultButton="true" layoutX="156.0" layoutY="350.0" onAction="#confirmButtonAction" prefHeight="40.0" prefWidth="95.0" text="Confirm" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="emailLabel" alignment="CENTER" layoutX="43.0" layoutY="168.0" minHeight="16" minWidth="69" prefHeight="27.0" prefWidth="320.0" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="141.0" layoutY="70.0" text="New Email:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" layoutX="42.0" layoutY="122.0" prefHeight="40.0" prefWidth="320.0" promptText="Email">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="psw" layoutX="42.0" layoutY="255.0" prefHeight="40.0" prefWidth="320.0" promptText="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+      <Label layoutX="113.0" layoutY="206.0" text="Enter Password :">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="pswLabel" alignment="CENTER" layoutX="42.0" layoutY="307.0" minHeight="16" minWidth="69" prefHeight="27.0" prefWidth="320.0" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

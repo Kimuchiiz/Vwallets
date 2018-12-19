@@ -39,10 +39,10 @@ import models.Account;
 public class FXMLRegistrationController extends SceneChangeController implements Initializable {
 
     @FXML
-    private Label usernameLabel, pswLabel, pswLabel2, nameLabel;
+    private Label usernameLabel, pswLabel, pswLabel2, nameLabel, emailLabel;
 
     @FXML
-    private TextField username, name;
+    private TextField username, name, email;
 
     @FXML
     private PasswordField psw, psw2;
@@ -55,6 +55,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
             pswLabel.setText("");
             pswLabel2.setText("");
             nameLabel.setText("");
+            emailLabel.setText("");
             psw.clear();
             psw2.clear();
         } else if (!username.getText().matches("[a-zA-Z0-9]*")) {
@@ -62,6 +63,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
             pswLabel.setText("");
             pswLabel2.setText("");
             nameLabel.setText("");
+            emailLabel.setText("");
             psw.clear();
             psw2.clear();
         } else if (username.getText().length() < 4 || username.getText().length() > 12) {
@@ -69,6 +71,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
             pswLabel.setText("");
             pswLabel2.setText("");
             nameLabel.setText("");
+            emailLabel.setText("");
             psw.clear();
             psw2.clear();
 
@@ -77,6 +80,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
             usernameLabel.setText("");
             pswLabel.setText("");
             pswLabel2.setText("");
+            emailLabel.setText("");
             psw.clear();
             psw2.clear();
         } else if (!name.getText().matches("[A-Z][a-z]* [A-Z][a-z]*") && !name.getText().matches("[A-Z][a-z]* [A-Z][a-z]*")) {
@@ -84,6 +88,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
             usernameLabel.setText("");
             pswLabel.setText("");
             pswLabel2.setText("");
+            emailLabel.setText("");
             psw.clear();
             psw2.clear();
 
@@ -92,6 +97,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
             usernameLabel.setText("");
             nameLabel.setText("");
             pswLabel2.setText("");
+            emailLabel.setText("");
             psw.clear();
             psw2.clear();
         } else if (!psw.getText().matches("[a-zA-Z0-9]*")) {
@@ -99,36 +105,42 @@ public class FXMLRegistrationController extends SceneChangeController implements
             usernameLabel.setText("");
             nameLabel.setText("");
             pswLabel2.setText("");
+            emailLabel.setText("");
             psw.clear();
             psw2.clear();
 
-        } else if (psw.getText().length() < 6 ) {
+        } else if (psw.getText().length() < 6) {
             pswLabel.setText("Password must have at least 6 characters");
             usernameLabel.setText("");
             pswLabel2.setText("");
             nameLabel.setText("");
+            emailLabel.setText("");
             psw.clear();
             psw2.clear();
-
-        } /*else if (psw2.getText().isEmpty()) {
-            pswLabel2.setText("Please fill the re-password");
-            usernameLabel.setText("");
-            pswLabel.setText("");
-            nameLabel.setText("");
-            psw.clear();
-            psw2.clear();
-        } else if (!psw2.getText().matches("[a-zA-Z0-9]*")) {
-            pswLabel2.setText("Password must be a-z A-Z 0-9");
-            usernameLabel.setText("");
-            pswLabel.setText("");
-            nameLabel.setText("");
-            psw.clear();
-            psw2.clear();
-        }*/ else if (!psw.getText().matches(psw2.getText())) {
+        }
+        else if (!psw.getText().matches(psw2.getText())) {
             pswLabel2.setText("Password not match");
             usernameLabel.setText("");
             pswLabel.setText("");
             nameLabel.setText("");
+            emailLabel.setText("");
+            psw.clear();
+            psw2.clear();
+            
+        } else if (email.getText().isEmpty()) {
+            emailLabel.setText("Please fill the email");
+            pswLabel.setText("");
+            pswLabel2.setText("");
+            nameLabel.setText("");
+            usernameLabel.setText("");
+            psw.clear();
+            psw2.clear();
+        } else if (!email.getText().matches("[a-zA-Z0-9_.-]*@[a-zA-Z0-9_.-]*")) {
+            emailLabel.setText("Invalid email");
+            pswLabel.setText("");
+            pswLabel2.setText("");
+            nameLabel.setText("");
+            usernameLabel.setText("");
             psw.clear();
             psw2.clear();
 
@@ -137,18 +149,35 @@ public class FXMLRegistrationController extends SceneChangeController implements
             pswLabel.setText("");
             nameLabel.setText("");
             pswLabel2.setText("");
+            emailLabel.setText("");
 
-                if (VWallet.setRegister(username.getText(), psw.getText(), name.getText())) {
-                   Account account = VWallet.isLogin(username.getText(), psw.getText());
-                walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
-                } else {
+            int i = VWallet.setRegister(username.getText(), psw.getText(), name.getText(), email.getText());
+            switch (i) {
+                case 0:
+                    Account account = VWallet.isLogin(username.getText(), psw.getText());
+                    walletScene((Stage) ((Node) event.getSource()).getScene().getWindow(), account);
+                    break;
+                case 1:
                     usernameLabel.setText("Username Already Taken!!");
-                    pswLabel.setText("");
-                    nameLabel.setText("");
-                    pswLabel2.setText("");
                     psw.clear();
                     psw2.clear();
-                }
+                    break;
+                case 2:
+                    emailLabel.setText("Email Already Taken!!");
+                    psw.clear();
+                    psw2.clear();
+                    break;
+                default:
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error alert");
+                    alert.setHeaderText("Unknown Error");
+                    alert.setContentText("Please try again");
+
+                    alert.showAndWait();
+                    psw.clear();
+                    psw2.clear();
+                    break;
+            }
 
         }
     }
@@ -157,7 +186,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
     private void backButtonAction(ActionEvent event) throws IOException {
         loginScene((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
-    
+
     @FXML
     private void closeBtnAction(ActionEvent event) {
         ((Node) event.getSource()).getScene().getWindow().hide();
@@ -166,7 +195,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
     @Override
     public void initialize(URL url, ResourceBundle rb
     ) {
-       ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
+        ///////////////////////////////////// Limit  input in TextField ////////////////////////////////
         username.setOnKeyTyped(event -> {
             int maxCharacters = 12;
             if (username.getText().length() >= maxCharacters) {
@@ -174,7 +203,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
             }
         });
         /////////////////////////////////////////////////////////////////////////////////////////////////
-        
+
         //////////////////////////////////////////// Username Format ///////////////////////////////////
         UnaryOperator<TextFormatter.Change> usernameFilter = change -> {
             String newText = change.getControlNewText();
@@ -188,8 +217,7 @@ public class FXMLRegistrationController extends SceneChangeController implements
         username.setTextFormatter(usernameformatter);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
-        
-         //////////////////////////////////////////// name Format ///////////////////////////////////
+        //////////////////////////////////////////// name Format ///////////////////////////////////
         UnaryOperator<TextFormatter.Change> nameFilter = change -> {
             String newText = change.getControlNewText();
             if (newText.matches("[A-Z]?[a-z]* ?[A-Z]?[a-z]* ?[A-Z]?[a-z]*")) {
@@ -202,7 +230,6 @@ public class FXMLRegistrationController extends SceneChangeController implements
         name.setTextFormatter(nameformatter);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
-        
         //////////////////////////////////////////// Password Format ///////////////////////////////////
         UnaryOperator<TextFormatter.Change> pswFilter = change -> {
             String newText = change.getControlNewText();
@@ -213,11 +240,25 @@ public class FXMLRegistrationController extends SceneChangeController implements
 
         };
         TextFormatter<String> pswformatterr = new TextFormatter<>(pswFilter);
-        username.setTextFormatter(pswformatterr);
+        psw.setTextFormatter(pswformatterr);
+        TextFormatter<String> psw2formatterr = new TextFormatter<>(pswFilter);
+        psw2.setTextFormatter(psw2formatterr);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
-         
-         
+        
+        //////////////////////////////////////////// Email Format ///////////////////////////////////
+        UnaryOperator<TextFormatter.Change> emailFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("[a-zA-Z0-9_@.-]*")) {
+                return change;
+            }
+            return null;
+
+        };
+        TextFormatter<String> emailformatter = new TextFormatter<>(emailFilter);
+        email.setTextFormatter(emailformatter);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
 }

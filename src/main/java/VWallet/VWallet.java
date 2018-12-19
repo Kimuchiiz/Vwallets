@@ -8,6 +8,14 @@ package VWallet;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,12 +24,17 @@ import models.Account;
 import models.ActivityHistory;
 import models.BankAccount;
 import models.CreditCard;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  *
  * @author Xclos
  */
 public class VWallet {
+
+    static Properties mailServerProperties;
+    static Session getMailSession;
+    static MimeMessage generateMailMessage;
 
     static String toHexadecimal(String source) {
 
@@ -59,7 +72,7 @@ public class VWallet {
         return result;
     }
 
-    public static boolean setRegister(String username, String password, String name) { //func register ถ้าสมัครได้ return true ไม่ได้ return false
+    public static int setRegister(String username, String password, String name, String email) { //func register ถ้าสมัครได้ return true ไม่ได้ return false
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
         Account account = new Account();
@@ -70,18 +83,24 @@ public class VWallet {
             if (i.getUsername().equals(username)) {
                 em.close();
                 emf.close();
-                return false;
+                return 1;
+            }
+            if (i.getEmail().equals(email)) {
+                em.close();
+                emf.close();
+                return 2;
             }
         }
         em.getTransaction().begin();
         account.setUsername(username);
         account.setPassword(toMD5Hash(password));
         account.setName(name);
+        account.setEmail(email);
         em.persist(account);
         em.getTransaction().commit();
         em.close();
         emf.close();
-        return true;
+        return 0;
     }
 
     public static Account isLogin(String username, String password) { // ใช้ login return obj ของ user ที่ login
@@ -101,30 +120,22 @@ public class VWallet {
         return null;
     }
 
-    public static boolean editAccount(Account account, String password, String name) {
+    public static void editAccount(Account account, String name) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
         EntityManager em = emf.createEntityManager();
         TypedQuery<Account> query = em.createQuery("SELECT a from Account a", Account.class);
         List<Account> result = query.getResultList();
         for (Account i : result) {
             if (i.getUsername().equals(account.getUsername())) {
-                if (i.getPassword().equals(toMD5Hash(password))) {
-                    em.getTransaction().begin();
-                    i.setName(name);
-                    em.persist(i);
-                    em.getTransaction().commit();
-                    em.close();
-                    emf.close();
-                    return true;
-                }
-                em.close();
-                emf.close();
-                return false;
+                em.getTransaction().begin();
+                i.setName(name);
+                em.persist(i);
+                em.getTransaction().commit();
+                break;
             }
         }
         em.close();
         emf.close();
-        return false;
     }
 
     public static boolean changePassword(Account account, String curpassword, String newpassword) {
@@ -152,6 +163,39 @@ public class VWallet {
         emf.close();
         return false;
     }
+    
+    public static int changeEmail(Account account, String password, String email) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> query = em.createQuery("SELECT a from Account a", Account.class);
+        List<Account> result = query.getResultList();
+        for (Account i : result) {
+            if(i.getEmail().equals(email)){
+                em.close();
+                emf.close();
+                return 2;
+            }
+        }
+        for (Account i : result) {
+            if (i.getUsername().equals(account.getUsername())) {
+                if (i.getPassword().equals(toMD5Hash(password))) {
+                    em.getTransaction().begin();
+                    i.setEmail(email);
+                    em.persist(i);
+                    em.getTransaction().commit();
+                    em.close();
+                    emf.close();
+                    return 0;
+                }
+                em.close();
+                emf.close();
+                return 1;
+            }
+        }
+        em.close();
+        emf.close();
+        return 3;
+    }
 
     public static int addBankAccount(Account account, String number, String pin) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
@@ -169,7 +213,7 @@ public class VWallet {
         List<BankAccount> bankresult = bankquery.getResultList();
         for (BankAccount i : bankresult) {
             if (i.getNumber().equals(number)) {
-                if (i.getPin().equals(pin)) {
+                if (i.getPin().equals(toMD5Hash(pin))) {
                     if (!acc.getBankaccount().contains(i)) {
                         em.getTransaction().begin();
                         acc.addBankaccount(i);
@@ -322,7 +366,7 @@ public class VWallet {
             acchis.setFromname(acc.getName());
             acchis.setFromuser(acc.getUsername());
             acchis.setToname(bacc.getName());
-            acchis.setTouser(bacc.getNumber()+" (Bank)");
+            acchis.setTouser(bacc.getNumber() + " (Bank)");
             acchis.setType("Withdraw");
             acc.addActivityHistory(acchis);
             em.persist(acc);
@@ -378,7 +422,7 @@ public class VWallet {
             acchis.setFromname(acc.getName());
             acchis.setFromuser(acc.getUsername());
             acchis.setToname(bacc.getName());
-            acchis.setTouser(bacc.getNumber()+" (Bank)");
+            acchis.setTouser(bacc.getNumber() + " (Bank)");
             acchis.setType("Add Balance");
             acc.addActivityHistory(acchis);
             em.persist(acc);
@@ -410,7 +454,7 @@ public class VWallet {
                 acchis.addAccount(i);
                 acchis.setAmount(amount);
                 acchis.setFromname(firstname + " " + lastname);
-                acchis.setFromuser(cardNumber+" (CreditCard)");
+                acchis.setFromuser(cardNumber + " (CreditCard)");
                 acchis.setToname(i.getName());
                 acchis.setTouser(i.getUsername());
                 acchis.setType("Refill via CreditCard");
@@ -548,7 +592,7 @@ public class VWallet {
                             acchis.setFromname(acc.getName());
                             acchis.setFromuser(acc.getUsername());
                             acchis.setToname(i.getName());
-                            acchis.setTouser(i.getNumber()+" (Bank)");
+                            acchis.setTouser(i.getNumber() + " (Bank)");
                             acchis.setType("Payment");
                             acc.addActivityHistory(acchis);
                             acc2.addActivityHistory(acchis);
@@ -589,6 +633,62 @@ public class VWallet {
         em.close();
         emf.close();
         return null;
+    }
+
+    public static boolean resetPassword(String email) throws MessagingException {
+        String random = RandomStringUtils.randomAlphanumeric(6);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb/db/AccountDB.odb");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Account> accountquery = em.createQuery("SELECT a from Account a", Account.class
+        );
+        List<Account> accountresult = accountquery.getResultList();
+        for (Account i : accountresult) {
+            if (i.getEmail().equals(email)) {
+                em.getTransaction().begin();
+                i.setPassword(toMD5Hash(random));
+                em.persist(i);
+                em.getTransaction().commit();
+                em.close();
+                emf.close();
+                generateAndSendEmail(email, i.getUsername(), random);
+                return true;
+            }
+        }
+        em.close();
+        emf.close();
+        return false;
+
+    }
+
+    public static void generateAndSendEmail(String email, String username, String random) throws AddressException, MessagingException {
+
+        // Step1
+        System.out.println("\n 1st ===> setup Mail Server Properties..");
+        mailServerProperties = System.getProperties();
+        mailServerProperties.put("mail.smtp.port", "587");
+        mailServerProperties.put("mail.smtp.auth", "true");
+        mailServerProperties.put("mail.smtp.starttls.enable", "true");
+        System.out.println("Mail Server Properties have been setup successfully..");
+
+        // Step2
+        System.out.println("\n\n 2nd ===> get Mail Session..");
+        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+        generateMailMessage = new MimeMessage(getMailSession);
+        generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("59010649@kmitl.ac.th"));
+        generateMailMessage.setSubject("Password reset");
+        String emailBody = "Your Password has been reset to <br><br>" + random + "<br><br> In case you forgotten, your username is: " + username + "<br> Please Change Your Password after login <br><br> Regards, <br>VWallet";
+        generateMailMessage.setContent(emailBody, "text/html");
+        System.out.println("Mail Session has been created successfully..");
+
+        // Step3
+        System.out.println("\n\n 3rd ===> Get Session and Send mail");
+        Transport transport = getMailSession.getTransport("smtp");
+
+        // Enter your correct gmail UserID and Password
+        // if you have 2FA enabled then provide App Specific Password
+        transport.connect("smtp.gmail.com", "VWallet.kmitl@gmail.com", "VWallet2018");
+        transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
+        transport.close();
     }
 
     public static void main(String[] args) {

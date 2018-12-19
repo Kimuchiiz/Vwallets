@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="496.0" style="-fx-background-color: #E8EEE6; -fx-border-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLChangeNameController">
+   <children>
+      <Rectangle fill="DODGERBLUE" height="47.0" layoutX="1.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: #369E53;" width="494.0" />
+      <Button id="closebutton" cancelButton="true" layoutX="466.0" layoutY="5.0" maxHeight="41.0" maxWidth="43.0" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#closePopupAction" prefHeight="24.0" prefWidth="24.0" style="-fx-background-radius: 12;" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="172.0" layoutY="7.0" text="Change Name" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="confirmBtn" defaultButton="true" layoutX="203.0" layoutY="226.0" onAction="#confirmButtonAction" prefHeight="40.0" prefWidth="95.0" text="Confirm" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="186.0" layoutY="69.0" text="New Name:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name" layoutX="91.0" layoutY="120.0" prefHeight="40.0" prefWidth="320.0" promptText="Name">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="28.0" layoutY="160.0" prefHeight="65.0" prefWidth="440.0" textFill="RED" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

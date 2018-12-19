@@ -132,4 +132,8 @@ public class FXMLLoginController extends SceneChangeController implements Initia
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
     }
+    
+    public void resetPassword(ActionEvent event){
+        enterEmailScene((Stage) ((Node) event.getSource()).getScene().getWindow());
+    }
 }

@@ -41,7 +41,7 @@ public class CreateBankAccount {
                 bankaccount.genNumber();
                 em.getTransaction().begin();
                 bankaccount.setName(name);
-                bankaccount.setPin(pin);
+                bankaccount.setPin(VWallet.toMD5Hash(pin));
                 em.persist(bankaccount);
                 em.getTransaction().commit();
                 em.close();

@@ -36,7 +36,7 @@ public class FXMLAccountController extends SceneChangeController implements Init
     private AnchorPane rootPane;
     
     @FXML
-    private Label name,username;
+    private Label name,username,email;
 
     
     @FXML
@@ -77,7 +77,20 @@ public class FXMLAccountController extends SceneChangeController implements Init
     
      public void setAccount(Account account) {
         this.account = VWallet.VWallet.refreshAccount(account);
-        name.setText(this.account.getName());
-        username.setText(this.account.getUsername());
+        name.setText("Name: " + this.account.getName());
+        username.setText("Username: " + this.account.getUsername());
+        email.setText("Email: " + this.account.getEmail());
+    }
+     
+    public void changeName(ActionEvent event){
+        changeNameScene((Stage) ((Node) event.getSource()).getScene().getWindow(),account);
+    }
+    
+    public void changePassword(ActionEvent event){
+        changePasswordScene((Stage) ((Node) event.getSource()).getScene().getWindow(),account);
+    }
+    
+    public void changeEmail(ActionEvent event){
+        changeEmailScene((Stage) ((Node) event.getSource()).getScene().getWindow(),account);
     }
 }

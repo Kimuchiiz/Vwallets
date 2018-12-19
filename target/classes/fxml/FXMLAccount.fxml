@@ -5,12 +5,10 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLAccountController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #E8EEE6;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FXMLAccountController">
    <children>
       <Rectangle fx:id="menubar" fill="#369e53" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
       <Button fx:id="optionBtn1" layoutX="733.0" layoutY="6.0" mnemonicParsing="false" onAction="#optionButtonAction" prefHeight="50.0" prefWidth="120.0" text="Account">
@@ -58,44 +56,44 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <AnchorPane layoutX="76.0" layoutY="116.0" prefHeight="190.0" prefWidth="420.0" style="-fx-background-radius: 5; -fx-background-color: white;">
+      <AnchorPane layoutX="248.0" layoutY="232.0" prefHeight="266.0" prefWidth="528.0" style="-fx-background-radius: 5; -fx-background-color: white;">
          <children>
-            <Text accessibleRole="HYPERLINK" fill="#828282" layoutX="31.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Circle fill="WHITE" layoutX="81.0" layoutY="96.0" radius="37.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.5" style="-fx-background-color: white;" />
-            <Text fill="#828282" layoutX="67.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
-               <font>
-                  <Font size="40.0" />
-               </font>
-            </Text>
-            <Text fill="#369e53" layoutX="33.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update photo">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Label fx:id="name" layoutX="152.0" layoutY="80.0" prefHeight="26.0" prefWidth="222.0" text="Chompoonud Khumpitak" textFill="#828282">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="527.0" layoutY="116.0" prefHeight="93.0" prefWidth="420.0" style="-fx-background-radius: 5; -fx-background-color: white;">
-         <children>
-            <Label fx:id="username" layoutX="31.0" layoutY="19.0" text="You have 2 addresses." textFill="#828282">
+            <Label fx:id="name" layoutX="39.0" layoutY="91.0" prefHeight="27.0" prefWidth="346.0" text="Name" textFill="#828282">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Hyperlink layoutX="27.0" layoutY="55.0" text="Change Password" textFill="#369e53">
+            <Label fx:id="username" layoutX="39.0" layoutY="30.0" prefHeight="27.0" prefWidth="447.0" text="Username" textFill="#828282">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Hyperlink layoutX="394.0" layoutY="91.0" onAction="#changeName" text="Change Name" textFill="#369e53">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Hyperlink>
+            <Label fx:id="email" layoutX="39.0" layoutY="148.0" prefHeight="27.0" prefWidth="346.0" text="Email" textFill="#828282">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Hyperlink layoutX="383.0" layoutY="208.0" onAction="#changePassword" text="Change Password" textFill="#369e53">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="396.0" layoutY="148.0" onAction="#changeEmail" text="Change Email" textFill="#369e53">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
          </children>
       </AnchorPane>
+      <Label layoutX="458.0" layoutY="134.0" text="Account" textFill="#369e53">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

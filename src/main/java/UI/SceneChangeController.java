@@ -278,6 +278,65 @@ public abstract class SceneChangeController {
         changeScene(stage, Loader);
     }
     
+    public void enterEmailScene(Stage stage){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLEnterEmail.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLEnterEmailController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLEnterEmailController display = Loader.getController();
+        display.setStage(stage);
+        
+        popupScene(stage, Loader);
+    }
+    
+    public void changeNameScene(Stage stage,Account account){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLChangeName.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLChangeNameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLChangeNameController display = Loader.getController();
+        display.setStage(stage);
+        display.setAccount(account);
+        
+        popupScene(stage, Loader);
+    }
+    
+    public void changePasswordScene(Stage stage,Account account){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLChangePassword.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLChangePasswordController display = Loader.getController();
+        display.setStage(stage);
+        display.setAccount(account);
+        
+        popupScene(stage, Loader);
+    }
+    
+    public void changeEmailScene(Stage stage,Account account){
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("/fxml/FXMLChangeEmail.fxml"));
+        try {
+            Loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLChangeEmailController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FXMLChangeEmailController display = Loader.getController();
+        display.setStage(stage);
+        display.setAccount(account);
+        
+        popupScene(stage, Loader);
+    }
+    
     public void changeScene(Stage stage, FXMLLoader Loader) {
         Parent root = Loader.getRoot();
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
