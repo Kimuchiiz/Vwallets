@@ -228,16 +228,19 @@ public class FXMLWebCamQRCodeScannerController extends SceneChangeController imp
                                                     alert.showAndWait();
                                                     stopCamera = false;
                                                     selWebCam.open();
+                                                    startWebCamStream();
                                                 }
                                             } catch (NumberFormatException e) {
                                                 alert.showAndWait();
                                                 stopCamera = false;
                                                 selWebCam.open();
+                                                startWebCamStream();
                                             }
                                         } else {
                                             alert.showAndWait();
                                             stopCamera = false;
                                             selWebCam.open();
+                                            startWebCamStream();
                                         }
                                     }
 
